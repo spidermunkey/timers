@@ -1,0 +1,63 @@
+.timer {
+    display: inline-flex;
+    flex-direction: column;
+    min-width: 300px;
+    border: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    &--header,
+    &--clock {
+        display: flex;
+    }
+
+    &--header {
+        justify-content: space-between;
+        margin: 10px;
+        
+        &-options {
+            cursor: pointer;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &--clock {
+        margin: 10px;
+        justify-content: start;
+
+        &-controls {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        &-controls .ctrl-wrapper {
+            height: 100px;
+            min-width: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid grey;
+        }
+
+        &-controls .ctrl {
+            display: none;
+        }
+
+        &-controls .ctrl.current {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &-times .time-slot-wrapper {
+            display: flex;
+            height: 100px;
+            align-items: center;
+        }
+        &-times .time-slot {
+            display: flex;
+            border: 1px solid grey;
+            font-size: 48px;
+        }
+    }
+}
