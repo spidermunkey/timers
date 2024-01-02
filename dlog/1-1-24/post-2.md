@@ -6,4 +6,4 @@ I have the mojo repository but I don't yet understand how to
 
 To bring my utilities in a project I've been using one large file for utility functions,
 another for classes, once more for global project specific variables.
-I attach those as scripts in the head tag so they are available throughout the project modules. It works but it feels sloppy
+I attach those as scripts in the head tag so they are available throughout the project modules. It works but it feels sloppy.
