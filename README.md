@@ -45,4 +45,13 @@ I believe what you do every day has the most influence on who and how you become
 
     - A users profile will show all of the previously metioned logs as well as a lifetime cumilative total.
 
-    
+
+## Outlook
+
+1) Intergrate with calendar app
+
+2) Intergrate with goals app, goal --> prequesites for completion --> associated timer --> associated day(s)
+
+3) Update Styles regularly
+
+4) Show analytics and analytical actions 
