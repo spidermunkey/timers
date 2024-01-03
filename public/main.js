@@ -253,12 +253,62 @@ listen($('.reset'),Test.reset.bind(Test))
 
 const dayinps = $$('.inp-field[data-type="day"] input[type="checkbox"]');
 console.log(dayinps);
+const timeinps = $$('.inp-field input[data-type="time"]');
+console.log(timeinps)
 
 const neverInput = $('.inp-field[data-type="binary"] .option[data-option="never"] input[type="checkbox"]');
 console.log(neverInput)
 const everyInput = $('.inp-field[data-type="binary"] .option[data-option="every"] input[type="checkbox"]');
 console.log(everyInput)
 
+timeinps.forEach(inp => {
+    inp.addEventListener('click',() => {
+        inp.select();
+    })
+    inp.addEventListener('keydown',(event) => {
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+              return false;
+            return true;
+        }
+        
+        if (!isNumberKey(event))
+          event.preventDefault();
+
+          const prev = timeinps[timeinps.indexOf(inp) -1]
+          if (event.keyCode == 8 && !!prev && (inp.value === 0 || inp.value === "0" || inp.value === "")){
+            inp.value = 0;
+            prev.focus();
+            prev.select();
+            return;
+        }
+    })
+
+    inp.addEventListener('keyup',(e) => {
+        console.log(prev)
+        console.log(inp.value)
+        if (e.keyCode == 8){
+            inp.value = 0;
+            return;
+        }
+        const next = timeinps[timeinps.indexOf(inp) + 1]
+        if (!!next){
+            next.focus();
+            next.select();
+        }
+
+    })
+
+    inp.addEventListener('blur',(e) => {
+        if (inp.value === "")
+            inp.value = 0;
+    })
+    // inp.addEventListener('input',() => {
+        
+    // })
+})
 dayinps.forEach(inp => {
     inp.addEventListener('input',(e) => {
         if(dayinps.some(inp => inp.checked == true))
@@ -286,5 +336,4 @@ everyInput.addEventListener('input',(e) => {
         neverInput.checked = false;
         dayinps.forEach(inp => inp.checked = true)
     }
-
 })
