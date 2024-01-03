@@ -1,0 +1,1 @@
+Just when I think I'm ready to take it to the next level and bring in a framework or library of some sort... I run into a form. I tense up a little, and realize I still need more practice. They really slow me down sometimes and convice me to procrastinate.
