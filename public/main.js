@@ -251,6 +251,7 @@ listen($('.create-timer .close'),()=> {
 })
 listen($('.reset'),Test.reset.bind(Test))
 
+const createForm = $('form#create-timer')
 const dayinps = $$('.inp-field[data-type="day"] input[type="checkbox"]');
 console.log(dayinps);
 const timeinps = $$('.inp-field input[data-type="time"]');
@@ -287,7 +288,6 @@ timeinps.forEach(inp => {
     })
 
     inp.addEventListener('keyup',(e) => {
-        console.log(prev)
         console.log(inp.value)
         if (e.keyCode == 8){
             inp.value = 0;
@@ -337,3 +337,48 @@ everyInput.addEventListener('input',(e) => {
         dayinps.forEach(inp => inp.checked = true)
     }
 })
+
+
+async function submitForm(e,form) {
+    e.preventDefault();
+
+    const btnSubmit = $('input[type="submit"]#btn-create');
+    console.log(btnSubmit);
+    btnSubmit.disabled = true;
+    setTimeout(() => btnSubmit.disabled = false,2000);
+
+    let data = {};
+    console.log(form)
+    const x = new FormData(form);
+    console.log(x)
+
+
+
+
+
+
+
+    for (const pair of new FormData(form)){
+        if (!!data[pair[0]])
+            data[pair[0]] = [data[pair[0]],pair[1]].join('')
+        else
+            data[pair[0]] = pair[1];
+        
+    }
+
+    const req = {
+        headers:{
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+          },
+        body: JSON.stringify(data)
+    }
+
+    // data = JSON.stringify(data)
+    const res1 = await axios.get('http://localhost:1279/timers');
+    console.log(res1)
+    const res = await axios.post('http://localhost:1279/timers',req);
+    console.log(res)
+    console.log(data)
+}
+createForm.addEventListener('submit',(e) => submitForm(e,createForm))

@@ -47,8 +47,13 @@
                 border: none;
                 outline: none;
                 border: 1px solid rgba(128, 128, 128, 0.161);
+                &:invalid {
+                    border: 2px solid coral;
+                }
             }
         }
+
+
     }
     .new-timer--form-field[data-field="time"] {
         display: flex;
@@ -132,10 +137,12 @@
     }
 
     .btn-create {
+        position: relative;
         margin: 10px;
-        display: flex;
+        display: inline-flex;
         justify-content: center;
         align-items: center;
+        align-self: center;
         .label {
             padding: 1rem 4rem;
             border: 1px solid grey;
@@ -143,4 +150,11 @@
         }
     }
 
+    input#btn-create {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
 }
