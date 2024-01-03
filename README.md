@@ -54,4 +54,4 @@ I believe what you do every day has the most influence on who and how you become
 
 3) Update Styles regularly
 
-4) Show analytics and analytical actions 
+4) Show analytics and analytical actions

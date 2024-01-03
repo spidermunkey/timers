@@ -1,1 +1,20 @@
-@import './scss/main.scss'
+@import './scss/main.scss';
+
+*,*::before,*::after {
+    box-sizing: border-box;
+    
+}
+html,
+body,
+.dashboard {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+.dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;   
+}
+

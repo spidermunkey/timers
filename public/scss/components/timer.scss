@@ -2,6 +2,8 @@
     display: inline-flex;
     flex-direction: column;
     min-width: 300px;
+    min-height: 150px;
+    max-height: max-content;
     border: 1px solid black;
     font-family: Arial, Helvetica, sans-serif;
     &--header,
@@ -58,6 +60,10 @@
             display: flex;
             border: 1px solid grey;
             font-size: 48px;
+        }
+
+        &-times .time-slot .label {
+            font-size: 16px;
         }
     }
 }

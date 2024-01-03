@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,120 +14,131 @@
     <script src="boiler.js"></script>
     <script src="globals.js"></script>
 </head>
+
 <body>
-    <div class="timer">
-        <div class="timer--header">
-            <div class="timer--header-title">
-                <span class="label">Timer Name</span>
+    <div class="dashboard">
+        <div class="timer">
+            <div class="timer--header">
+                <div class="timer--header-title">
+                    <span class="label">Timer Name</span>
+        
+                </div>
+                <div class="timer--header-options">
+                    <div class="timer--header-options__icon">
+                        <span class="label">show options</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timer--clock">
+                <div class="timer--clock-controls">
+                    <div class="ctrl-wrapper">
+                        <div class="play ctrl current">
+                            <span class="control">play</span>
+                        </div>
+                        <div class="pause ctrl">
+                            <span class="control">pause</span>
+                        </div>
+                    </div>
+                </div>
     
-            </div>
-            <div class="timer--header-options">
-                <div class="timer--header-options__icon">
-                    <span class="label">show options</span>
+                <div class="timer--clock-times">
+                    <div class="time-slot-wrapper">
+                        <div class="hours time-slot">
+                            <span class="tenth-hour">0</span>
+                            <span class="zero-hour">0</span>
+                        </div>
+                        <div class="minutes time-slot">
+                            <div class="tenth-minute">0</div>
+                            <div class="zero-minute">0</div>
+                        </div>
+                        <div class="seconds time-slot">
+                            <div class="tenth-second">0</div>
+                            <div class="zero-second">0</div>
+                        </div>
+                    </div>
+    
                 </div>
             </div>
         </div>
-        <div class="timer--clock">
-            <div class="timer--clock-controls">
-                <div class="ctrl-wrapper">
-                    <div class="play ctrl current">
-                        <span class="control">play</span>
+
+        <div class="timer-list">
+            <div class="timer"></div>
+        <div class="create-timer">
+            <div class="close">x</div>
+            <div class="new-timer--form">
+                <div class="new-timer--form-field" data-field="title">
+                    <span class="inp-field" data-type="title">
+                        <span class="label">Title</span>
+                        <input type="text">
+                    </span>
+                </div>
+                <div class="new-timer--form-field" data-field="time">
+                    <span class="inp-field" data-type="hours">
+                        <input name="hours" id="nHours">
+                        <input name="hours" id="0Hours">
+                        <span class="label">h</span>
+                    </span>
+                    <span class="inp-field" data-type="minutes">
+                        <input name="minutes" id="nMinutes">
+                        <input name="minutes" id="0Minutes">
+                        <span class="label">m</span>
+                    </span>
+                    <span class="inp-field" data-type="seconds">
+                        <input name="seconds" id="nSeconds">
+                        <input name="seconds" id="0Seconds">
+                        <span class="label">s</span>
+                    </span>
+                </div>
+                <div class="new-timer--form-field" data-field="occurance">
+                    <div class="inp-field" data-type="day">
+                        <span class="label">M</span>
                     </div>
-                    <div class="pause ctrl">
-                        <span class="control">pause</span>
+                    <div class="inp-field" data-type="day">
+                        <span class="label">T</span>
+                    </div>
+                    <div class="inp-field" data-type="day">
+                        <span class="label">W</span>
+                    </div>
+                    <div class="inp-field" data-type="day">
+                        <span class="label">T</span>
+                    </div>
+                    <div class="inp-field" data-type="day">
+                        <span class="label">F</span>
+                    </div>
+                    <div class="inp-field" data-type="day">
+                        <span class="label">S</span>
+                    </div>
+                    <div class="inp-field" data-type="day">
+                        <span class="label">S</span>
+                    </div>
+                    <div class="inp-field" data-type="binary">
+                        <div class="option">never</div>
+                        <div class="option">everyday</div>
                     </div>
                 </div>
-            </div>
-
-            <div class="timer--clock-times">
-                <div class="time-slot-wrapper">
-                    <div class="hours time-slot">
-                        <span class="tenth-hour">0</span>
-                        <span class="zero-hour">0</span>
+                <div class="tod-modal">
+                    <div class="option selected">
+                        <span class="label">ANY</span>
                     </div>
-                    <div class="minutes time-slot">
-                        <div class="tenth-minute">0</div>
-                        <div class="zero-minute">0</div>
-                    </div>
-                    <div class="seconds time-slot">
-                        <div class="tenth-second">0</div>
-                        <div class="zero-second">0</div>
+                    <div class="option">
+                        <div class="hour">
+                            <span class="nHour">05</span>
+                            <span class="breaker">:</span>
+                            <span class="0hour">00</span>
+                        </div>
+                        <div class="minute"></div>
                     </div>
                 </div>
-
+                <span class="btn-create">
+                    <span class="label">Create</span>
+                </span>
             </div>
         </div>
     </div>
-    <div class="create-timer">
-        <div class="new-timer--form">
-            <div class="new-timer--form-field" data-field="title">
-                <span class="inp-field" data-type="title">
-                    <span class="label">Title</span>
-                    <input type="text">
-                </span>
-            </div>
-            <div class="new-timer--form-field" data-field="time">
-                <span class="inp-field" data-type="hours">
-                    <input name="hours" id="nHours">
-                    <input name="hours" id="0Hours">
-                    <span class="label">h</span>
-                </span>
-                <span class="inp-field" data-type="minutes">
-                    <input name="minutes" id="nMinutes">
-                    <input name="minutes" id="0Minutes">
-                    <span class="label">m</span>
-                </span>
-                <span class="inp-field" data-type="seconds">
-                    <input name="seconds" id="nSeconds">
-                    <input name="seconds" id="0Seconds">
-                    <span class="label">s</span>
-                </span>
-            </div>
-            <div class="new-timer--form-field" data-field="occurance">
-                <div class="inp-field" data-type="day">
-                    <span class="label">M</span>
-                </div>
-                <div class="inp-field" data-type="day">
-                    <span class="label">T</span>
-                </div>
-                <div class="inp-field" data-type="day">
-                    <span class="label">W</span>
-                </div>
-                <div class="inp-field" data-type="day">
-                    <span class="label">T</span>
-                </div>
-                <div class="inp-field" data-type="day">
-                    <span class="label">F</span>
-                </div>
-                <div class="inp-field" data-type="day">
-                    <span class="label">S</span>
-                </div>
-                <div class="inp-field" data-type="day">
-                    <span class="label">S</span>
-                </div>
-                <div class="inp-field" data-type="binary">
-                    <div class="option">never</div>
-                    <div class="option">everyday</div>
-                </div>
-            </div>
-            <div class="tod-modal">
-                <div class="option selected">
-                    <span class="label">ANY</span>
-                </div>
-                <div class="option">
-                    <div class="hour">
-                        <span class="nHour">05</span>
-                        <span class="breaker">:</span>
-                        <span class="0hour">00</span>
-                    </div>
-                    <div class="minute"></div>
-                </div>
-            </div>
-            <span class="btn-create">
-                <span class="label">Create</span>
-            </span>
-        </div>
+
     </div>
+
+
 </body>
 <script src="main.js" type="module"></script>
 </html>
