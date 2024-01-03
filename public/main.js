@@ -74,9 +74,12 @@ class Timer {
     }
 
     reset() {
+        clearInterval(this.currentInterval)
         this.currentInterval = null;
         this.time = structuredClone(this.initial);
         this.update();
+        $(`[data-id="${this.uuid}"] .play`).classList.add('current')
+        $(`[data-id="${this.uuid}"] .pause`).classList.remove('current')
     }
 
 
@@ -104,11 +107,16 @@ class Timer {
     render(destination){
         const frag = this.create();
         destination.appendChild(frag);
-        listen($(`[data-id="${this.uuid}"] .play`),() => {
-            if (!this.currentInterval)
+        listen($(`[data-id="${this.uuid}"] .ctrl-wrapper`),() => {
+            if (!this.currentInterval){
                 this.play();
+                $(`[data-id="${this.uuid}"] .pause`).classList.add('current')
+                $(`[data-id="${this.uuid}"] .play`).classList.remove('current')
+            }
             else if (this.currentInterval) {
                 this.pause();
+                $(`[data-id="${this.uuid}"] .play`).classList.add('current')
+                $(`[data-id="${this.uuid}"] .pause`).classList.remove('current')
             }
 
         })
@@ -182,6 +190,8 @@ function createTimerElement(title,hours,minutes,seconds) {
                         <span class="control">pause</span>
                     </div>
                 </div>
+                <div class="reset">reset</div>
+
             </div>
 
             <div class="timer--clock-times">
@@ -233,5 +243,10 @@ let Test = new Timer('test',{
     seconds: 4,
 })
 
-Test.render($('.timer-list'))
+Test.render($('.timer-list'));
 
+listen($('.btn-toggle--form'), ()=>$('.create-timer').classList.toggle('active'));
+listen($('.create-timer .close'),()=> {
+    $('.create-timer').classList.remove('active');
+})
+listen($('.reset'),Test.reset.bind(Test))

@@ -1,13 +1,18 @@
 .create-timer {
     background-color: white;
     position: absolute;
-    display: none;
     // margin: 16px 0;
+    display: none;
     border: 1px solid black;
     width: 100%;
     top:0;
     font-family: Arial, Helvetica, sans-serif;
+    z-index: 10;
+    &.active {
+        display: flex;
+        flex-direction: column;
 
+    }
     .close {
         position: absolute;
         top: 0;

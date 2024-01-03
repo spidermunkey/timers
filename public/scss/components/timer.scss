@@ -28,11 +28,13 @@
         justify-content: start;
 
         &-controls {
+            position: relative;
             margin-right: 10px;
             cursor: pointer;
         }
 
         &-controls .ctrl-wrapper {
+            position: relative;
             height: 100px;
             min-width: 100px;
             display: flex;
@@ -43,6 +45,13 @@
 
         &-controls .ctrl {
             display: none;
+        }
+
+        &-controls .reset {
+            position: absolute;
+            bottom: 0;
+            right: -200px;
+            // background-color: black;
         }
 
         &-controls .ctrl.current {
