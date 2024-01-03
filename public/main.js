@@ -1,5 +1,6 @@
 class Timer {
     constructor(title,time) {
+        this.currentInterval = null;
         this.title = title;
         this.time = this.initial = (()=>{
             let {hours,minutes,seconds} = time;
@@ -20,6 +21,12 @@ class Timer {
 
         console.log(this.time, Timer.formatMs(this.time.total))
         this.uuid = uuid();
+
+
+    }
+
+    get element(){
+            
     }
 
     padNum(num) {
@@ -30,39 +37,48 @@ class Timer {
     }
     
     play() {
+        if(this.currentInterval)
+            return
+        let t = Timer.formatMs(this.time.total - 1000);
+        if (Math.round(t.total) < 0)
+            this.reset();
+        this.currentInterval = setInterval(this.decer.bind(this),1000)
 
-        let decer = () => {
-            let t = Timer.formatMs(this.time.total - 1000);
-            
-            log(t)
+    }
 
-            if (Math.round(t.total) < 0) {
-                this.time = Timer.formatMs(0);
-                console.log(this.time,this.initial)
-                clearInterval(intervalId);
-                return;
-            }
+    decer() {
+        let t = Timer.formatMs(this.time.total - 1000);
+        
+        if (Math.round(t.total) < 0) {
+            this.time = Timer.formatMs(0);
+            console.log(this.time,this.initial);
 
-            this.time = t;
-            this.update();
+            clearInterval(this.currentInterval);
+            this.currentInterval = null;
+            return;
         }
 
-        let intervalId = setInterval(decer,1000)
-
-
+        this.time = t;
+        this.update();
     }
 
     pause(){
-
+        clearInterval(this.currentInterval);
+        this.currentInterval = null;
+        return;
     }
 
     stop(){
-
+        clearInterval(this.currentInterval)
+        this.currentInterval = null;
     }
 
-    resume(){
-
+    reset() {
+        this.currentInterval = null;
+        this.time = structuredClone(this.initial);
+        this.update();
     }
+
 
     create() {
 
@@ -88,6 +104,14 @@ class Timer {
     render(destination){
         const frag = this.create();
         destination.appendChild(frag);
+        listen($(`[data-id="${this.uuid}"] .play`),() => {
+            if (!this.currentInterval)
+                this.play();
+            else if (this.currentInterval) {
+                this.pause();
+            }
+
+        })
     }
 
     update() {
@@ -210,4 +234,4 @@ let Test = new Timer('test',{
 })
 
 Test.render($('.timer-list'))
-Test.play()
+
