@@ -250,3 +250,41 @@ listen($('.create-timer .close'),()=> {
     $('.create-timer').classList.remove('active');
 })
 listen($('.reset'),Test.reset.bind(Test))
+
+const dayinps = $$('.inp-field[data-type="day"] input[type="checkbox"]');
+console.log(dayinps);
+
+const neverInput = $('.inp-field[data-type="binary"] .option[data-option="never"] input[type="checkbox"]');
+console.log(neverInput)
+const everyInput = $('.inp-field[data-type="binary"] .option[data-option="every"] input[type="checkbox"]');
+console.log(everyInput)
+
+dayinps.forEach(inp => {
+    inp.addEventListener('input',(e) => {
+        if(dayinps.some(inp => inp.checked == true))
+            neverInput.checked = false;
+        else if (dayinps.every(inp => inp.checked == false))
+            neverInput.checked = true;
+        
+        if (dayinps.some(inp => inp.checked == false))
+            everyInput.checked = false;
+
+        if (dayinps.every(inp => inp.checked == true))
+            everyInput.checked = true;
+    })
+})
+neverInput.addEventListener('input',(e) => {
+    console.log(neverInput.checked)
+    if (neverInput.checked)
+        everyInput.checked = false;
+
+    dayinps.forEach(inp => inp.checked = false)
+})
+
+everyInput.addEventListener('input',(e) => {
+    if (everyInput.checked) {
+        neverInput.checked = false;
+        dayinps.forEach(inp => inp.checked = true)
+    }
+
+})

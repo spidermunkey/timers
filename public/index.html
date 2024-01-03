@@ -67,58 +67,89 @@
 
             <div class="btn-toggle--form">New Timer +</div>
             <div class="create-timer">
-                <form action="#">
+                <form action="#" id="create-timer">
 
                 <div class="close">x</div>
                 <div class="new-timer--form">
                     <div class="new-timer--form-field" data-field="title">
                         <span class="inp-field" data-type="title">
                             <span class="label">Title</span>
-                            <input type="text">
+                            <input type="text" required>
                         </span>
                     </div>
                     <div class="new-timer--form-field" data-field="time">
                         <span class="inp-field" data-type="hours">
-                            <input name="hours" id="nHours">
-                            <input name="hours" id="0Hours">
+                            <input name="hours" id="nHours" value="0">
+                            <input name="hours" id="0Hours" value="0">
                             <span class="label">h</span>
                         </span>
                         <span class="inp-field" data-type="minutes">
-                            <input name="minutes" id="nMinutes">
-                            <input name="minutes" id="0Minutes">
+                            <input name="minutes" id="nMinutes" value="0">
+                            <input name="minutes" id="0Minutes" value="0">
                             <span class="label">m</span>
                         </span>
                         <span class="inp-field" data-type="seconds">
-                            <input name="seconds" id="nSeconds">
-                            <input name="seconds" id="0Seconds">
+                            <input name="seconds" id="nSeconds" value="0">
+                            <input name="seconds" id="0Seconds" value="0">
                             <span class="label">s</span>
                         </span>
                     </div>
                     <div class="new-timer--form-field" data-field="occurance">
                         <div class="inp-field" data-type="day">
-                            <span class="label">M</span>
+                            <label for="mon">
+                                <span class="label">M</span>
+                            </label>
+                            <input type="checkbox" name="mon" id="mon">
                         </div>
                         <div class="inp-field" data-type="day">
-                            <span class="label">T</span>
+                            <label for="tue">
+                                <span class="label">T</span>
+                            </label>
+                            <input type="checkbox" name="tue" id="tue">
                         </div>
                         <div class="inp-field" data-type="day">
-                            <span class="label">W</span>
+                            <label for="wed">
+                                <span class="label">W</span>
+                            </label>
+                            <input type="checkbox" name="wed" id="wed">
                         </div>
                         <div class="inp-field" data-type="day">
-                            <span class="label">T</span>
+                            <label for="thu">
+                                <span class="label">T</span>
+                            </label>
+                            <input type="checkbox" name="thu" id="thu">
                         </div>
                         <div class="inp-field" data-type="day">
-                            <span class="label">F</span>
+                            <label for="fri">
+                                <span class="label">F</span>
+                            </label>
+                            <input type="checkbox" name="fri" id="fri">
                         </div>
                         <div class="inp-field" data-type="day">
-                            <span class="label">S</span>
+                            <label for="sat">
+                                <span class="label">S</span>
+                            </label>
+                            <input type="checkbox" name="sat" id="sat">
                         </div>
                         <div class="inp-field" data-type="day">
-                            <span class="label">S</span>
+                            <label for="sun">
+                                <span class="label">S</span>
+                            </label>
+                            <input type="checkbox" name="sun" id="sun">
                         </div>
                         <div class="inp-field" data-type="binary">
-                            <div class="option">never</div>
-                            <div class="option">everyday</div>
+                            <div class="option" data-option="never">
+                                <label for="never">
+                                    <span class="label">never</span>
+                                </label>
+                                <input type="checkbox" name="never" id="never">
+                            </div>
+                            <div class="option" data-option="every">
+                                <label for="everyday">
+                                    <span class="label">everyday</span>
+                                </label>
+                                <input type="checkbox" name="every" id="every">
+                            </div>
                         </div>
                     </div>
                     <div class="tod-modal">
