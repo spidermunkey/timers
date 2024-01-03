@@ -1,3 +1,4 @@
+
 class Timer {
     constructor(title,time) {
         this.currentInterval = null;
@@ -167,6 +168,24 @@ class Timer {
     }
 }
 
+async function getTimers() {
+    const res = await axios.get('http://localhost:1279/timers')
+    const {data} = res;
+    console.log(data)
+
+    if (data.length == 0) {
+        $('.timers').innerHTML = 'No Timers'
+    } else {
+        return data.map(timer => {
+            const t = new Timer(timer.title,timer);
+            t.render($('.timers'));
+            return t;
+        })
+    }
+}
+
+const timers = getTimers();
+
 function createTimerElement(title,hours,minutes,seconds) {
     return `
     <div class="timer">
@@ -237,19 +256,19 @@ function createTimeSlot({hours,minutes,seconds}) {
     </div>`
 }
 
-let Test = new Timer('test',{
-    hours: 0,
-    minutes: 0,
-    seconds: 4,
-})
+// let Test = new Timer('test',{
+//     hours: 0,
+//     minutes: 0,
+//     seconds: 4,
+// })
 
-Test.render($('.timer-list'));
+// Test.render($('.timer-list'));
 
 listen($('.btn-toggle--form'), ()=>$('.create-timer').classList.toggle('active'));
 listen($('.create-timer .close'),()=> {
     $('.create-timer').classList.remove('active');
 })
-listen($('.reset'),Test.reset.bind(Test))
+// listen($('.reset'),Test.reset.bind(Test))
 
 const createForm = $('form#create-timer')
 const dayinps = $$('.inp-field[data-type="day"] input[type="checkbox"]');
@@ -366,19 +385,14 @@ async function submitForm(e,form) {
         
     }
 
-    const req = {
-        headers:{
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
-          },
-        body: JSON.stringify(data)
-    }
-
+    // data = JSON.stringify(data)
+    console.log(data)
     // data = JSON.stringify(data)
     const res1 = await axios.get('http://localhost:1279/timers');
     console.log(res1)
-    const res = await axios.post('http://localhost:1279/timers',req);
-    console.log(res)
+    const res = await axios.post('http://localhost:1279/timers',data);
+    let t = new Timer(res.data.title,res.data)
+    t.render($('.timers'))
     console.log(data)
 }
 createForm.addEventListener('submit',(e) => submitForm(e,createForm))
