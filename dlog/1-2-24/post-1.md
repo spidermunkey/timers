@@ -1,3 +1,11 @@
-It is at this point I have to admit that most of my code starts out messy. In my defence I used to have anxiety attacks when, after weeks of studying, I'd open my text editor ready to create something and NOTHING WORKS. I don't know how to css, can barely make out HTML tags, and don't get me started on javascript.
+currently, I'm not using react, svelte, php, or dsls because I don't know them.
 
-The messiness started after one week I was frustrated with life, myself and especially my programming skills. I sat at my desk cracked to energy drinks BACK TO BACK and just started hacking until I came up with something that worked. (see icon repo in "learning-center") it wasn't pretty but my confidence shot throught the roof after seeing 2years of pure toil and turmoil. Now when I start I just GO hack until something works and make it nice after.
+I don't know them because I've been trying to learn how things work as before adding any abstractions that I don't understand.
+
+version 0.1 is will be js, html, sass, node, mongodb... that's it.
+
+In later versions, as I learn how to utilize tools I'll begin refactoring with them but for now I feel very fluent with the barebones stack.
+
+I want this project done today so I can use it and move on to creating more productivity tools.
+
+Once I feel satisfied I'll add bells and whistles.
