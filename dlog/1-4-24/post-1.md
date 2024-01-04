@@ -4,4 +4,5 @@ I wanted to commit to writing code every day however, my level of proficiency re
 
 I now feel like I'm able to write code everyday and even though I'm still working 2 jobs and working everyday at that I think I can put in atleast an hour a day either before or after work.
 
+I have enough half baked projects to keep me busy so...
 Let's see how this goes.
