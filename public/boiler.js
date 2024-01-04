@@ -236,6 +236,57 @@ function focusInputOnClick(event, placholder) {
     return input
 };
 
+function allChecked(inputGroup){
+    return inputGroup.every(inp => inp.checked == true);
+}
+
+function noneChecked(inputGroup){
+    return inputGroup.every(inp => inp.checked == false);
+}
+
+function oneChecked(inputGroup){
+    return inputGroup.some(inp => inp.checked == true);
+}
+
+function oneUnchecked(inputGroup){
+    return inputGroup.some(inp => inp.checked == false);
+}
+
+function disable(submitInput){
+    submitInput.disabled = true;
+}
+
+function enable(submitInput){
+    submitInput.disabled = false;
+}
+
+function throttleInput(input,time){
+    /* 
+        https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled
+        The disabled attribute is supported by 
+        <button>, <fieldset>, <optgroup>, <option>, <select>, <textarea> and <input>.
+    */
+
+    input.disabled = true;
+    setTimeout(() => input.disabled = false,time);
+
+    return;
+}
+
+function check(input) {
+    input.checked = true;
+}
+function uncheck(input) {
+    input.checked = false;
+}
+function checkAll(inputGroup){
+    inputGroup.forEach(inp => inp.checked = true);
+}
+
+function uncheckAll(inputGroup){
+    inputGroup.forEach(inp => inp.checked = false);
+}
+
 function currentTime() {
     return (new Date()).toLocaleTimeString();
 }
@@ -246,6 +297,27 @@ function mouseClickRight(event) {
 
 function mouseClickLeft(event) {
     return event.button === 0;
+}
+
+function isNumberKey(event) {
+    var charCode = (event.which) ? event.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+      return false;
+    return true;
+}
+
+function highlightInput(input){
+    input.focus();
+    input.select();
+    return input;
+}
+
+function isBackspaceKey(event){
+    return event.keyCode == 8;
+}
+
+function isEmptyNumberInput(input){
+    return input.value === 0 || input.value === "0" || input.value === ""
 }
 
 function elementClicked(elementClass,event) {
