@@ -114,14 +114,16 @@ async function submitForm(event,form) {
     let data = {};
     const x = new FormData(form);
     
-    for (const pair of new FormData(form)){
+    for (const pair of new FormData(form)) {
+        
+        // handle input[hour] | input[hour]
         if (!!data[pair[0]])
-            data[pair[0]] = [data[pair[0]],pair[1]].join('')
+            data[pair[0]] = [ data[pair[0]] , pair[1] ].join('')
         else
             data[pair[0]] = pair[1];
     }
 
-    const POST = api.addTimer(data,function effect(data) {
+    api.addTimer(data,function effect(data) {
         let t = new Timer( data.title , data )
         t.render($('.timers'))
     })
