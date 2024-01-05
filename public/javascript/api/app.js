@@ -34,7 +34,7 @@ export const api = {
         else
             console.error('someting went wrong in /timers',res);
         
-        return;
+        return true;
     }
 }
 

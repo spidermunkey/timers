@@ -260,7 +260,7 @@ export class Timer {
 
         this.time = props.time;
 
-        this.initial = props.initial || props.time;
+        this.initial = props.initial || structuredClone(props.time);
 
         this.id = props.id || uuid();
 
@@ -289,7 +289,7 @@ export class Timer {
 
     decer() {
         let t = Timer.formatMs(this.time.total - 1000);
-        
+        console.log(t)
         if (Math.round(t.total) < 0) {
             this.time = Timer.formatMs(0);
             console.log(this.time,this.initial);
@@ -300,6 +300,7 @@ export class Timer {
         }
 
         this.time = t;
+    
         this.update();
     }
 
@@ -320,6 +321,7 @@ export class Timer {
     }
 
     reset() {
+        console.log('reset')
         clearInterval(this.currentInterval);
         this.currentInterval = null;
         this.time = structuredClone(this.initial);
@@ -330,23 +332,15 @@ export class Timer {
 
 
     create() {
-        console.log(this.time)
-        let {hours,minutes,seconds} = this.time;
-        console.log(hours,minutes,seconds);
 
-        hours = this.padNum(hours);
-        minutes = this.padNum(minutes);
-        seconds = this.padNum(seconds);
-
-        let html = this.createTimerElement(this.title, hours, minutes ,seconds );
+        let html = this.createTimerElement();
         let fragment = frag();
         let element = div();
 
         element.innerHTML = html;
         element.dataset.id = this.id;
         fragment.appendChild(element);
-        console.log(element);
-        console.log(fragment);
+
         return fragment;
     }
 
@@ -361,19 +355,13 @@ export class Timer {
             }
             else if (this.currentInterval) {
                 this.pause();
-
             }
-
-        })
+        });
+        listen($('.reset',this.element), this.reset.bind(this))
     }
 
     update() {
-        let {hours,minutes,seconds} = this.time;
-        hours = this.padNum(hours);
-        minutes = this.padNum(minutes);
-        seconds = this.padNum(seconds);
-
-        $(`[data-id="${this.id}"] .time-slot-wrapper`).innerHTML = this.createTimeSlot({hours,minutes,seconds});
+        $('.time-slot-wrapper',this.element).innerHTML = this.createTimeSlot();
     }
 
 
@@ -440,23 +428,7 @@ export class Timer {
                 </div>
     
                 <div class="timer--clock-times">
-                    <div class="time-slot-wrapper">
-                        <div class="hours time-slot">
-                            <span class="tenth-hour">${this.time.hours[0] || 0}</span>
-                            <span class="zero-hour">${this.time.hours[1] || 0}</span>
-                            <span class="label">h</span>
-                        </div>
-                        <div class="minutes time-slot">
-                            <div class="tenth-minute">${this.time.minutes[0] || 0}</div>
-                            <div class="zero-minute">${this.time.minutes[1] || 0}</div>
-                            <span class="label">m</span>
-                        </div>
-                        <div class="seconds time-slot">
-                            <div class="tenth-second">${this.time.seconds[0] || 0}</div>
-                            <div class="zero-second">${this.time.seconds[1] || 0}</div>
-                            <span class="label">s</span>
-                        </div>
-                    </div>
+                    <div class="time-slot-wrapper">${this.createTimeSlot()}</div>
     
                 </div>
             </div>
@@ -464,20 +436,26 @@ export class Timer {
     }
     
     createTimeSlot() {
+        const {hours,minutes,seconds} = this.time;
+        let 
+            h = this.padNum(hours),
+            m = this.padNum(minutes),
+            s = this.padNum(seconds);
+
         return `
         <div class="hours time-slot">
-            <span class="tenth-hour">${this.time.hours[0] || 0}</span>
-            <span class="zero-hour">${this.time.hours[1] || 0}</span>
+            <span class="tenth-hour">${h[0] || 0}</span>
+            <span class="zero-hour">${h[1] || 0}</span>
             <span class="label">h</span>
         </div>
         <div class="minutes time-slot">
-            <div class="tenth-minute">${this.time.minutes[0] || 0}</div>
-            <div class="zero-minute">${this.time.minutes[1] || 0}</div>
+            <div class="tenth-minute">${m[0] || 0}</div>
+            <div class="zero-minute">${m[1] || 0}</div>
             <span class="label">m</span>
         </div>
         <div class="seconds time-slot">
-            <div class="tenth-second">${this.time.seconds[0] || 0}</div>
-            <div class="zero-second">${this.time.seconds[1] || 0}</div>
+            <div class="tenth-second">${s[0]|| 0}</div>
+            <div class="zero-second">${s[1] || 0}</div>
             <span class="label">s</span>
         </div>`
     }

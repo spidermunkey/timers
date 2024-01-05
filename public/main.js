@@ -47,7 +47,7 @@ createFormTimeInputs.forEach(inp => {
         // skip to previous input on backspace if
         if (!!prev && isBackspaceKey(event) &&  isEmptyNumberInput(inp)) {
             inp.value = 0;
-            highlightInput(inp);
+            highlightInput(prev);
             return;
         }
     })
@@ -143,8 +143,8 @@ async function submitForm(event,form) {
 
     let props = parseForm(data);
     let timer = new Timer({props});
-    let POST = await api.addTimer( props );
+    let success = await api.addTimer( props );
 
-    if (responseOk(POST))
+    if (success)
         timer.render($('.timer-list .timers'));
 }
