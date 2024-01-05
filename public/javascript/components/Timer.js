@@ -357,11 +357,16 @@ export class Timer {
                 this.pause();
             }
         });
-        listen($('.reset',this.element), this.reset.bind(this))
+        listen($('.reset',this.element), this.reset.bind(this));
+        listen($('.delete',this.element),this.delete.bind(this))
     }
 
     update() {
         $('.time-slot-wrapper',this.element).innerHTML = this.createTimeSlot();
+    }
+
+    delete() {
+        console.log(api,'delete');
     }
 
 
@@ -403,6 +408,14 @@ export class Timer {
     createTimerElement() {
         return `
         <div class="timer">
+            <div class="timer--options">
+                <div class="option delete">
+                    <span class="label">delete</span>
+                </div>
+                <div class="option edit">
+                    <span class="label">edit</span>
+                </div>
+            </div>
             <div class="timer--header">
                 <div class="timer--header-title">
                     <span class="label">${this.title}</span>
