@@ -358,15 +358,18 @@ export class Timer {
             }
         });
         listen($('.reset',this.element), this.reset.bind(this));
-        listen($('.delete',this.element),this.delete.bind(this))
+        listen($('.delete',this.element),this.delete.bind(this));
     }
 
     update() {
         $('.time-slot-wrapper',this.element).innerHTML = this.createTimeSlot();
     }
 
-    delete() {
+    async delete() {
         console.log(api,'delete');
+        const deleted = api.delete(this.id);
+        if (deleted)
+            this.element.remove();
     }
 
 

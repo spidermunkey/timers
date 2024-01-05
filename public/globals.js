@@ -35,6 +35,15 @@ const api = {
             console.error('someting went wrong in /timers',res);
         
         return true;
+    },
+
+    async delete(id) {
+        console.log(id);
+        const res = await axios.delete(`http://localhost:1279/timers?id=${id}`);
+        console.log(res);
+        if (responseOk(res))
+            return true;
+        return false;
     }
 }
 
