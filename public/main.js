@@ -8,8 +8,9 @@ const timers = api.getTimers(function then(data) {
     if (data.length == 0) {
         $('.timers').innerHTML = 'No Timers';
     } else {
-        return data.map(timer => {
-            const t = new Timer(timer.title,timer);
+        console.log(data)
+        return data.map(props => {
+            const t = new Timer({props});
             t.render($('.timers'));
             return t;
         })
@@ -107,24 +108,43 @@ everyInput.addEventListener('input',(e) => {
 
 
 async function submitForm(event,form) {
+
     event.preventDefault();
 
     throttleInput(btnSubmit,2000);
 
-    let data = {};
-    const x = new FormData(form);
+
+    const data = new FormData(form);
     
-    for (const pair of new FormData(form)) {
-        
-        // handle input[hour] | input[hour]
-        if (!!data[pair[0]])
-            data[pair[0]] = [ data[pair[0]] , pair[1] ].join('')
-        else
-            data[pair[0]] = pair[1];
+    function parseForm(formDataObject){
+
+        let fdo = formDataObject;
+
+        for (const entry of fdo)
+            if (entry[1].trim() === '') entry[1] = 0;
+    
+        let
+            title = fdo.get('title'),
+            hours = fdo.getAll('hours').join(''),
+            minutes = fdo.getAll('minutes').join(''),
+            seconds = fdo.getAll('seconds').join(''),
+            total = Timer.timeInMs({hours,minutes,seconds}),
+            id = uuid(),
+            time = { hours, minutes, seconds, total },
+            initial = time;
+
+        return {
+            title,
+            id,
+            time,
+            initial
+        };
     }
 
-    api.addTimer(data,function effect(data) {
-        let t = new Timer( data.title , data )
-        t.render($('.timers'))
-    })
+    let props = parseForm(data);
+    let timer = new Timer({props});
+    let POST = await api.addTimer( props );
+
+    if (responseOk(POST))
+        timer.render($('.timer-list .timers'));
 }
