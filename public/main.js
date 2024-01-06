@@ -113,16 +113,26 @@ async function submitForm(event,form) {
 
     throttleInput(btnSubmit,2000);
 
-
     const data = new FormData(form);
     
     function parseForm(formDataObject){
 
         let fdo = formDataObject;
-
+        console.log(fdo)
         for (const entry of fdo)
             if (entry[1].trim() === '') entry[1] = 0;
-    
+
+                // Get the values of the checkboxes for days
+        let days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].filter(day => {
+            let checkbox = $(`.inp-field[data-type="day"] input[name="day"][data-day="${day}"]`);
+
+            if (checkbox && checkbox.checked){
+                console.log(day)
+                return true
+            }
+        });
+        console.log(days)
+
         let
             title = fdo.get('title'),
             hours = fdo.getAll('hours').join(''),
@@ -137,6 +147,7 @@ async function submitForm(event,form) {
             title,
             id,
             time,
+            days,
             initial
         };
     }
