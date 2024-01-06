@@ -156,6 +156,6 @@ async function submitForm(event,form) {
     let timer = new Timer({props});
     let success = await api.addTimer( props );
 
-    if (success)
+    if (success && timer.isToday)
         timer.render($('.timer-list .timers'));
 }
