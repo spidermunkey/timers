@@ -1,10 +1,7 @@
+import {api} from './javascript/api/app.js';
 import {Timer} from './javascript/components/Timer.js';
-// import {api} from './javascript/api/app.js';
 
-console.log(Timer);
-console.log(api);
-
-const timers = api.getTimers(function then(data) {
+const timers = api.getTimers((data) => {
     if (data.length == 0) {
         $('.timers').innerHTML = 'No Timers';
     } else {

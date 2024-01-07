@@ -3,11 +3,8 @@
 
     ADD DELETE/DESTROY FUNCTION
     CREATE TIME TRACKER CLASS
-    
-    HOW TO REFERENCE API WHEN IT IS IMPORTED?
-
 */
-
+import {api} from '../api/app';
 export class Timer {
     constructor({props}) {
 
