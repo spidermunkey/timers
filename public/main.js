@@ -27,14 +27,11 @@ const neverInput = $('.inp-field[data-type="binary"] .option[data-option="never"
 const everyInput = $('.inp-field[data-type="binary"] .option[data-option="every"] input[type="checkbox"]');
 
 
-
+// handle timer menu options
 listen($('.timer-list'), (e) => {
-    console.log('hi')
-    if (elementClicked('.timer--header-options',e)){
-        const timer = elementClicked('.timer',e);
-        $('.timer--options',timer).classList.toggle('active')
-        
-    }
+    if (elementClicked('.timer--header-options',e))
+        $('.timer--options',elementClicked('.timer',e))
+            .classList.toggle('active')
 })
 listen(formToggleButton, () => $('.create-timer').classList.toggle('active') );
 listen(formCloseButton, () => $('.create-timer').classList.remove('active') );
