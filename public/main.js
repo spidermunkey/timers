@@ -11,8 +11,11 @@ const timers = api.getTimers(function then(data) {
         console.log(data)
         return data.map(props => {
             const t = new Timer({props});
-            t.render($('.timers'));
-            return t;
+            if (t.isToday){
+                t.render($('.timers'));
+                return t;
+            }
+
         })
     }
 });

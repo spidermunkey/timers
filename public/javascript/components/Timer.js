@@ -29,7 +29,7 @@ export class Timer {
 
         let dow = ['sun','mon','tue','wed','thu','fri','sat'];
 
-        this.isToday = props.days.some(day => day == dow[today.getDay()]);
+        this.isToday = props.days.some(day => day === dow[today.getDay()]);
 
         console.log('ISTODAY',this.isToday)
     }
