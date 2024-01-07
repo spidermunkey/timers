@@ -1,7 +1,6 @@
 /* 
     TODO 
 
-    ADD DELETE/DESTROY FUNCTION
     CREATE TIME TRACKER CLASS
 */
 import {api} from '../api/app';
