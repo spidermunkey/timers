@@ -2,8 +2,12 @@
     TODO 
 
     CREATE TIME TRACKER CLASS
+    ADD EDIT METHOD/ROUTE
+
 */
+
 import {api} from '../api/app';
+
 export class Timer {
     constructor({props}) {
 
@@ -188,7 +192,8 @@ export class Timer {
                 </div>
                 <div class="timer--header-options">
                     <div class="timer--header-options__icon">
-                        <span class="label">show options</span>
+                        <span class="label show">show options</span>
+                        <span class="lable hide">hide options</span>
                     </div>
                 </div>
             </div>
@@ -237,5 +242,15 @@ export class Timer {
             <div class="zero-second">${s[1] || 0}</div>
             <span class="label">s</span>
         </div>`
+    }
+}
+
+export class TimeTracker {
+    constructor({props}) {
+
+        this.title = props.title;
+        this.id = props.id || uuid();
+        this.successTime = props.successTime;
+
     }
 }

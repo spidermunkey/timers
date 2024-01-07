@@ -26,6 +26,16 @@ const createFormTimeInputs = $$('.inp-field input[data-type="time"]');
 const neverInput = $('.inp-field[data-type="binary"] .option[data-option="never"] input[type="checkbox"]');
 const everyInput = $('.inp-field[data-type="binary"] .option[data-option="every"] input[type="checkbox"]');
 
+
+
+listen($('.timer-list'), (e) => {
+    console.log('hi')
+    if (elementClicked('.timer--header-options',e)){
+        const timer = elementClicked('.timer',e);
+        $('.timer--options',timer).classList.toggle('active')
+        
+    }
+})
 listen(formToggleButton, () => $('.create-timer').classList.toggle('active') );
 listen(formCloseButton, () => $('.create-timer').classList.remove('active') );
 
@@ -42,7 +52,6 @@ createFormTimeInputs.forEach(inp => {
 
         if (!isNumberKey(event))
           event.preventDefault();
-
 
         // skip to previous input on backspace if
         if (!!prev && isBackspaceKey(event) &&  isEmptyNumberInput(inp)) {
