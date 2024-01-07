@@ -1,5 +1,5 @@
 import {api} from './javascript/api/app.js';
-import {Timer} from './javascript/components/Timer.js';
+import { Timer , TimeTracker } from './javascript/components/Timer.js';
 
 const timers = api.getTimers((data) => {
     if (data.length == 0) {
@@ -26,7 +26,8 @@ const createFormTimeInputs = $$('.inp-field input[data-type="time"]');
 const neverInput = $('.inp-field[data-type="binary"] .option[data-option="never"] input[type="checkbox"]');
 const everyInput = $('.inp-field[data-type="binary"] .option[data-option="every"] input[type="checkbox"]');
 
-
+const btnCreateTracker = $('input[type="submit"]#btn-create-tracker');
+const createTrackerForm = $('form#create-tracker')
 // handle timer menu options
 listen($('.timer-list'), (e) => {
     if (elementClicked('.timer--header-options',e))
@@ -37,7 +38,7 @@ listen(formToggleButton, () => $('.create-timer').classList.toggle('active') );
 listen(formCloseButton, () => $('.create-timer').classList.remove('active') );
 
 listen(createTimerForm, (e) => submitForm(e,createTimerForm),'submit');
-
+listen(createTrackerForm,(e) => submitTracker(e,createTrackerForm),'submit');
 
 createFormTimeInputs.forEach(inp => {
 
@@ -164,4 +165,46 @@ async function submitForm(event,form) {
 
     if (success && timer.isToday)
         timer.render($('.timer-list .timers'));
+}
+
+async function submitTracker(event,form) {
+
+        event.preventDefault();
+    
+        throttleInput(btnCreateTracker,2000);
+    
+        const data = new FormData(form);
+        
+        function parseForm(formDataObject){
+    
+            let fdo = formDataObject;
+            console.log(fdo)
+            for (const entry of fdo)
+                if (entry[1].trim() === '') entry[1] = 0;
+        
+            let
+                title = fdo.get('title'),
+                hours = fdo.getAll('hours').join(''),
+                minutes = fdo.getAll('minutes').join(''),
+                seconds = fdo.getAll('seconds').join(''),
+                total = Timer.timeInMs({hours,minutes,seconds}),
+                id = uuid(),
+                successTime = { hours, minutes, seconds, total },
+                time = Timer.formatMs(0);
+    
+            return {
+                title,
+                id,
+                time,
+                successTime,
+                resetAfterSuccess: true
+            };
+        }
+    
+        let props = parseForm(data);
+        console.log(props)
+        let tracker = new TimeTracker({props});
+        let success = await api.addTracker( props );
+        if (success)
+            tracker.render($('.trackers'),'tracker');
 }

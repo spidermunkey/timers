@@ -9,12 +9,12 @@
 import {api} from '../api/app';
 
 export class Timer {
+    // DEFAULTS TO COUNTDOWN
     constructor({props}) {
 
-        console.log(props)
         this.currentInterval = null;
 
-        this.days = props.days;
+        this.days = props.days || [];
 
         this.title = props.title;
 
@@ -30,55 +30,53 @@ export class Timer {
 
         let dow = ['sun','mon','tue','wed','thu','fri','sat'];
 
-        this.isToday = props.days.some(day => day === dow[today.getDay()]);
-
-        console.log('ISTODAY',this.isToday)
+        this.isToday = this.days.some(day => day === dow[today.getDay()]) || null;
     }
 
     padNum(num) {
-        if (num.toString().length == 1) return num.toString().padStart(2,'0')
+        if (num.toString().length == 1) 
+            return num.toString().padStart(2,'0')
         else return num.toString();
     }
     
     play() {
         if (this.currentInterval) return;
-
-        let t = Timer.formatMs(this.time.total - 1000);
-
-        if (Math.round(t.total) < 0) this.reset();
-
-        this.currentInterval = setInterval(this.decer.bind(this),1000);
-
-        $('.pause',this.element).classList.add('current');
-        $('.play',this.element).classList.remove('current');
-
+        this.currentInterval = setInterval(this.countdown.bind(this),1000);
     }
 
     decer() {
-        let t = Timer.formatMs(this.time.total - 1000);
-        console.log(t)
-        if (Math.round(t.total) < 0) {
-            this.time = Timer.formatMs(0);
-            console.log(this.time,this.initial);
 
+        let t = Timer.formatMs(this.time.total - 1000);
+
+        if (Math.round(t.total) < 0) {
+            t = Timer.formatMs(0);
             clearInterval(this.currentInterval);
             this.currentInterval = null;
             return;
         }
 
-        this.time = t;
-    
-        this.update();
+        return t;
+    }
+
+    incer() {
+        let t = Timer.formatMs(this.time.total + 1000);
+
+        if (Math.round(t.total) < 0) {
+            t = Timer.formatMs(0);
+            clearInterval(this.currentInterval);
+            this.currentInterval = null;
+            return;
+        }
+
+        return t;
     }
 
     pause(){
 
         clearInterval(this.currentInterval);
         this.currentInterval = null;
-
-        $('.play',this.element).classList.add('current');
-        $('.pause',this.element).classList.remove('current');
-
+        this.showPaused();
+        console.log(this)
         return;
     }
 
@@ -88,19 +86,29 @@ export class Timer {
     }
 
     reset() {
-        console.log('reset')
         clearInterval(this.currentInterval);
         this.currentInterval = null;
         this.time = structuredClone(this.initial);
+    }
+    
+    resetView() {
+        this.showPaused();
+        this.reset();
         this.update();
-        $(`[data-id="${this.id}"] .play`).classList.add('current');
-        $(`[data-id="${this.id}"] .pause`).classList.remove('current');
+    }
+
+    countdown() {
+        this.time = this.decer();
+
+        if (this.time.total <= 0) 
+            return this.resetView();
+        this.update();
     }
 
 
-    create() {
+    create(type) {
 
-        let html = this.createTimerElement();
+        let html = this.createTimerElement(type);
         let fragment = frag();
         let element = div();
 
@@ -111,34 +119,51 @@ export class Timer {
         return fragment;
     }
 
-    render(destination){
-        const frag = this.create();
+    showPlaying() {
+        if (!this.element) return;
+        $('.pause',this.element).classList.add('current');
+        $('.play',this.element).classList.remove('current');
+    }
+    
+    showPaused() {
+        console.log(this)
+        if (!this.element) return;
+        $('.play',this.element).classList.add('current');
+        $('.pause',this.element).classList.remove('current');
+    }
+
+    render(destination,type){
+        const frag = this.create(type);
         this.element = $(`[data-id="${this.id}"]`,frag);
         destination.appendChild(frag);
 
         listen($('.ctrl-wrapper',this.element),() => {
             if (!this.currentInterval){
+                this.showPlaying();
                 this.play();
             }
             else if (this.currentInterval) {
+                this.showPaused();
                 this.pause();
             }
         });
-        listen($('.reset',this.element), this.reset.bind(this));
+        listen($('.reset',this.element), this.resetView.bind(this));
         listen($('.delete',this.element),this.delete.bind(this));
     }
 
     update() {
+        if (!this.element) return;
         $('.time-slot-wrapper',this.element).innerHTML = this.createTimeSlot();
     }
 
     async delete() {
         console.log(api,'delete');
         const deleted = api.delete(this.id);
-        if (deleted)
+        if (deleted){
             this.element.remove();
+            this.element = null;
+        }
     }
-
 
     static timeInMs({hours,minutes,seconds}) {
             // convert all to ms
@@ -175,9 +200,9 @@ export class Timer {
         }
     }
 
-    createTimerElement() {
+    createTimerElement(type) {
         return `
-        <div class="timer">
+        <div class="timer" ${type ? `data-type=${type}`: null} >
             <div class="timer--options">
                 <div class="option delete">
                     <span class="label">delete</span>
@@ -245,12 +270,38 @@ export class Timer {
     }
 }
 
-export class TimeTracker {
+
+export class TimeTracker extends Timer {
     constructor({props}) {
+        super({props});
 
-        this.title = props.title;
-        this.id = props.id || uuid();
-        this.successTime = props.successTime;
+        this.initial = Timer.formatMs(0);
+        this.successTime = props.successTime; 
+        this.onSuccess = props.onSucces || function() {
+            alert(`${this.title} tracker has completed`);
+            if (this.element)
+                $('.timer',this.element).classList.add('complete')
 
+        };
+
+        this.success = false;
+
+        this.resetAfterSuccess = props.resetOnSuccess || false;
+    }
+
+    countup() {
+        this.time = this.incer();
+        if (this.success === false && this.time.total >= this.successTime.total){
+            this.success = true;
+            this.onSuccess();
+        }
+        if (this.resetOnSuccess)
+            return this.resetView();
+        else this.update();
+    }
+
+    play() {
+        if (this.currentInterval) return;
+        this.currentInterval = setInterval(this.countup.bind(this),1000);
     }
 }

@@ -74,7 +74,7 @@
                     <div class="new-timer--form-field" data-field="title">
                         <span class="inp-field" data-type="title">
                             <span class="label">Title</span>
-                            <input type="text" name="title" id="form-title" required>
+                            <input type="text" name="title" id="form-title" autocomplete="off" required>
                         </span>
                     </div>
                     <div class="new-timer--form-field" data-field="time">
@@ -176,11 +176,44 @@
         </div>
 
         <div class="time-tracker-list">
-            <div class="timers"></div>
+            <div class="trackers"></div>
+
+
             <div class="create-tracker">
                 <div class="btn-create-tracker">
-                    <span class="label">Create Tracker</span>
+                    <span class="label">Create Tracker +</span>
                 </div>
+            </div>
+
+            <div class="create-tracker--form">
+            <form action="#" id="create-tracker">
+                
+                <div class="inp-field" data-field="title">
+                    <div class="label">Title</div>
+                    <div class="inp">
+                        <input type="text" name="title" data-field="title" id="trackerTitle" required autocomplete="off">
+                    </div>
+                </div>
+                <div class="new-tracker--form-field" data-field="time">
+                    <span class="inp-field" data-type="hours">
+                        <input name="hours" id="t-nHours" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                        <input name="hours" id="t-0Hours" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                        <span class="label">h</span>
+                    </span>
+                    <span class="inp-field" data-type="minutes">
+                        <input name="minutes" id="t-nMinutes" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                        <input name="minutes" id="t-0Minutes" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                        <span class="label">m</span>
+                    </span>
+                    <span class="inp-field" data-type="seconds">
+                        <input name="seconds" id="t-nSeconds" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                        <input name="seconds" id="t-0Seconds" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                        <span class="label">s</span>
+                    </span>
+                </div>
+
+                <input type="submit" name="create" id="btn-create-tracker">
+            </form>
             </div>
         </div>
 
