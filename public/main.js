@@ -27,7 +27,10 @@ const neverInput = $('.inp-field[data-type="binary"] .option[data-option="never"
 const everyInput = $('.inp-field[data-type="binary"] .option[data-option="every"] input[type="checkbox"]');
 
 const btnCreateTracker = $('input[type="submit"]#btn-create-tracker');
-const createTrackerForm = $('form#create-tracker')
+const createTrackerForm = $('form#create-tracker');
+const trackerFormClose = $('.create-tracker--form .close');
+const trackerFormToggle = $('.btn-create-tracker');
+
 // handle timer menu options
 listen($('.timer-list'), (e) => {
     if (elementClicked('.timer--header-options',e))
@@ -36,6 +39,9 @@ listen($('.timer-list'), (e) => {
 })
 listen(formToggleButton, () => $('.create-timer').classList.toggle('active') );
 listen(formCloseButton, () => $('.create-timer').classList.remove('active') );
+
+listen(trackerFormClose, () => $('.create-tracker--form').classList.remove('active'));
+listen(trackerFormToggle, () => $('.create-tracker--form').classList.toggle('active'));
 
 listen(createTimerForm, (e) => submitForm(e,createTimerForm),'submit');
 listen(createTrackerForm,(e) => submitTracker(e,createTrackerForm),'submit');

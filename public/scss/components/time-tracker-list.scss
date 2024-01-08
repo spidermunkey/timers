@@ -11,7 +11,6 @@
     justify-content: flex-start;
     padding: 24px 0;
     margin-right: 16px;
-    
     .create-tracker {
         position: absolute;
         bottom: 0;
@@ -32,10 +31,8 @@
     .create-tracker--form {
         position: absolute;
         width: 100%;
-        top: 0;
         // height: 400px;
         padding: 24px;
-        border: 1px solid red;
     }
 
     .inp-field[data-field="title"] {

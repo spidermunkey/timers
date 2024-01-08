@@ -1,9 +1,11 @@
 /* 
     TODO 
 
-    CREATE TIME TRACKER CLASS
     ADD EDIT METHOD/ROUTE
+    CREATE SECTION FOR ALL TRACKERS
+    ADD TRACKERS TO MOJO/DATE
 
+    UPDATE UI DESIGN
 */
 
 import {api} from '../api/app';
@@ -278,7 +280,7 @@ export class TimeTracker extends Timer {
         this.initial = Timer.formatMs(0);
         this.successTime = props.successTime; 
         this.onSuccess = props.onSucces || function() {
-            alert(`${this.title} tracker has completed`);
+            console.log(`${this.title} tracker has completed`);
             if (this.element)
                 $('.timer',this.element).classList.add('complete')
 
