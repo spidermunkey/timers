@@ -15,6 +15,20 @@ export var api = {
         return;
     },
 
+    async getTrackers(effect) {
+        console.log('getting all trackers');
+        const res = await axios.get('http://localhost:1279/trackers');
+        const {data} = res;
+
+        if (responseOk(res)){
+            if (effect) effect(data);
+            return data;
+        }
+        else
+            console.error('something went wrong in /trackers');
+        return;
+    },
+
     async addTimer(body,effect){
         console.log('posting to api',body)
         const res = await axios.post('http://localhost:1279/timers',body);

@@ -5,17 +5,30 @@ const timers = api.getTimers((data) => {
     if (data.length == 0) {
         $('.timers').innerHTML = 'No Timers';
     } else {
-        console.log(data)
-        return data.map(props => {
+        
+        const dta = data.map(props => {
             const t = new Timer({props});
-            if (t.isToday){
-                t.render($('.timers'));
-                return t;
-            }
-
+            if (t.isToday) t.render($('.timers'));
+            return t
         })
+
+        if (!(dta.some(timer => timer.isToday)))
+            $('.timers').innerHTML = 'No Trackers Today';
     }
 });
+
+const trackers = api.getTrackers((data) => {
+    if (data.length == 0) {
+        $('.trackers').innerHTML = 'No Trackers';
+    } else {
+        console.log(data);
+        return data.map(props => {
+            const t = new TimeTracker({props});
+            t.render($('.trackers'));
+            return t;
+        })
+    }
+})
 
 const createTimerForm = $('form#create-timer');
 const btnSubmit = $('input[type="submit"]#btn-create');
