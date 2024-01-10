@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timers</title>
+    <link rel="stylesheet" href="app.scss">
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="utils.js"></script>
+    <script src="boiler.js"></script>
+    <script src="globals.js"></script>
+</head>
+
+<body>
+    <div class="dashboard">
+        <!-- <div class="timer">
+            <div class="timer--header">
+                <div class="timer--header-title">
+                    <span class="label">Timer Name</span>
+        
+                </div>
+                <div class="timer--header-options">
+                    <div class="timer--header-options__icon">
+                        <span class="label">show options</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timer--clock">
+                <div class="timer--clock-controls">
+                    <div class="ctrl-wrapper">
+                        <div class="play ctrl current">
+                            <span class="control">play</span>
+                        </div>
+                        <div class="pause ctrl">
+                            <span class="control">pause</span>
+                        </div>
+                        <div class="reset">reset</div>
+                    </div>
+                </div>
+    
+                <div class="timer--clock-times">
+                    <div class="time-slot-wrapper">
+                        <div class="hours time-slot">
+                            <span class="tenth-hour">0</span>
+                            <span class="zero-hour">0</span>
+                        </div>
+                        <div class="minutes time-slot">
+                            <div class="tenth-minute">0</div>
+                            <div class="zero-minute">0</div>
+                        </div>
+                        <div class="seconds time-slot">
+                            <div class="tenth-second">0</div>
+                            <div class="zero-second">0</div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </div> -->
+
+        <div class="timer-list">
+            <div class="timers"></div>
+
+            <div class="btn-toggle--form">New Timer +</div>
+            <div class="create-timer">
+                <form action="#" id="create-timer">
+
+                <div class="close">x</div>
+                <div class="new-timer--form">
+                    <div class="new-timer--form-field" data-field="title">
+                        <span class="inp-field" data-type="title">
+                            <span class="label">Title</span>
+                            <input type="text" name="title" id="form-title" autocomplete="off" required>
+                        </span>
+                    </div>
+                    <div class="new-timer--form-field" data-field="time">
+                        <span class="inp-field" data-type="hours">
+                            <input name="hours" id="nHours" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                            <input name="hours" id="0Hours" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                            <span class="label">h</span>
+                        </span>
+                        <span class="inp-field" data-type="minutes">
+                            <input name="minutes" id="nMinutes" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                            <input name="minutes" id="0Minutes" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                            <span class="label">m</span>
+                        </span>
+                        <span class="inp-field" data-type="seconds">
+                            <input name="seconds" id="nSeconds" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                            <input name="seconds" id="0Seconds" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                            <span class="label">s</span>
+                        </span>
+                    </div>
+                    <div class="new-timer--form-field" data-field="occurance">
+                        <div class="inp-field" data-type="day">
+                            <label for="mon">
+                                <span class="label">M</span>
+                            </label>
+                            <input type="checkbox" name="day" data-day="mon">
+                        </div>
+                        <div class="inp-field" data-type="day">
+                            <label for="tue">
+                                <span class="label">T</span>
+                            </label>
+                            <input type="checkbox" name="day" data-day="tue" id="tue">
+                        </div>
+                        <div class="inp-field" data-type="day">
+                            <label for="wed">
+                                <span class="label">W</span>
+                            </label>
+                            <input type="checkbox" name="day" data-day="wed" data-day="wed" id="wed">
+                        </div>
+                        <div class="inp-field" data-type="day">
+                            <label for="thu">
+                                <span class="label">T</span>
+                            </label>
+                            <input type="checkbox" name="day" data-day="thu" id="thu">
+                        </div>
+                        <div class="inp-field" data-type="day">
+                            <label for="fri">
+                                <span class="label">F</span>
+                            </label>
+                            <input type="checkbox" name="day" data-day="fri" id="fri">
+                        </div>
+                        <div class="inp-field" data-type="day">
+                            <label for="sat">
+                                <span class="label">S</span>
+                            </label>
+                            <input type="checkbox" name="day" data-day="sat" id="sat">
+                        </div>
+                        <div class="inp-field" data-type="day">
+                            <label for="sun">
+                                <span class="label">S</span>
+                            </label>
+                            <input type="checkbox" name="day" data-day="sun" id="sun">
+                        </div>
+                        <div class="inp-field" data-type="binary">
+                            <div class="option" data-option="never">
+                                <label for="never">
+                                    <span class="label">never</span>
+                                </label>
+                                <input type="checkbox" name="never" id="never">
+                            </div>
+                            <div class="option" data-option="every">
+                                <label for="everyday">
+                                    <span class="label">everyday</span>
+                                </label>
+                                <input type="checkbox" name="every" id="every">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tod-modal">
+                        <div class="option selected">
+                            <span class="label">ANY</span>
+                        </div>
+                        <div class="option">
+                            <div class="hour">
+                                <span class="nHour">05</span>
+                                <span class="breaker">:</span>
+                                <span class="0hour">00</span>
+                            </div>
+                            <div class="minute"></div>
+                        </div>
+                    </div>
+                    <span class="btn-create">
+                        <span class="label">Create</span>
+                        <input type="submit" name="create" id="btn-create">
+                    </span>
+                </div>
+            </form>
+
+            </div>
+        </div>
+
+        <div class="time-tracker-list">
+            <div class="trackers"></div>
+
+
+            <div class="create-tracker">
+                <div class="btn-create-tracker">
+                    <span class="label">Create Tracker +</span>
+                </div>
+            </div>
+
+            <div class="create-tracker--form">
+            <div class="close">x</div>
+            <form action="#" id="create-tracker">
+                
+                <div class="inp-field" data-field="title">
+                    <div class="label">Title</div>
+                    <div class="inp">
+                        <input type="text" name="title" data-field="title" id="trackerTitle" required autocomplete="off">
+                    </div>
+                </div>
+                <div class="new-tracker--form-field" data-field="time">
+                    <span class="inp-field" data-type="hours">
+                        <input name="hours" id="t-nHours" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                        <input name="hours" id="t-0Hours" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                        <span class="label">h</span>
+                    </span>
+                    <span class="inp-field" data-type="minutes">
+                        <input name="minutes" id="t-nMinutes" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                        <input name="minutes" id="t-0Minutes" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                        <span class="label">m</span>
+                    </span>
+                    <span class="inp-field" data-type="seconds">
+                        <input name="seconds" id="t-nSeconds" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                        <input name="seconds" id="t-0Seconds" value="0" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                        <span class="label">s</span>
+                    </span>
+                </div>
+
+                <input type="submit" name="create" id="btn-create-tracker">
+            </form>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+<script src="main.js" type="module"></script>
+</html>

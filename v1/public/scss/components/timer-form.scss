@@ -1,0 +1,160 @@
+.create-timer {
+    background-color: white;
+    position: absolute;
+    // margin: 16px 0;
+    display: none;
+    border: 1px solid black;
+    width: 100%;
+    top:0;
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 10;
+    &.active {
+        display: flex;
+        flex-direction: column;
+
+    }
+    .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 40px;
+        width: 40px;
+        border-bottom: 1px solid black;
+        border-left: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .new-timer--form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .new-timer--form-field {
+        border-bottom: 1px solid rgba(128, 128, 128, 0.409);
+        padding: 16px 0;
+    }
+    
+    .new-timer--form-field[data-field="title"] {
+        margin: 10px;
+        
+        .inp-field {
+            display: inline-flex;
+            flex-direction: column;
+            // border: 1px solid grey;
+
+            input {
+                border: none;
+                outline: none;
+                border: 1px solid rgba(128, 128, 128, 0.161);
+                &:invalid {
+                    border: 2px solid coral;
+                }
+            }
+        }
+
+
+    }
+    .new-timer--form-field[data-field="time"] {
+        display: flex;
+        margin: 10px;
+        .inp-field {
+            display: flex;
+            margin-right: 10px;
+            padding: 0px 8px;
+            border: 1px solid rgba(128, 128, 128, 0.148);
+            align-items: baseline;
+
+            input {
+                font-size: 32px;
+                width: 32px;
+                outline: none;
+                border: none;
+            }
+        }
+    }
+    .new-timer--form-field[data-field="occurance"]{
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin: 10px;
+        
+        .inp-field[data-type="day"] {
+            width: 48px;
+            height: 40px;
+            border: 1px solid rgba(128, 128, 128, 0.242);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 4px;
+
+            cursor: pointer;
+
+            &.selected {
+                background: rgba(226, 226, 226, 0.632);
+            }
+        }
+
+        .inp-field[data-type="binary"] {
+            .option {
+                margin: 2px;
+                padding: 2px;
+                border: 1px solid grey;
+                text-align: center;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: rgba(226, 226, 226, 0.632);
+                }
+            }
+        }
+
+
+    }
+
+    .tod-modal {
+        margin: 10px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.576);
+        padding-bottom: 10px;
+        display: inline-flex;
+        flex-direction: column;
+        
+        .option {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: max-content;
+            min-width: 48px;
+            margin: 4px 0;
+            padding: 10px;
+            border: 1px solid grey;
+
+            &.selected {
+                background-color: rgba(226, 226, 226, 0.632);
+            }
+        }
+
+    }
+
+    .btn-create {
+        position: relative;
+        margin: 10px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+        .label {
+            padding: 1rem 4rem;
+            border: 1px solid grey;
+            background-color: lightgreen;
+        }
+    }
+
+    input#btn-create {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+}

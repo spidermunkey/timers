@@ -1,0 +1,3 @@
+It is at this point I have to admit that most of my code starts out messy. In my defence I used to have anxiety attacks when, after weeks of studying, I'd open my text editor ready to create something and NOTHING WORKS. I don't know how to css, can barely make out HTML tags, and don't get me started on javascript.
+
+The messiness started after one week I was frustrated with life, myself and especially my programming skills. I sat at my desk cracked to energy drinks BACK TO BACK and just started hacking until I came up with something that worked. (see icon repo in "learning-center") it wasn't pretty but my confidence shot throught the roof after seeing 2years of pure toil and turmoil. Now when I start I just GO hack until something works and make it nice after.

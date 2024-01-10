@@ -1,0 +1,125 @@
+.timer {
+    position: relative;
+    background: white;
+    display: inline-flex;
+    flex-direction: column;
+    min-width: 300px;
+    min-height: 150px;
+    max-height: max-content;
+    border: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    
+    &[data-type="tracker"].complete {
+        background: lime;
+    }
+
+    &--options {
+        position: absolute;
+        left: calc(100% - 100px);
+        top: 30px;
+        height: 100px;
+        width: 100px;
+        border: 1px solid black;
+        background-color: white;
+        opacity: 0;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &.active{
+
+            opacity: 1;
+            pointer-events: all;
+            & + .timer--header .timer--header-options .hide {
+                display: block;
+            }
+            & + .timer--header .timer--header-options .show {
+                display: none;
+            }
+        }
+
+        // & + .timer--header .timer--header-options .show,
+        & + .timer--header .timer--header-options .hide {
+            display: none;
+        }
+
+
+        .option {
+            margin: 6px 0;          
+            border: 1px solid black; 
+            min-width: 60px;
+            cursor: pointer;
+
+        }
+    }
+    &--header,
+    &--clock {
+        display: flex;
+    }
+
+    &--header {
+        justify-content: space-between;
+        margin: 10px;
+        
+        &-options {
+            cursor: pointer;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &--clock {
+        margin: 10px;
+        justify-content: start;
+
+        &-controls {
+            position: relative;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        &-controls .ctrl-wrapper {
+            position: relative;
+            height: 100px;
+            min-width: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid grey;
+        }
+
+        &-controls .ctrl {
+            display: none;
+        }
+
+        &-controls .reset {
+            position: absolute;
+            bottom: 0;
+            right: -200px;
+            // background-color: black;
+        }
+
+        &-controls .ctrl.current {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &-times .time-slot-wrapper {
+            display: flex;
+            height: 100px;
+            align-items: center;
+        }
+        &-times .time-slot {
+            display: flex;
+            border: 1px solid grey;
+            font-size: 48px;
+        }
+
+        &-times .time-slot .label {
+            font-size: 16px;
+        }
+    }
+}
