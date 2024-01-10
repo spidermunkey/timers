@@ -1282,6 +1282,63 @@ class DateTime {
     //     console.log(d.getFullYear())
     // }
 
+    static daysIn(month){
+        const abbrv = month.slice(0,3);
+
+        if (DateTime.monthMap[month])
+            return DateTime.monthMap[month]
+
+        else if (DateTime.monthMap[abbrv])
+            return DateTime.monthMap[abbrv]
+
+    }
+
+    static dayMap = {
+        0: 'Sunday',
+        1: 'Monday',
+        2: 'Tuesday',
+        3: 'Wednesday',
+        4: 'Thurday',
+        5: 'Friday',
+        6: 'Saturday',
+        7: null,
+
+        toArray() {
+            const arr = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+            arr.abbrv = arr.abbreviate = () => ['sun','mon','tue','wed','thu','fri','sat','sun']
+            return arr;
+        }
+    }
+
+    static get days() {
+        return DateTime.dayMap.toArray();
+    }
+
+    static get monthMap() {
+        return {
+            'january': 31,
+            get 'february'(){
+                if (DateTime.thisYearIsLeap()) return 29
+                return 28;
+            },
+            'march': 31,
+            'april': 30,
+            'may': 31,
+            'june': 30,
+            'july': 31,
+            'august': 31,
+            'september': 30,
+            'october': 31,
+            'november': 30,
+            'december': 31,
+        }
+    }
+
+    static get months() {
+        const months = ['january','february','march','april','may','june','july','august','september','october','november','december']
+        months.abbrv = months.abbreviate = () => months.map(slice.bind(months,[0,3]));
+    }
+
     static date = {
 
         standard: undefined,
@@ -1621,11 +1678,32 @@ class DateTime {
 
 class Time {
     constructor() {
-        this.timers = [];
+        // current time
+        //      -time.in(ms,hms,hm)
     }
 
     static setTimer(start,end) {
         
+    }
+
+    static in(format){
+        switch (format) {
+            case('ms' || 'miliseconds'):{
+
+            }
+            case('hms' || 'hourminutesseconds'):{
+
+            }
+            case('hm' || 'hoursminutes'):{
+
+            }
+        }
+    }
+
+    static get current() {
+        return {
+
+        }
     }
 
 }

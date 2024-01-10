@@ -1,1 +1,3 @@
 I also need to figure out a way to pull those scripts out of the current project. work on them in a seperate directory and bring them all back in as a module...
+
+This way if I make an edit I don't have to track down all the edits in different projects to find something that has already been revised.

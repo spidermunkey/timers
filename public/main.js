@@ -43,7 +43,7 @@ api.getTrackers((data) => {
 // handle timer menu options
 listen($('.timer-list'), (e) => {
     if (elementClicked('.timer--header-options',e))
-        $('.timer--options',elementClicked('.timer',e)).classList.toggle('active')
+        $('.timer--options',elementClicked('.timer',e)).classList.toggle('active');
 })
 
 listen(timerFormToggle, () => $('.create-timer').classList.toggle('active') );
