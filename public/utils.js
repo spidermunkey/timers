@@ -1631,7 +1631,7 @@ class Time {
 }
 
 
-export class Timer {
+class Timer {
     // DEFAULTS TO COUNTDOWN
     constructor({props}) {
 
@@ -1894,7 +1894,7 @@ export class Timer {
 }
 
 
-export class TimeTracker extends Timer {
+class TimeTracker extends Timer {
     constructor({props}) {
         super({props});
 
