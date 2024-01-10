@@ -1,70 +1,80 @@
 import {api} from './javascript/api/app.js';
 
-const timers = api.getTimers((data) => {
-    if (data.length == 0) {
-        $('.timers').innerHTML = 'No Timers';
-    } else {
-        
-        const dta = data.map(props => {
-            const t = new Timer({props});
-            if (t.isToday) t.render($('.timers'));
-            return t
-        })
+const timerForm = $('form#create-timer');
+const timerFormSubit = $('input[type="submit"]#btn-create');
+const timerFormToggle = $('.btn-toggle--form');
+const timerFormClose = $('.create-timer .close');
+const timerDayInputs = $$('.inp-field[data-type="day"] input[type="checkbox"]');
+const timerTimeInputs = $$('.inp-field input[data-type="time"]');
+const timerNeverInput = $('.inp-field[data-type="binary"] .option[data-option="never"] input[type="checkbox"]');
+const timerEveryInput = $('.inp-field[data-type="binary"] .option[data-option="every"] input[type="checkbox"]');
 
-        if (!(dta.some(timer => timer.isToday)))
-            $('.timers').innerHTML = 'No Trackers Today';
-    }
-});
-
-const trackers = api.getTrackers((data) => {
-    if (data.length == 0) {
-        $('.trackers').innerHTML = 'No Trackers';
-    } else {
-        console.log(data);
-        return data.map(props => {
-            const t = new TimeTracker({props});
-            t.render($('.trackers'));
-            return t;
-        })
-    }
-})
-
-const createTimerForm = $('form#create-timer');
-const btnSubmit = $('input[type="submit"]#btn-create');
-const formToggleButton = $('.btn-toggle--form');
-const formCloseButton = $('.create-timer .close');
-const createFormDayInputs = $$('.inp-field[data-type="day"] input[type="checkbox"]');
-const createFormTimeInputs = $$('.inp-field input[data-type="time"]');
-const neverInput = $('.inp-field[data-type="binary"] .option[data-option="never"] input[type="checkbox"]');
-const everyInput = $('.inp-field[data-type="binary"] .option[data-option="every"] input[type="checkbox"]');
-
-const btnCreateTracker = $('input[type="submit"]#btn-create-tracker');
-const createTrackerForm = $('form#create-tracker');
+const trackerForm = $('form#create-tracker');
+const trackerFormSubmit = $('input[type="submit"]#btn-create-tracker');
 const trackerFormClose = $('.create-tracker--form .close');
 const trackerFormToggle = $('.btn-create-tracker');
+
+api.getTimers((data) => {
+    
+    const renderFilteredMap = props => {
+        const t = new Timer({props});
+        if (t.isToday) t.render($('.timers'));
+        return !!t.isToday;
+    }
+
+    data.filter(renderFilteredMap)
+        .length == 0
+            ? $('.timers').innerHTML = 'No Trackers Today'
+            : null;
+});
+
+api.getTrackers((data) => {
+
+    if (data.length == 0) $('.trackers').innerHTML = 'No Trackers';
+
+    else return data.map(props => {
+        const t = new TimeTracker({props});
+        t.render($('.trackers'));
+        return t;
+    })
+
+})
 
 // handle timer menu options
 listen($('.timer-list'), (e) => {
     if (elementClicked('.timer--header-options',e))
-        $('.timer--options',elementClicked('.timer',e))
-            .classList.toggle('active')
+        $('.timer--options',elementClicked('.timer',e)).classList.toggle('active')
 })
-listen(formToggleButton, () => $('.create-timer').classList.toggle('active') );
-listen(formCloseButton, () => $('.create-timer').classList.remove('active') );
+
+listen(timerFormToggle, () => $('.create-timer').classList.toggle('active') );
+listen(timerFormClose, () => $('.create-timer').classList.remove('active') );
 
 listen(trackerFormClose, () => $('.create-tracker--form').classList.remove('active'));
 listen(trackerFormToggle, () => $('.create-tracker--form').classList.toggle('active'));
 
-listen(createTimerForm, (e) => submitForm(e,createTimerForm),'submit');
-listen(createTrackerForm,(e) => submitTracker(e,createTrackerForm),'submit');
+listen(timerForm, (e) => submitForm(e,timerForm),'submit');
+listen(trackerForm,(e) => submitTracker(e,trackerForm),'submit');
 
-createFormTimeInputs.forEach(inp => {
+listen(timerNeverInput,function toggleEveryInput(){
+    if (timerNeverInput.checked) {
+        uncheck(timerEveryInput);
+        uncheckAll(timerDayInputs);
+}},'input');
+
+listen(timerEveryInput,function toggleNeverInput() {
+    if (timerEveryInput.checked) {
+        uncheck(timerNeverInput);
+        checkAll(timerDayInputs);
+    }
+},'input');
+
+timerTimeInputs.forEach(function EVENTS__timeInputs(inp) {
 
     inp.addEventListener('click',() => inp.select())
 
     inp.addEventListener('keydown',(event) => {
 
-        const prev = createFormTimeInputs[createFormTimeInputs.indexOf(inp) -1];
+        const prev = timerTimeInputs[timerTimeInputs.indexOf(inp) -1];
 
         if (!isNumberKey(event))
           event.preventDefault();
@@ -83,7 +93,7 @@ createFormTimeInputs.forEach(inp => {
             inp.value = 0;
             return;
         }
-        const next = createFormTimeInputs[createFormTimeInputs.indexOf(inp) + 1]
+        const next = timerTimeInputs[timerTimeInputs.indexOf(inp) + 1]
         if (!!next){
             next.focus();
             next.select();
@@ -98,45 +108,30 @@ createFormTimeInputs.forEach(inp => {
 
 });
 
-createFormDayInputs.forEach(inp => {
+timerDayInputs.forEach(function EVENTS__dayInputs(inp) {
 
     inp.addEventListener('input',() => {
 
         // handle all checked
-        if (oneUnchecked(createFormDayInputs)) 
-            uncheck(everyInput)
-        else if (allChecked(createFormDayInputs)) 
-            check(everyInput)
+        if (oneUnchecked(timerDayInputs)) 
+            uncheck(timerEveryInput)
+        else if (allChecked(timerDayInputs)) 
+            check(timerEveryInput)
 
         // handle none checked
-        if (oneChecked(createFormDayInputs))
-            uncheck(neverInput)
-        else if (noneChecked(createFormDayInputs))
-            check(neverInput)
+        if (oneChecked(timerDayInputs))
+            uncheck(timerNeverInput)
+        else if (noneChecked(timerDayInputs))
+            check(timerNeverInput)
 
     })
 })
-
-neverInput.addEventListener('input',(e) => {
-    if (neverInput.checked) {
-        uncheck(everyInput);
-        uncheckAll(createFormDayInputs);
-    }
-})
-
-everyInput.addEventListener('input',(e) => {
-    if (everyInput.checked) {
-        uncheck(neverInput);
-        checkAll(createFormDayInputs);
-    }
-})
-
 
 async function submitForm(event,form) {
 
     event.preventDefault();
 
-    throttleInput(btnSubmit,2000);
+    throttleInput(timerFormSubit,2000);
 
     const data = new FormData(form);
     
@@ -189,7 +184,7 @@ async function submitTracker(event,form) {
 
         event.preventDefault();
     
-        throttleInput(btnCreateTracker,2000);
+        throttleInput(trackerFormSubmit,2000);
     
         const data = new FormData(form);
         
