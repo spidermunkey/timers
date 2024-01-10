@@ -1,4 +1,24 @@
 import {api} from './javascript/api/app.js';
+/*
+    TODO
+
+    tracker tags && logging
+        ** {
+            select from quick task [over-arching tasks]
+                -- adds up weekly total
+                -- tracks times started and ended across week
+                -- tracks over achieved, under achieved, achieved
+
+            select timing goals for under over tasks
+                -- read *over* 20hrs/week
+                -- code *over* 20hrs/week
+                -- clean *under* 8hrs/week
+            advanced settings for specific goals and time management
+
+            [task]('specifics') *in* allotedTime {on} |day or week of| 
+                -- [read] ('building a second brain') *under* 4hrs/{this}|monday||week|
+        }
+*/
 
 const timerForm = $('form#create-timer');
 const timerFormSubit = $('input[type="submit"]#btn-create');

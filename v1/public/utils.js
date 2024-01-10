@@ -1304,8 +1304,8 @@ class DateTime {
         7: null,
 
         toArray() {
-            const arr = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-            arr.abbrv = arr.abbreviate = () => ['sun','mon','tue','wed','thu','fri','sat','sun']
+            const arr = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+            arr.abbrv = arr.abbreviate = () => arr.map(slice.bind(months,[0,3]));
             return arr;
         }
     }
@@ -1335,8 +1335,8 @@ class DateTime {
     }
 
     static get months() {
-        const months = ['january','february','march','april','may','june','july','august','september','october','november','december']
-        months.abbrv = months.abbreviate = () => months.map(slice.bind(months,[0,3]));
+        const arr = ['january','february','march','april','may','june','july','august','september','october','november','december']
+        arr.abbrv = arr.abbreviate = () => arr.map(slice.bind(arr,[0,3]));
     }
 
     static date = {
@@ -1680,6 +1680,10 @@ class Time {
     constructor() {
         // current time
         //      -time.in(ms,hms,hm)
+    }
+
+    static get current() {
+        return (new Date()).toLocaleTimeString();
     }
 
     static setTimer(start,end) {
