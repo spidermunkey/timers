@@ -52,7 +52,7 @@ listen(timerFormClose, () => $('.create-timer').classList.remove('active') );
 listen(trackerFormClose, () => $('.create-tracker--form').classList.remove('active'));
 listen(trackerFormToggle, () => $('.create-tracker--form').classList.toggle('active'));
 
-listen(timerForm, (e) => submitForm(e,timerForm),'submit');
+listen(timerForm, (e) => submitTimer(e,timerForm),'submit');
 listen(trackerForm,(e) => submitTracker(e,trackerForm),'submit');
 
 listen(timerNeverInput,function toggleEveryInput(){
@@ -127,7 +127,7 @@ timerDayInputs.forEach(function EVENTS__dayInputs(inp) {
     })
 })
 
-async function submitForm(event,form) {
+async function submitTimer(event,form) {
 
     event.preventDefault();
 
@@ -178,6 +178,8 @@ async function submitForm(event,form) {
 
     if (success && timer.isToday)
         timer.render($('.timer-list .timers'));
+    
+    console.log(timer.isToday,'IS TODAY')
 }
 
 async function submitTracker(event,form) {
