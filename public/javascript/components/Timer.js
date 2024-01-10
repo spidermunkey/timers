@@ -3,9 +3,9 @@
 
     ADD EDIT METHOD/ROUTE
     CREATE SECTION FOR ALL TRACKERS
-    ADD TRACKERS TO MOJO/DATE
 
     UPDATE UI DESIGN
+        --add sound
 */
 
 import {api} from '../api/app';

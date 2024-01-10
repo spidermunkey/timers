@@ -1,4 +1,4 @@
-This works, that works, it all kinda works or could work but I think alot of it can and should be abstracted into composable functions and classes that.
+This works, that works, it all kinda works or could work but I think alot of it can and should be abstracted into composable functions and classes that. For example the timer that was built doesn't always need to be a dom element, it could be a background function that starts, stops, resets, maybe logs data to server, and has hooks to do something when these things happen.
 
 I hate when this happens because this is the point when I want to start building or adding to a library of such functions but I also want to see the project through at my current capabliities and toolset. So do I stop and start, swap and shape, or keep powering through and start when I'm done with my tasks.
 
