@@ -182,7 +182,11 @@ export class Timer {
 
                 const fdo = new FormData(form);
                 let props = parseForm(fdo,form)
+                console.log(this.id)
+                console.log(props.id);
+                props.id = this.id
                 let success = await api.edit(this.id, props);
+        
                 if (success)
                     console.log('SUCCESS!');
             }

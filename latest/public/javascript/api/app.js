@@ -81,7 +81,7 @@ export var api = {
 
     async edit(id,data){
         const res = await axios.patch(`http://localhost:1279/timers?id=${id}`,data);
-        console.log(res);
+                console.log(res);
         if (responseOk(res))
             return true;
         return false;
