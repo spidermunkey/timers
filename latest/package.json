@@ -1,1 +1,5 @@
-{}
+{
+  "devDependencies": {
+    "@parcel/transformer-react-refresh-wrap": "^2.11.0"
+  }
+}

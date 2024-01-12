@@ -77,6 +77,14 @@ export var api = {
         if (responseOk(res))
             return true;
         return false;
+    },
+
+    async edit(id,data){
+        const res = await axios.patch(`http://localhost:1279/timers?id=${id}`,data);
+    },
+
+    async log(id,data){
+        const res = await axios.post(`http://localhost:1279/timers?id=${id}`,data);
     }
 }
 
