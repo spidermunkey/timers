@@ -209,37 +209,48 @@ async function submitTracker(event,form) {
         throttleInput(trackerFormSubmit,2000);
     
         const data = new FormData(form);
-        
-        function parseForm(formDataObject){
-    
-            let fdo = formDataObject;
-            console.log(fdo)
-            for (const entry of fdo)
-                if (entry[1].trim() === '') entry[1] = 0;
-        
-            let
-                title = fdo.get('title'),
-                hours = fdo.getAll('hours').join(''),
-                minutes = fdo.getAll('minutes').join(''),
-                seconds = fdo.getAll('seconds').join(''),
-                total = Timer.timeInMs({hours,minutes,seconds}),
-                id = uuid(),
-                successTime = { hours, minutes, seconds, total },
-                time = Timer.formatMs(0);
-    
-            return {
-                title,
-                id,
-                time,
-                successTime,
-                resetAfterSuccess: true
-            };
-        }
-    
-        let props = parseForm(data);
+            
+        let props = parseForm(data,form);
         console.log(props)
         let tracker = new TimeTracker({props});
         let success = await api.addTracker( props );
         if (success)
             tracker.render($('.trackers'),'tracker');
+}
+
+function parseForm(formDataObject,form){
+
+    let fdo = formDataObject;
+    console.log(fdo)
+    for (const entry of fdo)
+        if (entry[1].trim() === '') entry[1] = 0;
+
+            // Get the values of the checkboxes for days
+    let days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].filter(day => {
+        let checkbox = $(`.inp-field[data-type="day"] input[name="day"][data-day="${day}"]`,form);
+
+        if (checkbox && checkbox.checked){
+            console.log(day)
+            return true
+        }
+    });
+    console.log(days)
+
+    let
+        title = fdo.get('title'),
+        hours = fdo.getAll('hours').join(''),
+        minutes = fdo.getAll('minutes').join(''),
+        seconds = fdo.getAll('seconds').join(''),
+        total = Timer.timeInMs({hours,minutes,seconds}),
+        id = uuid(),
+        time = { hours, minutes, seconds, total },
+        initial = time;
+
+    return {
+        title,
+        id,
+        time,
+        days,
+        initial
+    };
 }
