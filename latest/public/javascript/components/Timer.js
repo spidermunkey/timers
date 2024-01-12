@@ -139,6 +139,10 @@ export class Timer {
         this.element = $(`[data-id="${this.id}"]`,frag);
         destination.appendChild(frag);
 
+        this.hydrate();
+    }
+
+    hydrate() {
         listen($('.ctrl-wrapper',this.element),() => {
             if (!this.currentInterval){
                 this.showPlaying();
@@ -151,11 +155,78 @@ export class Timer {
         });
         listen($('.reset',this.element), this.resetView.bind(this));
         listen($('.delete',this.element),this.delete.bind(this));
+        listen($('.edit',this.element), this.showEditForm.bind(this));
     }
 
     update() {
         if (!this.element) return;
         $('.time-slot-wrapper',this.element).innerHTML = this.createTimeSlot();
+    }
+
+    showEditForm() {
+        let el = div();
+        el.innerHTML = this.createEditForm();
+        el.classList.add('edit-timer');
+        el.style.display = 'block'
+        $('.timer-list').appendChild(el);
+        let form = $('form',el);
+        hydrateForm.call(this,form);
+
+        function hydrateForm(form) {
+
+            form.addEventListener('submit',(e) => submit.call(this,e,form));
+
+            async function submit(event,form){
+                console.log(arguments)
+                event.preventDefault();
+
+                const fdo = new FormData(form);
+                let props = parseForm(fdo,form)
+                let success = await api.edit(this.id, props);
+                if (success)
+                    console.log('SUCCESS!');
+            }
+        }
+
+        function parseForm(formDataObject,form){
+
+            let fdo = formDataObject;
+            console.log(fdo)
+            for (const entry of fdo)
+                if (entry[1].trim() === '') entry[1] = 0;
+        
+                    // Get the values of the checkboxes for days
+            let days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].filter(day => {
+                let checkbox = $(`.inp-field[data-type="day"] input[name="day"][data-day="${day}"]`,form);
+        
+                if (checkbox && checkbox.checked){
+                    console.log(day)
+                    return true
+                }
+            });
+            console.log(days)
+        
+            let
+                title = fdo.get('title'),
+                hours = fdo.getAll('hours').join(''),
+                minutes = fdo.getAll('minutes').join(''),
+                seconds = fdo.getAll('seconds').join(''),
+                total = Timer.timeInMs({hours,minutes,seconds}),
+                id = uuid(),
+                time = { hours, minutes, seconds, total },
+                initial = time;
+        
+            return {
+                title,
+                id,
+                time,
+                days,
+                initial
+            };
+        }
+
+
+        console.log(el)
     }
 
     async delete() {
@@ -269,6 +340,114 @@ export class Timer {
             <div class="zero-second">${s[1] || 0}</div>
             <span class="label">s</span>
         </div>`
+    }
+
+    createEditForm(){
+        return `                
+        <form action="#" id="edit-timer">
+
+        <div class="close">x</div>
+        <div class="new-timer--form">
+            <div class="new-timer--form-field" data-field="title">
+                <span class="inp-field" data-type="title">
+                    <span class="label">Title</span>
+                    <input type="text" name="title" id="form-title" autocomplete="off" value="${this.title}" required>
+                </span>
+            </div>
+            <div class="new-timer--form-field" data-field="time">
+                <span class="inp-field" data-type="hours">
+                    <input name="hours" id="nHours" value="${this.time.hours[0]}" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                    <input name="hours" id="0Hours" value="${this.time.hours[1]}" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                    <span class="label">h</span>
+                </span>
+                <span class="inp-field" data-type="minutes">
+                    <input name="minutes" id="nMinutes" value="${this.time.minutes[0]}" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                    <input name="minutes" id="0Minutes" value="${this.time.minutes[1]}" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                    <span class="label">m</span>
+                </span>
+                <span class="inp-field" data-type="seconds">
+                    <input name="seconds" id="nSeconds" value="${this.time.seconds[0]}" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                    <input name="seconds" id="0Seconds" value="${this.time.seconds[1]}" maxlength="1" data-type="time" pattern="[0-9]" autocomplete="off">
+                    <span class="label">s</span>
+                </span>
+            </div>
+            <div class="new-timer--form-field" data-field="occurance">
+                <div class="inp-field" data-type="day">
+                    <label for="mon">
+                        <span class="label">M</span>
+                    </label>
+                    <input type="checkbox" name="day" data-day="mon" ${this.days.some(day => day === 'mon') ? 'checked' : null }>
+                </div>
+                <div class="inp-field" data-type="day">
+                    <label for="tue">
+                        <span class="label">T</span>
+                    </label>
+                    <input type="checkbox" name="day" data-day="tue" id="tue"${this.days.some(day => day === 'tue') ? 'checked' : null }>
+                </div>
+                <div class="inp-field" data-type="day">
+                    <label for="wed">
+                        <span class="label">W</span>
+                    </label>
+                    <input type="checkbox" name="day" data-day="wed" data-day="wed" id="wed"${this.days.some(day => day === 'wed') ? 'checked' : null }>
+                </div>
+                <div class="inp-field" data-type="day">
+                    <label for="thu">
+                        <span class="label">T</span>
+                    </label>
+                    <input type="checkbox" name="day" data-day="thu" id="thu"${this.days.some(day => day === 'thu') ? 'checked' : null }>
+                </div>
+                <div class="inp-field" data-type="day">
+                    <label for="fri">
+                        <span class="label">F</span>
+                    </label>
+                    <input type="checkbox" name="day" data-day="fri" id="fri"${this.days.some(day => day === 'fri') ? 'checked' : null }>
+                </div>
+                <div class="inp-field" data-type="day">
+                    <label for="sat">
+                        <span class="label">S</span>
+                    </label>
+                    <input type="checkbox" name="day" data-day="sat" id="sat"${this.days.some(day => day === 'sat') ? 'checked' : null }>
+                </div>
+                <div class="inp-field" data-type="day">
+                    <label for="sun">
+                        <span class="label">S</span>
+                    </label>
+                    <input type="checkbox" name="day" data-day="sun" id="sun"${this.days.some(day => day === 'sun') ? 'checked' : null }>
+                </div>
+                <div class="inp-field" data-type="binary">
+                    <div class="option" data-option="never">
+                        <label for="never">
+                            <span class="label">never</span>
+                        </label>
+                        <input type="checkbox" name="never" id="never" ${this.days.length == 0 ? 'checked' : null }>
+                    </div>
+                    <div class="option" data-option="every">
+                        <label for="everyday">
+                            <span class="label">everyday</span>
+                        </label>
+                        <input type="checkbox" name="every" id="every" ${this.days.length == 7 ? 'checked' : null }>
+                    </div>
+                </div>
+            </div>
+            <div class="tod-modal">
+                <div class="option selected">
+                    <span class="label">ANY</span>
+                </div>
+                <div class="option">
+                    <div class="hour">
+                        <span class="nHour">05</span>
+                        <span class="breaker">:</span>
+                        <span class="0hour">00</span>
+                    </div>
+                    <div class="minute"></div>
+                </div>
+            </div>
+            <span class="btn-create">
+                <span class="label">Create</span>
+                <input type="submit" name="create" id="btn-create">
+            </span>
+        </div>
+    </form>`
     }
 }
 
