@@ -47,14 +47,14 @@ export class Timer {
     }
 
     decer() {
-
+        console.log(this.time)
         let t = Timer.formatMs(this.time.total - 1000);
 
-        if (Math.round(t.total) < 0) {
+        if (Math.round(t.total) <= 0) {
             t = Timer.formatMs(0);
             clearInterval(this.currentInterval);
             this.currentInterval = null;
-            return;
+            return t
         }
 
         return t;
@@ -67,7 +67,7 @@ export class Timer {
             t = Timer.formatMs(0);
             clearInterval(this.currentInterval);
             this.currentInterval = null;
-            return;
+            return t
         }
 
         return t;

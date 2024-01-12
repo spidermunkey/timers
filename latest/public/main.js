@@ -1,7 +1,11 @@
 import {api} from './javascript/api/app.js';
+import {Timer,TimeTracker} from './javascript/components/Timer.js'
 /*
     TODO
 
+    add sounds
+    add edit feature
+    add extend current
     tracker tags && logging
         ** {
             select from quick task [over-arching tasks]
