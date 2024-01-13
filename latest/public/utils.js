@@ -1259,6 +1259,7 @@ class MouseTrackingSlider {
 // -----------------------------------------
 
 
+
 class DateTime {
     constructor() {
 
@@ -1337,6 +1338,7 @@ class DateTime {
     static get months() {
         const arr = ['january','february','march','april','may','june','july','august','september','october','november','december']
         arr.abbrv = arr.abbreviate = () => arr.map(slice.bind(arr,[0,3]));
+        return arr
     }
 
     static date = {
@@ -1411,6 +1413,10 @@ class DateTime {
         }
     }
     
+    static compareStamps(current,prev){
+        return DateTime.from( new Date(current.ms) , prev.ms )
+    }
+
     static today() {
         return DateTime.date.days[ (new Date()).getDay() ];
     }
@@ -1443,7 +1449,7 @@ class DateTime {
         function countFrom(lowest,highest) {
             let leapSince = 0;
             for (let i = lowest; i <= highest; i++) {
-                if (Datetdate.isLeap(i))
+                if (DateTime.isLeap(i))
                     leapSince++;
             }
             return leapSince;
@@ -1570,24 +1576,49 @@ class DateTime {
     
     // const minutesInYear = msnYear;
     
-    static from(since) {
-        const now = Date.now();
+    static from( since, compare = Date.now()) { // since Date , compareMILISECONDS
+        const now = compare;
         const then = since.getTime();
-        
+        const nowDate = new Date(compare);
+
+        console.log(now,then)
+
         const monthsInYear = 1/12;
+        const msnYear = DateTime.msnDay * 365;
         const msInWeek = 604800000;
         const msInDay = 86400000;
         const msInHour = 3600000;
         const msInMin = 60000;
         const msInSec = 1000;
+
+        const minutesInHour = 60;
+        const secondsInMinute = 60;
         
-        const monthOf = date.months[since.getMonth()]
-    
-        const daysIn = date.monthMap[monthOf];
+        /* TODO
+
+            DAYS ONLY WORKS IF IN SAME MONTH
+            CALCULATE MONTHS SINCE AND AMOUNT OF DAYS BETWEEN EACH MONTH
+            THEN GET DAYS
+
+            MONTHS ALGO IS WRONG TOO!
+            WEEKS ALGO IS WRONG!
+        */
+
+        const monthOf = DateTime.months[since.getMonth()]
+        const prevMonthOf = DateTime.months[nowDate.getMonth()]
+
+        const daysIn = DateTime.monthMap[monthOf];
+        const prevDaysIn = DateTime.monthMap[prevMonthOf]
+
         const dayOf = since.getDate();
-        const days = daysIn - dayOf;
-    
-        const leapSince = date.getLeaps(since.getFullYear(), new Date(now).getFullYear())
+        const prevDayOf = nowDate.getDate();
+
+        // const days = daysIn - dayOf;
+
+        const days = Math.abs(dayOf - prevDayOf);
+
+        const leapSince = DateTime.getLeaps(since.getFullYear(), new Date(now).getFullYear())
+        
         let msAgo = now - then;
         let context = 'ago'
         if (msAgo < 0) {
@@ -1595,34 +1626,52 @@ class DateTime {
         }
     
         msAgo = Math.abs(msAgo);
+        console.log(msAgo)
+        
+        const years = msAgo >= msnYear ? msAgo / msnYear : 0;
+
+        const monthsAgo = DateTime.getRemainder(years);
+            // const months = monthsAgo / monthsInYear;
+            // NULL SEE TODO
     
-        const years = msAgo / msnYear;
-        const monthsAgo = getRemainder(years);
-        const months = monthsAgo / monthsInYear;
-    
-        // const weeks = monthsAgo / weeksInYear;
-    
-        const weeksAgo = Math.floor(msAgo / msInWeek);
-        const daysAgo = (Math.floor(msAgo / msInDay) + leapSince);
-        const hoursAgo = Math.floor(msAgo / msInHour);
-        const minutesAgo = Math.floor(msAgo / msInMin);
-        const secondsAgo = Math.floor(msAgo / msInSec);
-    
+        const weeksAgo = msAgo >= msInWeek ? Math.floor(msAgo / msInWeek) : 0;        
+            // const weeks = monthsAgo / weeksInYear;
+            // NULL SEE TODO
+
+        const daysAgo = msAgo >= msInDay ? (Math.floor(msAgo / msInDay) + leapSince) : 0;
+            // NULL SEE TODO
+
+        const hoursAgo = msAgo >= msInHour ? Math.floor(msAgo / msInHour) : 0;
+            const hours = hoursAgo;
+
+        const minutesAgo = msAgo >= msInMin ? Math.floor(msAgo / msInMin) : 0;
+            const minutes = Math.floor(DateTime.getRemainder(msAgo/msInHour) * minutesInHour);
+        
+        const secondsAgo = msAgo >= msInSec ? Math.floor(msAgo / msInSec) : 0;
+            const seconds = Math.floor(DateTime.getRemainder(msAgo/msInMin) * secondsInMinute);
+
         const ago = {
             since: new Date(now),
             then: new Date(then),
     
             years: Math.floor(years),
-            months: Math.floor(months),
+            // months: Math.floor(months),
             days: days,
-    
+            
             yearsAgo: years,
             weeksAgo: weeksAgo,
             daysAgo: daysAgo,
             hoursAgo: hoursAgo,
+            hours,
             minutesAgo: minutesAgo,
+            minutes,
+
             secondsAgo: secondsAgo,
-    
+            seconds,
+
+            milisecondsAgo: msAgo,
+            // milliseconds: msAgo,
+
             leaps: leapSince,
             string: undefined,
         };
@@ -1655,7 +1704,10 @@ class DateTime {
             ago.string = `${ago.secondsAgo} Seconds ${ago}`
         }
         else if (ago.secondsAgo < 30) {
-            ago.string = `Just Now`
+            // ago.string = `Just Now`
+            ago.time = 'Just Now'
+            ago['context'] = context;
+            return ago;
         }
         else {
             return ago;
@@ -1667,7 +1719,7 @@ class DateTime {
         return ago;
     }
     
-    static getRemainder(float) {
+    static getRemainder(float) { // miliseconds left after floored value IN DECIMAL
         return float - Math.floor(float);
     }
     

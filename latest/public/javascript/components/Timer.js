@@ -1,7 +1,6 @@
 /* 
     TODO 
 
-    ADD EDIT METHOD/ROUTE
     CREATE SECTION FOR ALL TRACKERS
 
     UPDATE UI DESIGN
@@ -478,7 +477,7 @@ export class Timer {
                 </div>
             </div>
             <span class="btn-create">
-                <span class="label">Create</span>
+                <span class="label">Edit</span>
                 <input type="submit" name="create" id="btn-create">
             </span>
         </div>
@@ -490,6 +489,8 @@ export class Timer {
 export class TimeTracker extends Timer {
     constructor({props}) {
         super({props});
+
+        this.logs = [];
 
         this.initial = Timer.formatMs(0);
         this.successTime = props.successTime; 
@@ -519,5 +520,61 @@ export class TimeTracker extends Timer {
     play() {
         if (this.currentInterval) return;
         this.currentInterval = setInterval(this.countup.bind(this),1000);
+        this.logStart();
+    }
+
+    pause(){
+
+        clearInterval(this.currentInterval);
+        this.currentInterval = null;
+        this.showPaused();
+        this.logStop();
+        return;
+    }
+
+    logStart() {
+
+        let stamp = DateTime.stamp();
+        let log = {
+            type: 'start',
+            tID: this.id,
+            task: this.title,
+            elapsed: this.time,
+            stamp,
+        }
+        console.log(log);
+        this.logs.push(log);
+        return log;
+    }
+
+    logStop() {
+
+        let stamp = DateTime.stamp();
+        let completed = this.time.total >= this.successTime.total
+        let prevLog = last(this.logs)
+        let comp = DateTime.from(new Date(prevLog.stamp.ms));
+        let since = {
+            hours: comp.hours,
+            minutes: comp.minutes,
+            seconds: comp.seconds,
+        }
+
+        let log = {
+            type: 'stop',
+            tID: this.id,
+            task: this.title,
+            elapsed: this.time,
+            sinceLastStop: since,
+            completed,
+            stamp,
+        }
+
+        console.log(log)
+        return log;
+
+    }
+
+    logComplete(){
+
     }
 }

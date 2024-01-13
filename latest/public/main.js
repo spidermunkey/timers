@@ -5,8 +5,8 @@ import {Timer,TimeTracker} from './javascript/components/Timer.js';
     TODO
 
     add sounds
-    add edit feature
     add extend current
+    
     tracker tags && logging
         ** {
             select from quick task [over-arching tasks]
@@ -73,13 +73,13 @@ api.getTrackers((data) => {
         return t;
     })
 
-})
+});
 
 // handle timer menu options
 listen($('.timer-list'), (e) => {
     if (elementClicked('.timer--header-options',e))
         $('.timer--options',elementClicked('.timer',e)).classList.toggle('active');
-})
+});
 
 listen(timerFormToggle, () => $('.create-timer').classList.toggle('active') );
 listen(timerFormClose, () => $('.create-timer').classList.remove('active') );
@@ -160,7 +160,7 @@ timerDayInputs.forEach(function EVENTS__dayInputs(inp) {
             check(timerNeverInput)
 
     })
-})
+});
 
 async function submitTimer(event,form) {
 
@@ -215,7 +215,7 @@ async function submitTimer(event,form) {
         timer.render($('.timer-list .timers'));
     
     console.log(timer.isToday,'IS TODAY')
-}
+};
 
 async function submitTracker(event,form) {
 
@@ -257,4 +257,4 @@ async function submitTracker(event,form) {
         let success = await api.addTracker( props );
         if (success)
             tracker.render($('.trackers'),'tracker');
-}
+};

@@ -1411,6 +1411,10 @@ class DateTime {
         }
     }
     
+    static compareStamps(current,prev){
+        return DateTime.from( current.ms , prev.ms )
+    }
+
     static today() {
         return DateTime.date.days[ (new Date()).getDay() ];
     }
@@ -1570,8 +1574,8 @@ class DateTime {
     
     // const minutesInYear = msnYear;
     
-    static from(since) {
-        const now = Date.now();
+    static from( since, compare = Date.now()) {
+        const now = compare;
         const then = since.getTime();
         
         const monthsInYear = 1/12;
