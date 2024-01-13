@@ -12,7 +12,7 @@ export var api = {
         else
             console.error('someting went wrong in /timers',res);
 
-        return;
+        return false;
     },
 
     async getTrackers(effect) {
@@ -26,7 +26,7 @@ export var api = {
         }
         else
             console.error('something went wrong in /trackers');
-        return;
+        return false;
     },
 
     async addTimer(body,effect){
@@ -48,7 +48,7 @@ export var api = {
         else
             console.error('someting went wrong in /timers',res);
         
-        return true;
+        return false;
     },
 
     async addTracker(body,effect) {
@@ -67,7 +67,7 @@ export var api = {
         else
             console.error('someting went wrong in /trackers',res);
         
-        return true;
+        return false;
     },
 
     async delete(id) {
@@ -79,11 +79,12 @@ export var api = {
         return false;
     },
 
-    async edit(id,data){
-        const res = await axios.patch(`http://localhost:1279/timers?id=${id}`,data);
-                console.log(res);
+    async edit(id,body){
+        const res = await axios.patch(`http://localhost:1279/timers?id=${id}`,body);
+        const {data} = res;
+        console.log(res);
         if (responseOk(res))
-            return true;
+            return data;
         return false;
     },
 

@@ -166,16 +166,19 @@ export class Timer {
     showEditForm() {
         let el = div();
         el.innerHTML = this.createEditForm();
+        hydrateForm.call(this);
         el.classList.add('edit-timer');
-        el.style.display = 'block'
-        $('.timer-list').appendChild(el);
-        let form = $('form',el);
-        hydrateForm.call(this,form);
+        el.style.display = 'block';
 
-        function hydrateForm(form) {
+        $('.timer-list').appendChild(el);
+
+        function hydrateForm() {
+            let form = $('form',el);
 
             form.addEventListener('submit',(e) => submit.call(this,e,form));
-
+            form.querySelector('.close').addEventListener('click',() => {
+                el.remove();
+            })
             async function submit(event,form){
                 console.log(arguments)
                 event.preventDefault();
@@ -185,10 +188,13 @@ export class Timer {
                 console.log(this.id)
                 console.log(props.id);
                 props.id = this.id
-                let success = await api.edit(this.id, props);
+                let newDoc = await api.edit(this.id, props);
         
-                if (success)
-                    console.log('SUCCESS!');
+                if (newDoc){
+
+                    this.edit(newDoc);
+                    el.remove();
+                }
             }
         }
 
@@ -231,6 +237,31 @@ export class Timer {
 
 
         console.log(el)
+    }
+
+    edit(props) {
+
+        this.days = props.days || [];
+
+        this.title = props.title;
+
+        this.time = props.time;
+
+        this.initial = props.initial || structuredClone(props.time);
+
+        this.id = props.id || uuid();
+
+        let today = new Date();
+
+        let dow = ['sun','mon','tue','wed','thu','fri','sat'];
+
+        this.isToday = this.days.some(day => day === dow[today.getDay()]) || null;
+
+        const frag = this.create();
+        this.element = $(`[data-id="${this.id}"]`,frag);
+        $(`[data-id="${this.id}"]`,$('.timer-list')).replaceWith(this.element);
+        this.hydrate();
+        
     }
 
     async delete() {
