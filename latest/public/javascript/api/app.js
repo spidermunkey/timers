@@ -94,5 +94,5 @@ export var api = {
 }
 
 function responseOk(response) { // axios
-    return response.status === 200 && response.statusText === 'OK'
+    return response.status === 200 && response.statusText === 'OK';
 }
