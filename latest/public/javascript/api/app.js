@@ -88,8 +88,8 @@ export var api = {
         return false;
     },
 
-    async log(id,data){
-        const res = await axios.post(`http://localhost:1279/timers?id=${id}`,data);
+    async log(data){
+        const res = await axios.post(`http://localhost:1279/timers/logs`,data);
     }
 }
 

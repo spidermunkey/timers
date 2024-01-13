@@ -532,7 +532,7 @@ export class TimeTracker extends Timer {
         return;
     }
 
-    logStart() {
+    async logStart() {
 
         let stamp = DateTime.stamp();
         let log = {
@@ -544,15 +544,21 @@ export class TimeTracker extends Timer {
         }
         console.log(log);
         this.logs.push(log);
+        const success = await api.log(log)
+        if (success)
+            console.log(success)
+        else 
+            console.error(success)
         return log;
     }
 
-    logStop() {
+    async logStop() {
 
         let stamp = DateTime.stamp();
         let completed = this.time.total >= this.successTime.total
         let prevLog = last(this.logs)
         let comp = DateTime.from(new Date(prevLog.stamp.ms));
+
         let since = {
             hours: comp.hours,
             minutes: comp.minutes,
@@ -569,7 +575,12 @@ export class TimeTracker extends Timer {
             stamp,
         }
 
-        console.log(log)
+        const success = await api.log(log)
+        
+        if (success)
+            console.log(success)
+        else 
+            console.error(success)
         return log;
 
     }
