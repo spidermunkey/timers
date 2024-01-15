@@ -18,3 +18,48 @@ body,
     align-items: flex-start;   
 }
 
+.timer-text-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.timer .ctrl-wrapper {
+    border: none;
+}
+.play,
+.pause {
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    // border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    background-color: #4caf50;
+    color: white;
+
+    &:hover {
+        background-color: #81c784;
+        svg {
+            // fill: #f8f8f8f8;
+        }
+    }
+
+    & svg {
+        margin-top: 4px;
+        margin-left: 8px;
+        height: 40px;
+        width: 40px;
+        fill: white;
+        // background-color: black;
+    }
+}
+
+.pause svg {
+    margin-top: 0;
+    margin-left: 0;
+}
+
