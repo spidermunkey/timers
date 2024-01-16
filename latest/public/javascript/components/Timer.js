@@ -324,7 +324,7 @@ export class Timer {
                 </div>
                 <div class="timer--header-options">
                     <div class="timer--header-options__icon">
-                        <span class="label show">show options</span>
+                        <span class="label show">options</span>
                         <span class="lable hide">hide options</span>
                     </div>
                 </div>
@@ -365,8 +365,8 @@ export class Timer {
 
         return `
         <div class="hours time-slot">
-            <span class="tenth-hour">${h[0] || 0}</span>
-            <span class="zero-hour">${h[1] || 0}</span>
+            <div class="tenth-hour">${h[0] || 0}</div>
+            <div class="zero-hour">${h[1] || 0}</div>
             <span class="label">h</span>
         </div>
         <div class="minutes time-slot">
