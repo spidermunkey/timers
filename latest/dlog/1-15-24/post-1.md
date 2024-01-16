@@ -1,0 +1,1 @@
+Bought a new computer, tranfering files, still working two jobs but it's tough finding the time and energy to make a decent commit over the past view days. definetly feels like a monday.
