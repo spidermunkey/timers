@@ -310,23 +310,22 @@ export class Timer {
     createTimerElement(type) {
         return `
         <div class="timer" ${type ? `data-type=${type}`: null} >
-            <div class="timer--options">
-                <div class="option delete">
-                    <span class="label">delete</span>
-                </div>
-                <div class="option edit">
-                    <span class="label">edit</span>
-                </div>
-            </div>
+
             <div class="timer--header">
                 <div class="timer--header-title">
                     <span class="label">${this.title}</span>
                 </div>
-                <div class="timer--header-options">
-                    <div class="timer--header-options__icon">
-                        <span class="label show">options</span>
-                        <span class="lable hide">hide options</span>
-                    </div>
+                    <div class="timer--options">
+                    <div class="option edit">
+                    <span class="label"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M232 120C232 106.7 242.7 96 256 96C269.3 96 280 106.7 280 120V243.2L365.3 300C376.3 307.4 379.3 322.3 371.1 333.3C364.6 344.3 349.7 347.3 338.7 339.1L242.7 275.1C236 271.5 232 264 232 255.1L232 120zM256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0zM48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48C141.1 48 48 141.1 48 256z"></path></svg></span>
+                </div>    
+                    <div class="option delete">
+                           
+                        <span class="label"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M160 400C160 408.8 152.8 416 144 416C135.2 416 128 408.8 128 400V192C128 183.2 135.2 176 144 176C152.8 176 160 183.2 160 192V400zM240 400C240 408.8 232.8 416 224 416C215.2 416 208 408.8 208 400V192C208 183.2 215.2 176 224 176C232.8 176 240 183.2 240 192V400zM320 400C320 408.8 312.8 416 304 416C295.2 416 288 408.8 288 400V192C288 183.2 295.2 176 304 176C312.8 176 320 183.2 320 192V400zM317.5 24.94L354.2 80H424C437.3 80 448 90.75 448 104C448 117.3 437.3 128 424 128H416V432C416 476.2 380.2 512 336 512H112C67.82 512 32 476.2 32 432V128H24C10.75 128 0 117.3 0 104C0 90.75 10.75 80 24 80H93.82L130.5 24.94C140.9 9.357 158.4 0 177.1 0H270.9C289.6 0 307.1 9.358 317.5 24.94H317.5zM151.5 80H296.5L277.5 51.56C276 49.34 273.5 48 270.9 48H177.1C174.5 48 171.1 49.34 170.5 51.56L151.5 80zM80 432C80 449.7 94.33 464 112 464H336C353.7 464 368 449.7 368 432V128H80V432z"></path></svg></span>
+                            </div>
+                          
                 </div>
             </div>
             <div class="timer--clock">
