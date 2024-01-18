@@ -4,9 +4,17 @@ import {Timer,TimeTracker} from './javascript/components/Timer.js';
 /*
     TODO
 
-    add sounds
-    add extend current
+    UI UPDATES
+
+        scale down timer size
+        add list of timers/tasks to choose and only show timer when selected from a list
+        redo add menu
+        add sounds
+
+    FEATURE UPDATES
+        add extend current timer feature
     
+    API UPDATES
     tracker tags && logging
         ** {
             select from quick task [over-arching tasks]
