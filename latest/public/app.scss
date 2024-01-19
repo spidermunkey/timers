@@ -10,28 +10,93 @@ body{
     height: 100%;
     width: 100%;
     box-sizing: border-box;
+    margin: 0;
 }
 
-
-.timer .time-slot {
-    border: 1px solid transparent;
-    margin-right: 4px;
-    border-radius: 8px;
-    padding: 4px;
-
-    & div {
-        border-radius: 2px;
-    }
-    & div:hover{
-        background: #cccccc73;
-    }
-    &:hover {
-        border: 1px solid #cccccc6a;
-    }
+body {
+    display: flex;
+    overflow: hidden;
 }
 
-.time-slot-wrapper {
-    padding: 0px 10px;
-    border-radius: 14px;
-    box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.729);
+.task-module {
+    min-width: 500px;
+    height: 100%;
+    border: 1px dotted red;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 20px 10px 10px 10px;
+    .navigator {
+        display: flex;
+        margin: 0 auto;
+        justify-content: space-around;
+        
+        & > span {
+            margin: 0 10px;
+            padding: 10px;
+            border: 1px solid black;
+            min-width: 100px;
+            text-align: center;
+        }
+    }
+
+    .module-list-items {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        border: 1px dotted blue;
+        overflow: scroll;
+    }
+    .btn-toggle--form {
+        position: relative;
+        box-shadow: 0px 0px 4px -1px rgba(0, 0, 0, 0.78);
+
+        border-radius: 36px;
+        display: inline-flex;
+        flex-grow: 0;
+        flex-shrink: 1;
+        flex: 0;
+        align-self: center;
+        svg {
+            height: 42px;
+            width: 42px;
+            fill: white;
+            stroke: 2px;
+            
+        }
+        .toggle-btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100%;
+            padding: 1rem;
+            background-color: #43df49;
+            border: 1px solid #cccccc3a;
+            box-shadow:  0px 4px -1px rgba(173, 173, 173, 0.378);
+        }
+        .label {
+            height: 100%;
+            width: 150px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            // padding: 10px;
+            padding-right: 16px;
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            // display: inline-block;
+            // background-color: black;
+        }
+
+
+    }
+
+    .current-timer {
+        height: 100px;
+        width: 300px;
+        border: 1px dotted black;
+        position: absolute;
+        bottom: 0;
+        right: 100%;
+    }
 }
