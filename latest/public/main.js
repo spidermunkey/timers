@@ -10,8 +10,11 @@ import {Timer,TimeTracker} from './javascript/components/Timer.js';
         add list of timers/tasks to choose and only show timer when selected from a list
         redo add menu
         add sounds
+        timer blinker (playing|pausing|pomodoro indicator)
+
 
     FEATURE UPDATES
+        add pomodoro timer
         add extend current timer feature
     
     API UPDATES
@@ -83,12 +86,6 @@ api.getTrackers((data) => {
 
 });
 
-// handle timer menu options
-// listen($('.timer-list'), (e) => {
-//     if (elementClicked('.timer--header-options',e))
-//         $('.timer--options',elementClicked('.timer',e)).classList.toggle('active');
-// });
-
 listen(timerFormToggle, () => $('.create-timer').classList.toggle('active') );
 listen(timerFormClose, () => $('.create-timer').classList.remove('active') );
 
@@ -131,7 +128,6 @@ timerTimeInputs.forEach(function EVENTS__timeInputs(inp) {
     })
 
     inp.addEventListener('keyup',(e) => {
-        console.log(inp.value)
         if (e.keyCode == 8){
             inp.value = 0;
             return;
@@ -181,7 +177,6 @@ async function submitTimer(event,form) {
     function parseForm(formDataObject){
 
         let fdo = formDataObject;
-        console.log(fdo)
         for (const entry of fdo)
             if (entry[1].trim() === '') entry[1] = 0;
 
@@ -194,7 +189,6 @@ async function submitTimer(event,form) {
                 return true
             }
         });
-        console.log(days)
 
         let
             title = fdo.get('title'),
@@ -260,9 +254,9 @@ async function submitTracker(event,form) {
         }
     
         let props = parseForm(data);
-        console.log(props)
         let tracker = new TimeTracker({props});
         let success = await api.addTracker( props );
+        
         if (success)
             tracker.render($('.trackers'),'tracker');
 };

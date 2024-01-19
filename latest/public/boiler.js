@@ -60,7 +60,6 @@ function listenAll( elements , callback , listener = 'click') {
 }
 
 function listen( element = document , callback , listener = 'click', capture = false ) {
-    console.log(arguments)
     element.addEventListener(listener, function(event) {
         callback.apply(callback, [event, ...arguments, element])
     },capture)

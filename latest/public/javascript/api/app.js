@@ -1,7 +1,6 @@
 export var api = {
 
     async getTimers(effect) {
-        console.log('getting all timers');
         const res = await axios.get('http://localhost:1279/timers');
         const {data} = res;
 
@@ -16,7 +15,6 @@ export var api = {
     },
 
     async getTrackers(effect) {
-        console.log('getting all trackers');
         const res = await axios.get('http://localhost:1279/trackers');
         const {data} = res;
 
