@@ -382,18 +382,19 @@ export class Timer {
                         </div>
                     </div>
 
-                    <div class="reset">reset</div>
     
                 </div>
     
                 <div class="timer--clock-times">
                     <div class="time-slot-wrapper">${this.createTimeSlot(this.time)}</div>
+                    <div class="reset">reset</div>
+
                 </div>
             </div>
         </div>`
     }
     
-    createTimeSlot({hours,minutes,seconds}) {
+    createTimeSlot({hours,minutes,seconds} = this.time) {
         let 
             h = this.padNum(hours),
             m = this.padNum(minutes),
