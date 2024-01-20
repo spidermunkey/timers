@@ -31,6 +31,7 @@ export class Timer {
         let dow = ['sun','mon','tue','wed','thu','fri','sat'];
 
         this.isToday = this.days.some(day => day === dow[today.getDay()]) || null;
+        
     }
 
     padNum(num) {

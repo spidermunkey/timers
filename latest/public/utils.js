@@ -1417,6 +1417,17 @@ class DateTime {
         return DateTime.from( new Date(current.ms) , prev.ms )
     }
 
+    static weekOf(stamp){
+
+    }
+
+    static monthOf(stamp){
+
+    }
+
+    static yearOf(stamp){
+
+    }
     static today() {
         return DateTime.date.days[ (new Date()).getDay() ];
     }
@@ -1762,6 +1773,45 @@ class Time {
         }
     }
 
+    static padNum(num) {
+        if (num.toString().length == 1) 
+            return num.toString().padStart(2,'0')
+        else return num.toString();
+    }
+    
+    static msToStamp(ms) {
+        const msInHour = 3600000;
+        const msInMin = 60000;
+        const msInSec = 1000;
+        const minutesInHour = 60;
+        const secondsInMinute = 60;
+    
+        const hours = ms >= msInHour ? Math.floor(ms / msInHour) : 0;
+        // const hours = hoursAgo;
+    
+        // const minutesAgo = ms >= msInMin ? Math.floor(ms / msInMin) : 0;
+        const minutes = Math.floor(getRemainder(ms/msInHour) * minutesInHour);
+    
+        // const secondsAgo = ms >= msInSec ? Math.floor(ms / msInSec) : 0;
+        const seconds = Math.floor(getRemainder(ms/msInMin) * secondsInMinute);
+    
+        function getRemainder(float) { // miliseconds left after floored value IN DECIMAL
+            return float - Math.floor(float);
+        }
+        return {
+            hours,
+            minutes,
+            seconds,
+            get formatted() {
+                return {
+                    hours: Time.padNum(this.hours),
+                    minutes: Time.padNum(this.minutes),
+                    seconds: Time.padNum(this.seconds),
+                }
+            }
+        }
+    }
+    
 }
 
 

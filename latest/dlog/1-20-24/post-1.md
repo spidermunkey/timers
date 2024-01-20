@@ -1,0 +1,6 @@
+Things are finally starting to make since. Reading source code of any kind, even the simplest codepens used to be brain bending to me. But building my own things with vanilla js helps me understand why things are written the way they are. I haven't tested my realized understanding and someone elses code may still be difficult to reason about however, the deeper I get into my own projects, the more confidence I gain in my ability to reason about any peice of javascript if I really needed to. This is what these projects have always been about and I'm closing in on the goal.
+
+Also server side code always felt like an impossible concept for me to unpack and digest but the more I interact with mongo db and node in a barebones approach, I not only understand javascript a bit better but backend techniques and how things come to life with nothing but documents, tables and rows.
+Even if it's just Nodejs, I feel like I am gaining a good foundation of understanding to pick up these concepts and techniques with any language.
+
+Let's get on with it.
