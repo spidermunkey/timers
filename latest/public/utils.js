@@ -928,29 +928,23 @@ class Toggler {
     }
 }
 
-class Tabber {
-    constructor() {
-        this.current = undefined
-        this.previous = undefined
-    }
+function Tabber() {
+    
+    this.current = undefined
+    this.previous = undefined
 
-    setActive(value,event) {
-        // console.log(value,this.current)
+    this.setActive = function(value,event) {
         if (this.current != value) {
-            // console.log(this.current == value)
             if (this.current) this.current.close(event)
 
             this.previous = this.current
             this.current = value
-            // console.log(value,this.current)
-            
         }
     }
 
-    closeActive(event) {
+    this.closeActive = function(event) {
         if (this.current && this.current.state !== 'inactive') this.current.close(event);
     }
-
 }
 
 class Slider {
@@ -1261,7 +1255,7 @@ class MouseTrackingSlider {
 
 
 class DateTime {
-    constructor() {
+    constructor(dateObject) {
 
     }
 

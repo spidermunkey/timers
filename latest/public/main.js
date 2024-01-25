@@ -64,7 +64,7 @@ api.getTimers((data) => {
     
     const renderFilteredMap = props => {
         const t = new Timer({props});
-        if (t.isToday) t.render($('.timers'));
+        // if (t.isToday) t.render($('.timers'));
         return !!t.isToday;
     }
 
@@ -80,7 +80,7 @@ api.getTrackers((data) => {
 
     else return data.map(props => {
         const t = new TimeTracker({props});
-        t.render($('.trackers'));
+        // t.render($('.trackers'));
         return t;
     })
 

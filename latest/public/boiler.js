@@ -16,6 +16,7 @@ function setVar(variableName,value) {
 function addClass(element,classToAdd){
     element.classList.add(classToAdd);
 }
+
 function removeClass(element,classToRemove){
     element.classList.remove(classToRemove);
 }
@@ -60,6 +61,7 @@ function listenAll( elements , callback , listener = 'click') {
 }
 
 function listen( element = document , callback , listener = 'click', capture = false ) {
+    if (!element) return
     element.addEventListener(listener, function(event) {
         callback.apply(callback, [event, ...arguments, element])
     },capture)
@@ -275,9 +277,11 @@ function throttleInput(input,time){
 function check(input) {
     input.checked = true;
 }
+
 function uncheck(input) {
     input.checked = false;
 }
+
 function checkAll(inputGroup){
     inputGroup.forEach(inp => inp.checked = true);
 }
@@ -327,7 +331,6 @@ function toClipboard(value,message) {
     window.navigator.clipboard.writeText(value);
     if (message) console.log('message from clipboard', message)
 }
-
 
 function mergeObj(targetObj,mergingObj) {
     return {
