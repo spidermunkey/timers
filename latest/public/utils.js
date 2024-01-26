@@ -1335,6 +1335,47 @@ class DateTime {
         return arr
     }
 
+    static get clock() {
+
+        const curDate = new Date()
+        const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+        const months = ['January','February','March','April','May','June','July','August','September','October','November','December']
+        const hours = curDate.getHours();
+        const minutes = curDate.getMinutes();
+        const seconds = curDate.getSeconds();
+        const context = hours >= 12 ? 'pm' : 'am';
+        return {
+    
+            dow: days[curDate.getDay()],
+            month: months[curDate.getMonth()],
+            date: curDate.getDate(),
+            
+            hour: hours <= 12 ? hours : hours - 12,
+            minute:minutes,
+            second:seconds,
+            miliseconds: curDate.getMilliseconds(),
+            context,
+    
+            time: {
+                hour: hours <= 12 ? hours.toString() : (hours - 12).toString(),
+                minute: minutes >= 10 ? minutes.toString() : minutes.toString().padStart(2,'0'),
+                second: seconds >= 10 ? seconds.toString() : seconds.toString().padStart(2,'0'),
+                context,
+                get string() {
+                   return [this.hour,this.minute,this.second].join(':') + ' ' + context;
+                },
+                get default() {
+                    return [this.hour,this.minute].join(':') + ' ' + context;
+                }
+            }
+    
+        }
+    }
+
+    static get time() {
+        return DateTime.clock.time.default;
+    }
+    
     static date = {
 
         standard: undefined,

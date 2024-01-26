@@ -48,6 +48,8 @@ $sb-background: hsla( 0deg, 0%, 100%, 85%);
 
 *,*::before,*::after {
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 html,
@@ -91,9 +93,7 @@ body {
 }
 
 .menu {
-    position: absolute;
-    left: 0;
-    top: 0;
+    position: relative;
     height: 100%;
     width: fit-content;
     z-index: 100;
@@ -713,6 +713,52 @@ body {
     }
 }
 
+
+.app-header {
+    height:100px;
+    width: 100%;
+    border-bottom: 1px solid #8080802d;
+    margin: 0 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+
+    justify-content: space-between;
+
+    .current-tab {
+        margin: 16px;
+        font-size: 24px;
+    }
+
+    .current-dateTime {
+        margin-top: 16px;
+        font-size: 16px;
+        display: flex;
+        // flex-direction: column;
+    }
+    .current-dow {
+        margin-right: 8px;
+    }
+
+    .time-slot {
+        display: flex;
+        align-items: center;
+        margin: 0px 8px;
+        // font-size: 18px;
+        .time-divide {
+            margin: 0px 1px;
+        }
+        .current-context {
+            margin-left: 3px;
+        }
+    }
+    .current-dow {
+        // font-size: 19px;
+    }
+    .current-date {
+        // font-size: 16px;
+    }
+
+}   
 
 // .task-module {
 //     min-width: 500px;
