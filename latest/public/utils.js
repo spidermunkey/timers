@@ -3,7 +3,7 @@
 // -----------------------------------------
 
 
-class Cursor {
+class Cursor {cd
     // Allows extends a basic array allowing easy access to the next and previous elements in a list 
     // according to a pointer in memory
 
