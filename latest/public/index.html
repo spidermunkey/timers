@@ -25,7 +25,6 @@
         <div class="menu__wrapper">
           <!-- WRAPPER FOR ICONS / Parent for Home | Theme-Toggler | Dashboard-Tab-Container  -->
           <div class="sidebar" data-role="sidebar" id="SIDEBAR">
-            <!-- -------------------- -->
 
             <!-- MAIN LOGO -->
             <div
@@ -488,25 +487,320 @@
             <div class="task-metric">
                 <div class="mod module-task-complete">
                     <div class="t-completed">
+  
+                        <span class="label">Daily Tasks</span>
                         <div class="result">
                             <span class="res comped">5</span>
                             <span class="divider">/</span>
-                            
                             <span class="res total">10</span>
                         </div>
 
-                        <span class="label">Task completed today</span>
                     </div>
                     <div class="indicator">
                         <div class="progress"></div>
                     </div>
+                    <div class="perf-reccomendations">
+                        <ul>
+                            <li class="over-perf">
+                                <span class="marker">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="16px" width="16px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg>
+                                </span>
+                                <span>above average:</span>
+                                <break></break>
+                                <div>Code</div>
+                            </li>
+                            <li class="under-perf">
+                                <span class="marker">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" transform="rotate(180)" data-rotation="undefined" height="16px" width="16px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg>
+                                </span>
+                                <span>below average:</span>
+                                <div>Reading</div>
+                            </li>
+
+                        </ul>
+                    </div>
                 </div>
                 <div class="mod module-weekly-completed">
+                    <span class="module-title">Time Allocated</span>
+                    <div class="allocations">
+                        <div class="task-category">
 
-                </div>
-                <div class="mod module-performance-updates">
+                            <span class="label">Rest</span>
 
+                            <div class="progress-wrapper">
+
+                                <div class="inner-indicator">
+                                    <svg width="64" height="64" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
+                                        <circle r="30" cx="32" cy="32" fill="transparent" stroke="#e0e0e0" stroke-width="4px" stroke-dasharray="201px" stroke-dashoffset="0"></circle>
+                                        <circle r="30" cx="32" cy="32" stroke="#00c93d" stroke-width="4px" stroke-linecap="round" stroke-dashoffset="94.25" fill="transparent" stroke-dasharray="188.5"></circle>
+                                      </svg>
+                                </div>
+
+                                <div class="daily-indicator">
+                                    <span class="daily-label">0/8 hrs</span>
+                                </div>
+
+                            </div>
+
+                            <div class="weekly">
+                                <div class="days">
+                                    <div class="day mon">
+                                        <span>M</span>
+                                    </div>
+                                    <div class="day tue">
+                                        <span>T</span>
+                                    </div>
+                                    <div class="day wed">
+                                        <span>W</span>
+                                    </div>
+                                    <div class="day thur">
+                                        <span>T</span>
+                                    </div>
+                                    <div class="day fri">
+                                        <span>F</span>
+                                    </div>
+                                    <div class="day sat">
+                                        <span>S</span>
+                                    </div>
+                                    <div class="day sun">
+                                        <span>S</span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="task-category">
+                            <span class="label">Work</span>
+
+                            <div class="progress-wrapper">
+
+                                <div class="inner-indicator">
+                                    <svg width="64" height="64" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
+                                        <circle r="30" cx="32" cy="32" fill="transparent" stroke="#e0e0e0" stroke-width="4px" stroke-dasharray="201px" stroke-dashoffset="0"></circle>
+                                        <circle r="30" cx="32" cy="32" stroke="#00c93d" stroke-width="4px" stroke-linecap="round" stroke-dashoffset="94.25" fill="transparent" stroke-dasharray="188.5"></circle>
+                                      </svg>
+                                </div>
+
+                                <div class="daily-indicator">
+                                    <span class="daily-label">0/8 hrs</span>
+                                </div>
+
+                            </div>
+
+                            <div class="weekly">
+                                <div class="days">
+                                    <div class="day mon">
+                                        <span>M</span>
+                                    </div>
+                                    <div class="day tue">
+                                        <span>T</span>
+                                    </div>
+                                    <div class="day wed">
+                                        <span>W</span>
+                                    </div>
+                                    <div class="day thur">
+                                        <span>T</span>
+                                    </div>
+                                    <div class="day fri">
+                                        <span>F</span>
+                                    </div>
+                                    <div class="day sat">
+                                        <span>S</span>
+                                    </div>
+                                    <div class="day sun">
+                                        <span>S</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-category">
+                            <span class="label">Study</span>
+
+                            <div class="progress-wrapper">
+
+                                <div class="inner-indicator">
+                                    <svg width="64" height="64" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
+                                        <circle r="30" cx="32" cy="32" fill="transparent" stroke="#e0e0e0" stroke-width="4px" stroke-dasharray="201px" stroke-dashoffset="0"></circle>
+                                        <circle r="30" cx="32" cy="32" stroke="#00c93d" stroke-width="4px" stroke-linecap="round" stroke-dashoffset="94.25" fill="transparent" stroke-dasharray="188.5"></circle>
+                                      </svg>
+                                </div>
+
+                                <div class="daily-indicator">
+                                    <span class="daily-label">0/8 hrs</span>
+                                </div>
+
+                            </div>
+
+                            <div class="weekly">
+                                <div class="days">
+                                    <div class="day mon">
+                                        <span>M</span>
+                                    </div>
+                                    <div class="day tue">
+                                        <span>T</span>
+                                    </div>
+                                    <div class="day wed">
+                                        <span>W</span>
+                                    </div>
+                                    <div class="day thur">
+                                        <span>T</span>
+                                    </div>
+                                    <div class="day fri">
+                                        <span>F</span>
+                                    </div>
+                                    <div class="day sat">
+                                        <span>S</span>
+                                    </div>
+                                    <div class="day sun">
+                                        <span>S</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-category">
+                            <span class="label">Excercise</span>
+
+                            <div class="progress-wrapper">
+
+                                <div class="inner-indicator">
+                                    <svg width="64" height="64" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
+                                        <circle r="30" cx="32" cy="32" fill="transparent" stroke="#e0e0e0" stroke-width="4px" stroke-dasharray="201px" stroke-dashoffset="0"></circle>
+                                        <circle r="30" cx="32" cy="32" stroke="#00c93d" stroke-width="4px" stroke-linecap="round" stroke-dashoffset="94.25" fill="transparent" stroke-dasharray="188.5"></circle>
+                                      </svg>
+                                </div>
+
+                                <div class="daily-indicator">
+                                    <span class="daily-label">0/8 hrs</span>
+                                </div>
+
+                            </div>
+
+                            <div class="weekly">
+                                <div class="days">
+                                    <div class="day mon">
+                                        <span>M</span>
+                                    </div>
+                                    <div class="day tue">
+                                        <span>T</span>
+                                    </div>
+                                    <div class="day wed">
+                                        <span>W</span>
+                                    </div>
+                                    <div class="day thur">
+                                        <span>T</span>
+                                    </div>
+                                    <div class="day fri">
+                                        <span>F</span>
+                                    </div>
+                                    <div class="day sat">
+                                        <span>S</span>
+                                    </div>
+                                    <div class="day sun">
+                                        <span>S</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-category">
+                            <span class="label">Code</span>
+
+                            <div class="progress-wrapper">
+
+                                <div class="inner-indicator">
+                                    <svg width="64" height="64" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
+                                        <circle r="30" cx="32" cy="32" fill="transparent" stroke="#e0e0e0" stroke-width="4px" stroke-dasharray="201px" stroke-dashoffset="0"></circle>
+                                        <circle r="30" cx="32" cy="32" stroke="#00c93d" stroke-width="4px" stroke-linecap="round" stroke-dashoffset="94.25" fill="transparent" stroke-dasharray="188.5"></circle>
+                                      </svg>
+                                </div>
+
+                                <div class="daily-indicator">
+                                    <span class="daily-label">0/8 hrs</span>
+                                </div>
+
+                            </div>
+
+                            <div class="weekly">
+                                <div class="days">
+                                    <div class="day mon">
+                                        <span>M</span>
+                                    </div>
+                                    <div class="day tue">
+                                        <span>T</span>
+                                    </div>
+                                    <div class="day wed">
+                                        <span>W</span>
+                                    </div>
+                                    <div class="day thur">
+                                        <span>T</span>
+                                    </div>
+                                    <div class="day fri">
+                                        <span>F</span>
+                                    </div>
+                                    <div class="day sat">
+                                        <span>S</span>
+                                    </div>
+                                    <div class="day sun">
+                                        <span>S</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task-category">
+                            <span class="label">Misc</span>
+
+                            <div class="progress-wrapper">
+
+                                <div class="inner-indicator">
+                                    <svg width="64" height="64" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
+                                        <circle r="30" cx="32" cy="32" fill="transparent" stroke="#e0e0e0" stroke-width="4px" stroke-dasharray="201px" stroke-dashoffset="0"></circle>
+                                        <circle r="30" cx="32" cy="32" stroke="#00c93d" stroke-width="4px" stroke-linecap="round" stroke-dashoffset="94.25" fill="transparent" stroke-dasharray="188.5"></circle>
+                                      </svg>
+                                </div>
+
+                                <div class="daily-indicator">
+                                    <span class="daily-label">0/8 hrs</span>
+                                </div>
+
+                            </div>
+
+                            <div class="weekly">
+                                <div class="days">
+                                    <div class="day mon">
+                                        <span>M</span>
+                                    </div>
+                                    <div class="day tue">
+                                        <span>T</span>
+                                    </div>
+                                    <div class="day wed">
+                                        <span>W</span>
+                                    </div>
+                                    <div class="day thur">
+                                        <span>T</span>
+                                    </div>
+                                    <div class="day fri">
+                                        <span>F</span>
+                                    </div>
+                                    <div class="day sat">
+                                        <span>S</span>
+                                    </div>
+                                    <div class="day sun">
+                                        <span>S</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!-- <div class="mod module-performance-updates">
+
+                </div> -->
             </div>
           </div>
           <div class="panel-wrapper">
