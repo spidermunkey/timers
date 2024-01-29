@@ -786,6 +786,7 @@ body {
         border-bottom: 0;
       }
       .module-task-complete {
+        position: relative;
         display: flex;
         flex-direction: column;
         width: 300px;
@@ -860,6 +861,16 @@ body {
               stroke: $success-green;
               fill: $success-green;
             }
+          }
+        }
+        .create-todo {
+          position: absolute;
+          bottom: -8px;
+          right: 28px;
+          span {
+            cursor: pointer;
+            color: #575757;
+            text-decoration: underline;
           }
         }
       }
@@ -962,12 +973,36 @@ body {
     display: flex;
     overflow: hidden;
     flex-direction: column;
+
+    &[module="timers"],
+    &[module="pomodoro"] {
+      transform: translateY(46px);
+    }
+
+    // &[module="tasks"] {
+    //   width: 400px;
+    //   flex: 1 1 140px;
+    // }
     .now-playing {
       justify-self: stretch;
       align-self: flex-end;
-      height: 100px;
+      height: 80px;
       width: 100%;
       border-top: 2px solid rgba(193, 193, 193, 0.269);
+
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      .btn-play-np {
+        // border: 1px solid black;
+        width: fit-content;
+        fill: #525252;
+        padding: 16px;
+      }
+      .np-ttl {
+        padding-left: 24px;
+        font-size: 20px;
+      }
     }
     .preview {
       height: calc(100% - 100px);
@@ -975,8 +1010,33 @@ body {
       display: flex;
     }
     .preview {
-      height: 100%;
+      height: calc(100% - 100px);
       flex-grow: 1;
+      padding: 24px;
+      background: linear-gradient(#fcfcfc, white);
+
+      & .ttl {
+        font-family: "Noto Sans", sans-serif;
+        font-size: 32px;
+        color: #444;
+      }
+      .task-list {
+        width: 100%;
+        margin-left: 48px;
+        border-left-style: solid;
+        border-width: 1px;
+        border-image: linear-gradient(to top, transparent, rgb(220, 220, 220)) 1;
+        overflow: scroll;
+        ul {
+          list-style: none;
+          li {
+            cursor: pointer;
+            margin-top: 12px;
+            font-size: 18px;
+            color: #636363;
+          }
+        }
+      }
     }
   }
 
