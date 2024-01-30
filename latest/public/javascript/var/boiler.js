@@ -149,7 +149,7 @@ function frag() {
 
 function div(classList = [], styleProps = {}, attrs = {}, children) {
   const div = document.createElement("div");
-  if (classList) div.classList.add(...classList);
+  if (classList.length > 0) div.classList.add(...classList);
 
   if (styleProps) {
     for (prop in styleProps) {

@@ -105,7 +105,6 @@ export class Timer {
     let element = div();
 
     element.innerHTML = html;
-    element.dataset.id = this.id;
     fragment.appendChild(element);
 
     return fragment;
@@ -336,66 +335,36 @@ export class Timer {
   }
 
   createTimerElement(type = "timer") {
+    let { hours, minutes, seconds } = this.time,
+      h = this.padNum(hours),
+      m = this.padNum(minutes),
+      s = this.padNum(seconds);
     return `
-        <div class="timer" data-type=${type} >
-
-            <div class="timer--header">
-                <div class="timer--header-title">
-                    <span class="label">${this.title}</span>
-                </div>
-                <div class="timer--options">
-                    <div class="option edit">
-                        <span class="label">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
-                                <path d="M232 120C232 106.7 242.7 96 256 96C269.3 96 280 106.7 280 120V243.2L365.3 300C376.3 307.4 379.3 322.3 371.1 333.3C364.6 344.3 349.7 347.3 338.7 339.1L242.7 275.1C236 271.5 232 264 232 255.1L232 120zM256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0zM48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48C141.1 48 48 141.1 48 256z"></path>
-                            </svg>
-                        </span>
-                    </div>    
-                    <div class="option delete">
-                        <span class="label">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
-                                <path d="M160 400C160 408.8 152.8 416 144 416C135.2 416 128 408.8 128 400V192C128 183.2 135.2 176 144 176C152.8 176 160 183.2 160 192V400zM240 400C240 408.8 232.8 416 224 416C215.2 416 208 408.8 208 400V192C208 183.2 215.2 176 224 176C232.8 176 240 183.2 240 192V400zM320 400C320 408.8 312.8 416 304 416C295.2 416 288 408.8 288 400V192C288 183.2 295.2 176 304 176C312.8 176 320 183.2 320 192V400zM317.5 24.94L354.2 80H424C437.3 80 448 90.75 448 104C448 117.3 437.3 128 424 128H416V432C416 476.2 380.2 512 336 512H112C67.82 512 32 476.2 32 432V128H24C10.75 128 0 117.3 0 104C0 90.75 10.75 80 24 80H93.82L130.5 24.94C140.9 9.357 158.4 0 177.1 0H270.9C289.6 0 307.1 9.358 317.5 24.94H317.5zM151.5 80H296.5L277.5 51.56C276 49.34 273.5 48 270.9 48H177.1C174.5 48 171.1 49.34 170.5 51.56L151.5 80zM80 432C80 449.7 94.33 464 112 464H336C353.7 464 368 449.7 368 432V128H80V432z"></path>
-                            </svg>
-                        </span>
-                    </div> 
-                </div>
+    <div class="timer" data-id="${this.id}">
+    <div class="timer--clock-controls">
+        <div class="ctrl-wrapper">
+            <div class="play ctrl current">
+                <span class="control">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="40px" width="40px" transform="rotate(90)" data-rotation="undefined">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg>
+                </span>
             </div>
-
-            <div class="timer--clock">
-                <div class="timer--clock-controls">
-                    <div class="ctrl-wrapper">
-                        <div class="play ctrl current">
-                            <span class="control">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                                    <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
-                                    <path d="M361 215C375.3 223.8 384 239.3 384 256C384 272.7 375.3 288.2 361 296.1L73.03 472.1C58.21 482 39.66 482.4 24.52 473.9C9.377 465.4 0 449.4 0 432V80C0 62.64 9.377 46.63 24.52 38.13C39.66 29.64 58.21 29.99 73.03 39.04L361 215z"></path>
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="pause ctrl">
-                            <span class="control">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                    <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
-                                    <path d="M272 63.1l-32 0c-26.51 0-48 21.49-48 47.1v288c0 26.51 21.49 48 48 48L272 448c26.51 0 48-21.49 48-48v-288C320 85.49 298.5 63.1 272 63.1zM80 63.1l-32 0c-26.51 0-48 21.49-48 48v288C0 426.5 21.49 448 48 448l32 0c26.51 0 48-21.49 48-48v-288C128 85.49 106.5 63.1 80 63.1z"></path>
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-
-    
-                </div>
-    
-                <div class="timer--clock-times">
-                    <div class="time-slot-wrapper">${this.createTimeSlot(
-                      this.time
-                    )}</div>
-                    <div class="reset">reset</div>
-
-                </div>
+            <div class="pause ctrl">
+                <span class="control">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"  height="40px" width="40px">
+                        <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                        <path d="M272 63.1l-32 0c-26.51 0-48 21.49-48 47.1v288c0 26.51 21.49 48 48 48L272 448c26.51 0 48-21.49 48-48v-288C320 85.49 298.5 63.1 272 63.1zM80 63.1l-32 0c-26.51 0-48 21.49-48 48v288C0 426.5 21.49 448 48 448l32 0c26.51 0 48-21.49 48-48v-288C128 85.49 106.5 63.1 80 63.1z"></path>
+                    </svg>
+                </span>
             </div>
-        </div>`;
+        </div>
+    </div>
+
+    <div class="timer-title">${this.title}</div>
+    <div class="time-slot"> ${h}:${m}:${s}</div>
+    </div>
+
+    `;
   }
 
   createTimeSlot({ hours, minutes, seconds } = this.time) {

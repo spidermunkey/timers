@@ -1,202 +1,74 @@
 .timer {
-    position: relative;
-    background: white;
-    display: inline-flex;
-    flex-direction: column;
-    min-height: 150px;
-    max-height: max-content;
-    border: 1px solid black;
-    font-family: Arial, Helvetica, sans-serif;
-    
+  justify-self: stretch;
+  align-self: flex-end;
+  height: 80px;
+  width: 100%;
+  border-top: 2px solid rgba(193, 193, 193, 0.269);
 
-    padding: 8px 10px 4px 10px;
-    border: 0;
-    border-radius: 24px;
-    margin: 10px;
-    box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.729);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 8px 10px 4px 10px;
+  border: 0;
+  border-radius: 24px;
+  margin: 10px;
+  box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.729);
 
-    // &-text-box {
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-    
-    // }
+  // &-text-box {
+  //     display: flex;
+  //     justify-content: center;
+  //     align-items: center;
 
-    &[data-type="tracker"].complete {
-        background: lime;
+  // }
+
+  &[data-type="tracker"].complete {
+    background: lime;
+  }
+
+  .timer-title,
+  .time-slot {
+    padding-left: 24px;
+    font-size: 20px;
+  }
+
+  &--clock-controls .ctrl {
+    display: none;
+  }
+
+  &--clock-controls .ctrl.current {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .play,
+  .pause {
+    width: fit-content;
+    fill: #525252;
+    padding: 16px;
+    cursor: pointer;
+    &:hover {
+      fill: #222;
     }
+  }
 
-    &--options {
-
-        background-color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        
-        &.active{
-
-            opacity: 1;
-            pointer-events: all;
-            & + .timer--header .timer--header-options .hide {
-                display: block;
-            }
-            & + .timer--header .timer--header-options .show {
-                display: none;
-            }
-
-        }
-
-        & + .timer--header .timer--header-options .hide {
-            display: none;
-        }
-
-
-        .option {
-            margin: 0px 4px;          
-            cursor: pointer;
-            svg {
-                height: 20px;
-                width: 20px;
-            }
-        }
+  .delete {
+    margin-left: 8px;
+    &:hover svg {
+      fill: #ff878d;
     }
-    &--header,
-    &--clock {
-        display: flex;
+  }
+
+  .edit:hover svg {
+    fill: #f5e050;
+  }
+  .reset {
+    padding-top: 4px;
+    padding-right: 16px;
+    text-align: right;
+    cursor: pointer;
+    &:hover {
+      color: #ff5349;
     }
-
-    &--header {
-        
-        justify-content: space-between;
-        align-items: center;
-        margin: 6px 10px;
-        padding-left: 4px;
-        .label {
-            display: flex;
-            font-size: 20px;
-            // padding-left:16px;
-        }
-
-        &-options {
-            cursor: pointer;
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-    }
-
-    &--clock {
-        margin: 10px 10px 4px 10px;
-        justify-content: start;
-        align-items: start;
-
-        &-times {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            padding-top: 6px;
-        }
-        &-controls {
-            position: relative;
-            margin-right: 20px;
-            cursor: pointer;
-        }
-
-        &-controls .ctrl {
-            display: none;
-        }
-
-        &-controls .ctrl.current {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        &-times .time-slot-wrapper {
-            display: flex;
-            max-height: 100px;
-            padding: 4px;
-            align-items: center;
-            padding: 0px 10px;
-            border-radius: 14px;
-            box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.729);
-        }
-
-        &-times .time-slot {
-            display: flex;
-            border: 1px solid transparent;
-            font-size: 32px;
-
-                margin-right: 4px;
-                border-radius: 8px;
-                padding: 4px;
-            
-                & div {
-                    border-radius: 2px;
-                }
-                & div:hover{
-                    background: #cccccc73;
-                }
-                &:hover {
-                    border: 1px solid #cccccc6a;
-                }
-        }
-
-        &-times .time-slot .label {
-            font-size: 16px;
-        }
-    }
-
-    .play,
-    .pause {
-        border-radius: 50%;
-        // height: 40px;
-        // width: 40px;
-        padding: 16px;
-        background-color: #4caf50;
-        color: white;
-
-        &:hover {
-            background-color: #81c784;
-        }
-        .control {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        & svg {
-            height: 32px;
-            width: 32px;
-            fill: white;
-        }
-    }
-
-    .play svg {
-        transform: translateX(3px)
-        // margin-top: 0;
-        // margin-left: 0;
-    }
-
-    .delete {
-        margin-left: 8px;
-        &:hover svg {
-            fill: #ff878d;
-        }
-    }
-
-    .edit:hover svg {
-        fill: #f5e050;
-    }
-    .reset {
-
-        padding-top: 4px;
-        padding-right: 16px;
-        text-align: right;
-        cursor: pointer;
-        &:hover {
-            color: #ff5349; 
-        }
-
-    }
+  }
 }
