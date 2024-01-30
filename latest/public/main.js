@@ -101,29 +101,16 @@ const ready = (async () => {
   return true;
 })();
 
-listen(timerTab, async () => {
-  await ready;
-  const fragment = frag();
-  const timerList = div(["timer-list"]);
-  fragment.appendChild(timerList);
-  timers.forEach((timer) => timer.render(timerList));
-  dashboard.innerHTML = "";
-  dashboard.append(fragment);
+listen(timerTab, () => {
+  renderAllTimers(timers);
   appRoot.setAttribute("location", "timer");
 });
 
-listen(trackerTab, async () => {
-  await ready;
-  const fragment = frag();
-  const timerList = div(["timer-list"]);
-  fragment.appendChild(timerList);
-  trackers.forEach((tracker) => {
-    tracker.render(timerList);
-  });
-  dashboard.innerHTML = "";
-  dashboard.append(fragment);
+listen(trackerTab, () => {
+  renderAllTimers(trackers);
   appRoot.setAttribute("location", "tracker");
 });
+
 listen(timerFormToggle, () => $(".create-timer").classList.toggle("active"));
 listen(timerFormClose, () => $(".create-timer").classList.remove("active"));
 
@@ -291,4 +278,14 @@ async function submitTracker(event, form) {
   let success = await api.addTracker(props);
 
   if (success) tracker.render($(".trackers"), "tracker");
+}
+
+async function renderAllTimers(timerList) {
+  await ready;
+  const fragment = frag();
+  const timerListElement = div(["timer-list"]);
+  fragment.appendChild(timerListElement);
+  timerList.forEach((timer) => timer.render(timerListElement));
+  dashboard.innerHTML = "";
+  dashboard.append(fragment);
 }
