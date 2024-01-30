@@ -1,3 +1,6 @@
 node_modules
 development
+.env
+env
+config
 .parcel-cache

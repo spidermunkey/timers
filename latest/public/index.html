@@ -57,6 +57,7 @@
               <!-- TAB -->
               <div class="tab home icon" id="HOME">
                 <!-- TOGGLER -->
+                <a href="/">
                 <div class="tab__button" data-role="tabButton" data-tab="all">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -70,13 +71,15 @@
                     ></path>
                   </svg>
                 </div>
+                </a>
+
               </div>
 
               <!-- TAB NESTED -->
               <div
                 class="tab categories icon sidebar__tab"
                 data-type="nested"
-                id="CATEGORIES"
+                id="timers"
               >
                 <!-- TOGGLER -->
                 <div
@@ -101,7 +104,7 @@
                 <div
                   class="modal tab__modal top-aligned"
                   data-role="tabModal"
-                  data-tab="categories"
+                  data-tab="timers"
                 >
                   <!-- MENU/WRAPPER -->
                   <div class="modal__menu vert vert--sm">
@@ -154,7 +157,7 @@
               <div
                 class="tab collections icon sidebar__tab"
                 data-type="nested"
-                id="COLLECTIONS"
+                id="trackers"
               >
                 <!-- TOGGLER -->
                 <div
@@ -246,7 +249,7 @@
               <div
                 class="tab docs icon sidebar__tab"
                 data-type="nested"
-                id="DOCS"
+                id="pomodoro"
               >
                 <!-- TOGGLER -->
                 <div class="tab__button" data-role="tabButton" data-tab="docs">
@@ -845,7 +848,7 @@
 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg>
                 </div>
                 <div class="np-ttl">Now Playing</div>
-                <div class="np-time-slot"></div>
+                <div class="np-time-slot">0:00</div>
               </div>
             </div>
             <div class="task-module" module="tasks">
@@ -890,7 +893,7 @@
 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg>
                 </div>
                 <div class="np-ttl">Now Playing</div>
-                <div class="np-time-slot"></div>
+                <div class="np-time-slot">0:00/1:30</div>
               </div>
             </div>
             <div class="task-module" module="pomodoro">
@@ -931,7 +934,8 @@
 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg>
                 </div>
                 <div class="np-ttl">Now Playing</div>
-                <div class="np-time-slot"></div>
+                <div class="np-time-slot"> 0:00/1:30 <span class="session"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-9 -9 42 42" height="40px" width="">
+                    <circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg></span>1</div>
               </div>
             </div>
           </div>

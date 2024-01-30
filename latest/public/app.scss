@@ -998,10 +998,20 @@ body {
         width: fit-content;
         fill: #525252;
         padding: 16px;
+        cursor: pointer;
+        &:hover {
+          fill: #222;
+        }
       }
-      .np-ttl {
+      .np-ttl,
+      .np-time-slot {
         padding-left: 24px;
         font-size: 20px;
+
+        .session {
+          fill: #555;
+          margin-right: 2px;
+        }
       }
     }
     .preview {
@@ -1015,6 +1025,12 @@ body {
       padding: 24px;
       background: linear-gradient(#fcfcfc, white);
 
+      .preview-title {
+        margin-top: 8px;
+      }
+      .preview-icon {
+        margin-top: 10px;
+      }
       & .ttl {
         font-family: "Noto Sans", sans-serif;
         font-size: 32px;
@@ -1034,6 +1050,9 @@ body {
             margin-top: 12px;
             font-size: 18px;
             color: #636363;
+            &:hover {
+              color: #333;
+            }
           }
         }
       }
