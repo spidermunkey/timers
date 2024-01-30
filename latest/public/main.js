@@ -66,53 +66,58 @@ const trackerFormToggle = $(".btn-create-tracker");
 let trackers, trackerFragment, timers, timerFragment;
 
 const ready = (async () => {
-  timers = await api.getTimers((data) => {
+  await api.getTimers((data) => {
     const fragment = frag();
     const renderFilteredMap = (props) => {
       const t = new Timer({ props });
-      console.log(t.render);
       return !!t.isToday;
     };
 
-    timers = data
-      .filter(renderFilteredMap)
-      .map((props) => new Timer({ props }));
+    timers = data.filter(renderFilteredMap).map((props) => {
+      const timer = new Timer({ props });
+      return timer;
+    });
 
-    console.log(timers, "TIMERS");
     timers.length == 0
       ? (fragment.innerHTML = "No Trackers Today")
       : timers.forEach((timer) => timer.render(fragment));
     timerFragment = fragment;
   });
 
-  trackers = await api.getTrackers((data) => {
+  await api.getTrackers((data) => {
     const fragment = frag();
     if (data.length == 0) fragment.innerHTML = "No Trackers";
     else
       trackers = data.map((props) => {
         const tracker = new TimeTracker({ props });
         tracker.render(fragment);
+        return tracker;
       });
     trackerFragment = fragment;
   });
 
-  console.log(timers, trackers);
   return true;
 })();
 
 const timerTab = $("#timers");
 const trackerTab = $("#trackers");
+
 listen(timerTab, async () => {
   await ready;
+  const fragment = frag();
+  timers.forEach((timer) => timer.render(fragment));
   $(".dashboard").innerHTML = "";
-  $(".dashboard").append(timerFragment.cloneNode(true));
-  console.log(timerFragment);
-  console.log("timers");
+  $(".dashboard").append(fragment);
 });
+
 listen(trackerTab, async () => {
   await ready;
+  const fragment = frag();
+  trackers.forEach((tracker) => {
+    tracker.render(fragment);
+  });
   $(".dashboard").innerHTML = "";
-  $(".dashboard").append(trackerFragment.cloneNode(true));
+  $(".dashboard").append(fragment);
 });
 listen(timerFormToggle, () => $(".create-timer").classList.toggle("active"));
 listen(timerFormClose, () => $(".create-timer").classList.remove("active"));
