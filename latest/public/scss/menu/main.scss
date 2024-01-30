@@ -1,0 +1,171 @@
+.menu {
+  position: relative;
+  height: 100%;
+  min-width: fit-content;
+  width: 64px;
+  z-index: 100;
+  /* transform: translateX(-200%); */
+  /* opacity: 0; */
+  transition: transform 500ms ease-in-out;
+  transition: opacity 400ms ease-in-out;
+  border-top-left-radius: $border-radius__default;
+  border-bottom-left-radius: $border-radius__default;
+  // Parent for Icon Container
+  &__wrapper {
+    position: relative;
+    display: flex;
+    z-index: 1000;
+
+    width: $sidebar_width;
+    height: 100%;
+
+    border-top-left-radius: $border-radius__default;
+    border-bottom-left-radius: $border-radius__default;
+
+    /* background: rgba(255, 255, 255, 0.94); */
+    background: $sidebar_background;
+    box-shadow: $sidebar_shadow;
+
+    transition: width 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    .svg,
+    svg {
+      height: 40px;
+      width: 40px;
+      pointer-events: none;
+    }
+  }
+
+  // Parent for Individual Logo/Theme-Toggler && Dashboard Tab Container
+  .sidebar {
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: $sidebar_width;
+    z-index: 10000;
+
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-top: 24px;
+    padding-bottom: 24px;
+    // shadow compounds with outer wrapper
+    box-shadow: -2px 4px 8px 2px rgba(128, 128, 128, 0.092);
+    background: $sb-background;
+  }
+
+  // Parent for Dashboard Tabs
+  .sidebar__tab-set {
+    box-sizing: border-box;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    /* background: blue; */
+    border-top: 1px solid rgba(128, 128, 128, 0.1771);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.177);
+    padding: 32px 0;
+    margin: 32px 0;
+
+    // CONTAINER
+    .tab {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2px;
+    }
+
+    // Individual Icon Button
+    .tab__button {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      margin: 16px 0;
+      border-radius: $tab-button-radius;
+
+      cursor: pointer;
+
+      &.home,
+      &.theme {
+        margin: 0;
+      }
+
+      &.theme {
+        transform: translateY(-12px);
+        .sun {
+          display: none;
+        }
+      }
+
+      &:hover:not(.theme):not(.logo) {
+        box-shadow: $tab-button-active-shadow;
+      }
+    }
+
+    // HIDDEN MENU INSIDE
+    .tab .modal {
+      position: absolute;
+      left: calc(100% + 20px);
+      z-index: 100;
+      box-shadow: 0px 2px 4px 1px rgba(126, 126, 126, 0.139),
+        2px 4px 20px 4px rgba(180, 180, 180, 0.139),
+        2px 4px 40px -4px rgba(180, 180, 180, 0.39);
+      background: #fff;
+      border-radius: 10px;
+
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      overflow: hidden;
+
+      transition: transform 200ms ease-in-out,
+        opacity 150ms cubic-bezier(0.075, 0.82, 0.165, 1);
+
+      &.active {
+        transform: rotateX(4deg) rotateY(-8deg) rotateZ(0deg);
+        visibility: visible;
+        pointer-events: all;
+        opacity: 1;
+      }
+
+      &.top-aligned {
+        top: -20px;
+      }
+
+      &.bottom-aligned {
+        bottom: -50%;
+      }
+
+      &[data-tab="settings"] {
+        top: -150px;
+        // height: 250px;
+        transform: translateY(-20px);
+      }
+    }
+  }
+
+  /* Click Outside Modal */
+  .cosm {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    opacity: 0;
+    background: rgba(128, 128, 128, 0.836);
+    pointer-events: none;
+    transition: 150ms ease-in;
+
+    &.open {
+      /* background: grey; */
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+}

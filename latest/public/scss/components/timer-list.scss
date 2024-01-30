@@ -1,31 +1,12 @@
 .timer-list {
-    box-sizing: border-box;
-
-    position: relative;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 24px 0;
-    margin-right: 16px;
-
-    .btn-toggle--form {
-        svg {
-            height: 42px;
-            width: 42px;
-            fill: white;
-            stroke: 2px;
-            
-        }
-        position: absolute;
-        bottom: 40px;
-        right: 0;
-        border-radius: 100%;
-        padding: 1rem;
-        
-        // border: 1px solid black;
-        background-color: #43df49;
-        box-shadow: 0px 0px 4px -1px rgba(0, 0, 0, 0.378);
-    }
+  box-sizing: border-box;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px 16px;
+  margin-right: 16px;
+  overflow: scroll;
 }

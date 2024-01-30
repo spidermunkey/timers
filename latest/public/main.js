@@ -62,8 +62,12 @@ const trackerForm = $("form#create-tracker");
 const trackerFormSubmit = $('input[type="submit"]#btn-create-tracker');
 const trackerFormClose = $(".create-tracker--form .close");
 const trackerFormToggle = $(".btn-create-tracker");
+const timerTab = $("#timers");
+const trackerTab = $("#trackers");
+const dashboard = $(".dashboard");
+const appRoot = $("#app");
 
-let trackers, trackerFragment, timers, timerFragment;
+let trackers, timers;
 
 const ready = (async () => {
   await api.getTimers((data) => {
@@ -81,7 +85,6 @@ const ready = (async () => {
     timers.length == 0
       ? (fragment.innerHTML = "No Trackers Today")
       : timers.forEach((timer) => timer.render(fragment));
-    timerFragment = fragment;
   });
 
   await api.getTrackers((data) => {
@@ -93,31 +96,33 @@ const ready = (async () => {
         tracker.render(fragment);
         return tracker;
       });
-    trackerFragment = fragment;
   });
 
   return true;
 })();
 
-const timerTab = $("#timers");
-const trackerTab = $("#trackers");
-
 listen(timerTab, async () => {
   await ready;
   const fragment = frag();
-  timers.forEach((timer) => timer.render(fragment));
-  $(".dashboard").innerHTML = "";
-  $(".dashboard").append(fragment);
+  const timerList = div(["timer-list"]);
+  fragment.appendChild(timerList);
+  timers.forEach((timer) => timer.render(timerList));
+  dashboard.innerHTML = "";
+  dashboard.append(fragment);
+  appRoot.setAttribute("location", "timer");
 });
 
 listen(trackerTab, async () => {
   await ready;
   const fragment = frag();
+  const timerList = div(["timer-list"]);
+  fragment.appendChild(timerList);
   trackers.forEach((tracker) => {
-    tracker.render(fragment);
+    tracker.render(timerList);
   });
-  $(".dashboard").innerHTML = "";
-  $(".dashboard").append(fragment);
+  dashboard.innerHTML = "";
+  dashboard.append(fragment);
+  appRoot.setAttribute("location", "tracker");
 });
 listen(timerFormToggle, () => $(".create-timer").classList.toggle("active"));
 listen(timerFormClose, () => $(".create-timer").classList.remove("active"));
