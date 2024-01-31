@@ -49,6 +49,8 @@ body {
   .app-col {
     flex: 1;
     overflow: scroll;
+    height: 100%;
+    position: relative;
   }
 
   .app-header {

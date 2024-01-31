@@ -1,0 +1,100 @@
+#app[location="timer"],
+#app[location="task"] {
+  .dashboard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    flex: 1;
+  }
+  .pg-1,
+  .pg-2 {
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+
+  .col-1,
+  .col-2 {
+    width: 50%;
+    height: 100%;
+    border: 1px dotted black;
+  }
+
+  .pg-2 {
+    flex-direction: column;
+
+    .row-2 {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+    .col-1 {
+      overflow: scroll;
+    }
+  }
+  .timer-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .current-timer,
+  .module-monthly-indicators {
+    border: 1px dotted black;
+    height: 300px;
+    width: 500px;
+  }
+
+  .indicators {
+    border: 1px dotted #ccc;
+    width: 500px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border-bottom: 1px solid black;
+    .daily-indicator {
+      height: 40px;
+      width: 100%;
+      border: 1px dotted blue;
+    }
+    .weekly-indicator {
+      border: 1px dotted blue;
+      height: 40px;
+      width: 100%;
+    }
+  }
+
+  .current-dashboard-label {
+    height: 200px;
+    display: flex;
+    align-items: center;
+  }
+
+  .page-header {
+    display: flex;
+    align-items: baseline;
+  }
+  .search {
+    height: 64px;
+    width: 400px;
+    border: 1px solid #ddd;
+  }
+  .pg-2 .col-2 {
+    display: flex;
+    flex-direction: column;
+    .module-create-timer {
+      height: 200px;
+      width: 100%;
+      border: 1px dotted blue;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      .tab {
+        margin: 16px;
+      }
+    }
+  }
+}

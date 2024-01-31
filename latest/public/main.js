@@ -1,6 +1,6 @@
 import { api } from "./javascript/api/app.js";
 import { Timer, TimeTracker } from "./javascript/components/Timer.js";
-
+import { dashboardHTML } from "./javascript/components/Dashboard.js";
 /*
     TODO
 
@@ -282,10 +282,7 @@ async function submitTracker(event, form) {
 
 async function renderAllTimers(timerList) {
   await ready;
-  const fragment = frag();
-  const timerListElement = div(["timer-list"]);
-  fragment.appendChild(timerListElement);
+  dashboard.innerHTML = dashboardHTML;
+  const timerListElement = $(".timer-list");
   timerList.forEach((timer) => timer.render(timerListElement));
-  dashboard.innerHTML = "";
-  dashboard.append(fragment);
 }
