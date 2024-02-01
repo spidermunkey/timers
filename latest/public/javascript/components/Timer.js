@@ -8,9 +8,12 @@
 */
 
 import { api } from "../api/app";
+
 export class Timer {
   // DEFAULTS TO COUNTDOWN
   constructor({ props }) {
+    this.once = false;
+
     this.currentInterval = null;
 
     this.days = props.days || [];
@@ -30,11 +33,21 @@ export class Timer {
     let dow = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 
     this.isToday = this.days.some((day) => day === dow[today.getDay()]) || null;
+
+    this.refs = [];
   }
 
   padNum(num) {
     if (num.toString().length == 1) return num.toString().padStart(2, "0");
     else return num.toString();
+  }
+
+  formatTime() {
+    let { hours, minutes, seconds } = this.time,
+      h = this.padNum(hours),
+      m = this.padNum(minutes),
+      s = this.padNum(seconds);
+    return { h, m, s };
   }
 
   play() {
@@ -95,6 +108,7 @@ export class Timer {
   countdown() {
     this.time = this.decer();
 
+    // change to show complete;
     if (this.time.total <= 0) return this.resetView();
     this.update();
   }
@@ -112,43 +126,71 @@ export class Timer {
 
   showPlaying() {
     if (!this.element) return;
-    $(".pause", this.element).classList.add("current");
-    $(".play", this.element).classList.remove("current");
+
+    function togglePlayButton(element) {
+      $(".pause", element).classList.add("current");
+      $(".play", element).classList.remove("current");
+    }
+
+    togglePlayButton(this.element);
+    togglePlayButton(this.clone);
+    return;
   }
 
   showPaused() {
-    console.log(this);
     if (!this.element) return;
-    $(".play", this.element).classList.add("current");
-    $(".pause", this.element).classList.remove("current");
+    function togglePauseButton(element) {
+      $(".play", element).classList.add("current");
+      $(".pause", element).classList.remove("current");
+    }
+
+    togglePauseButton(this.element);
+    togglePauseButton(this.clone);
   }
 
   render(destination, type) {
     const frag = this.create(type);
-    this.element = $(`[data-id="${this.id}"]`, frag);
+    let element = $(`[data-id="${this.id}"]`, frag);
     destination.appendChild(frag);
-
-    this.hydrate();
+    this.hydrate(element);
+    this.element = element;
   }
 
-  hydrate() {
-    listen($(".ctrl-wrapper", this.element), () => {
+  renderClone(type) {
+    const node = $('#app[location="timer"] .current-timer');
+    const frag = this.create(type);
+    let element = $(`[data-id="${this.id}"]`, frag);
+    this.clone = element;
+
+    node.innerHTML = "";
+    node.append(frag);
+    this.hydrate(element);
+  }
+
+  hydrate(element) {
+    listen($(".ctrl-wrapper", element), () => {
       if (!this.currentInterval) {
+        this.renderClone();
         this.showPlaying();
         this.play();
       } else if (this.currentInterval) {
         this.showPaused();
         this.pause();
+        app.current_timer.playing = false;
       }
     });
-    listen($(".reset", this.element), this.resetView.bind(this));
-    listen($(".delete", this.element), this.delete.bind(this));
-    listen($(".edit", this.element), this.showEditForm.bind(this));
+    listen($(".reset", element), this.resetView.bind(this));
+    listen($(".delete", element), this.delete.bind(this));
+    listen($(".edit", element), this.showEditForm.bind(this));
   }
 
   update() {
     if (!this.element) return;
-    $(".time-slot-wrapper", this.element).innerHTML = this.createTimeSlot();
+    const updateView = (element) =>
+      ($(".time-slot", element).innerHTML = this.createTimeSlot());
+
+    updateView(this.element);
+    updateView(this.clone);
   }
 
   showEditForm() {
@@ -298,7 +340,10 @@ export class Timer {
     const deleted = api.delete(this.id);
     if (deleted) {
       this.element.remove();
+      this.refs.forEach((ref) => ref.remove());
       this.element = null;
+      app.current_timer.playing = false;
+      app.current_timer.reference = null;
     }
   }
 
@@ -335,10 +380,7 @@ export class Timer {
   }
 
   createTimerElement(type = "timer") {
-    let { hours, minutes, seconds } = this.time,
-      h = this.padNum(hours),
-      m = this.padNum(minutes),
-      s = this.padNum(seconds);
+    let { h, m, s } = this.formatTime();
     return `
     <div class="timer" data-id="${this.id}">
     <div class="timer--clock-controls">
@@ -363,31 +405,12 @@ export class Timer {
     <div class="timer-title">${this.title}</div>
     <div class="time-slot"> ${h}:${m}:${s}</div>
     </div>
-
     `;
   }
 
   createTimeSlot({ hours, minutes, seconds } = this.time) {
-    let h = this.padNum(hours),
-      m = this.padNum(minutes),
-      s = this.padNum(seconds);
-
-    return `
-        <div class="hours time-slot">
-            <div class="tenth-hour">${h[0] || 0}</div>
-            <div class="zero-hour">${h[1] || 0}</div>
-            <span class="label">h</span>
-        </div>
-        <div class="minutes time-slot">
-            <div class="tenth-minute">${m[0] || 0}</div>
-            <div class="zero-minute">${m[1] || 0}</div>
-            <span class="label">m</span>
-        </div>
-        <div class="seconds time-slot">
-            <div class="tenth-second">${s[0] || 0}</div>
-            <div class="zero-second">${s[1] || 0}</div>
-            <span class="label">s</span>
-        </div>`;
+    let { h, m, s } = this.formatTime();
+    return `<div class="time-slot"> ${h}:${m}:${s}</div>`;
   }
 
   createEditForm({ hours, minutes, seconds }) {

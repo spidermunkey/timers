@@ -39,4 +39,4 @@ export const timer = `
   <div class="timer-title">${this.title}</div>
   <div class="time-slot">${h}:${m}:${s}</div>
 </div>
-`
+`;

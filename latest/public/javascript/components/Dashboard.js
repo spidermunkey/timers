@@ -27,32 +27,32 @@ export const dashboardHTML = `
 </div>
 
 <div class="pg-2">
-<div class="row-1">
-  <div class="page-header">
-    <div class="label">
-      <span>Task/Timer List</span>
-    </div>
-    <div class="search">search</div>
-  </div>
-</div>
-
-<div class="row-2">
-  <div class="col-1">
-    <div class="timer-list"></div>
-  </div>
-  <div class="col-2">
-    <div class="module-create-timer">
-      create-timer
-    </div>
-    <div class="tab-wrapper">
-      <div class="tabs">
-        <div class="tab session-tab">Sessions</div>
-        <div class="tab outlook-tab">Outlook</div>
+  <div class="row-1">
+    <div class="page-header">
+      <div class="label">
+        <span>Task/Timer List</span>
       </div>
-      <div class="current-tab"></div>
+      <div class="search">search</div>
     </div>
   </div>
-</div>
+
+  <div class="row-2">
+    <div class="col-1">
+      <div class="timer-list"></div>
+    </div>
+    <div class="col-2">
+      <div class="module-create-timer">
+        create-timer
+      </div>
+      <div class="tab-wrapper">
+        <div class="tabs">
+          <div class="tab session-tab">Sessions</div>
+          <div class="tab outlook-tab">Outlook</div>
+        </div>
+        <div class="current-tab"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 `;
