@@ -11,7 +11,7 @@ export const dashboardHTML = `
           <div class="section-title">Now-Playing</div>
     
           <div class="section-time-slot"> 
-            <div class="time-slot"></div> 
+            <div class="time-slot">00:00:00</div> 
           </div>
 
           </div>
@@ -44,7 +44,9 @@ export const dashboardHTML = `
 
         <div class="timer-notes">
         <div class="timer-note-title">Notes</div>
-        <div class="create-note"> <textarea name="note" id="note" cols="30" rows="10"></textarea> </div>
+        <div class="create-note"> 
+        <input class="subject" type="text" placeholder="Subject">
+        <textarea name="note" id="note" cols="30" rows="4" placeholder="Leave a Quick Note"></textarea> </div>
         <div class="btn-add-note"> 
         <span class="create">Create Note </span>
       </div>
@@ -63,14 +65,25 @@ export const dashboardHTML = `
 
   </div>
 
-  <div class="col-2">
-    <div class="module-quick-notes">
-      <div class="quick-note-wall">Notes This Week</div>
+  <div class="col-2 task-insights">
 
+    <div class="tab-bar">
+    <div class="tab">Sessions</div>
+
+      <div class="tab">Notes</div>
+      <div class="tab">Analytics</div>
+    </div>
+    <div class="tab-panel">
+      <div class="module module-quick-notes" state="active">
+        <div class="quick-note-wall">Notes This Week</div>
+      </div>
+      <div class="module module-monthly-indicators">Montly Analytics</div>
+      <div class="module module-task-session-data">Task Session Data</div>
     </div>
 
-    <div class="module-monthly-indicators"></div>
+
   </div>
+
 </div>
 
 <div class="pg-2">
