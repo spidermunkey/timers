@@ -157,14 +157,11 @@ export class Timer {
   }
 
   renderClone(type) {
-    const node = $('#app[location="timer"] .current-timer');
-    const frag = this.create(type);
-    let element = $(`[data-id="${this.id}"]`, frag);
-    this.clone = element;
-
-    node.innerHTML = "";
-    node.append(frag);
-    this.hydrate(element);
+    const location = $(".current-timer");
+    const title = $(".section-title", location);
+    title.textContent = this.title;
+    this.clone = location;
+    this.hydrate(location);
   }
 
   hydrate(element) {

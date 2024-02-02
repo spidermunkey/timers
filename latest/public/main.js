@@ -102,5 +102,11 @@ async function renderAllTimers(timerList) {
   await ready;
   dashboard.innerHTML = dashboardHTML;
   const timerListElement = $(".timer-list");
-  timerList.forEach((timer) => timer.render(timerListElement));
+  timerList.forEach((timer) => {
+    const namelist = $(".namelist");
+    const title = li();
+    title.textContent = timer.title;
+    namelist.appendChild(title);
+    timer.render(timerListElement);
+  });
 }
