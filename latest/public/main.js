@@ -104,6 +104,14 @@ async function renderAllTimers(timerList) {
   dashboard.innerHTML = dashboardHTML;
   hydrateTabPanel();
   createMenuFromTimerNames();
+
+  console.log($(".module-create-timer .module-title"));
+  listen($(".module-create-timer .module-title"), () => {
+    $(".create-timer-form").setAttribute("state", "active");
+  });
+  listen($(".create-timer-form .form-close"), () => {
+    $(".create-timer-form").setAttribute("state", "inactive");
+  });
   function hydrateTabPanel() {
     const timerTabs = $$(".task-insights .tab-bar .tab");
     console.log(timerTabs);
