@@ -194,7 +194,9 @@
   .btn-add-note {
     margin: 24px auto;
     padding-left: 18px;
+
     .create {
+      cursor: pointer;
       padding: 16px 24px;
       background-color: rgb(9, 149, 231);
       border-radius: 8px;
@@ -269,6 +271,7 @@
       margin: 0px 12px;
       border-radius: 8px;
       box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.248);
+      cursor: pointer;
     }
   }
 

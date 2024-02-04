@@ -68,17 +68,17 @@ export const dashboardHTML = `
   <div class="col-2 task-insights">
 
     <div class="tab-bar">
-    <div class="tab">Sessions</div>
+    <div class="tab" tab="sessions">Sessions</div>
 
-      <div class="tab">Notes</div>
-      <div class="tab">Analytics</div>
+      <div class="tab" tab="notes">Notes</div>
+      <div class="tab" tab="analytics">Analytics</div>
     </div>
     <div class="tab-panel">
-      <div class="module module-quick-notes" state="active">
+      <div class="module module-quick-notes" module="notes" state="active">
         <div class="quick-note-wall">Notes This Week</div>
       </div>
-      <div class="module module-monthly-indicators">Montly Analytics</div>
-      <div class="module module-task-session-data">Task Session Data</div>
+      <div class="module module-monthly-indicators" module="analytics">Montly Analytics</div>
+      <div class="module module-task-session-data" module="sessions">Task Session Data</div>
     </div>
 
 

@@ -47,6 +47,7 @@ import { dashboardHTML } from "./javascript/components/Dashboard.js";
 
 const timerTab = $("#timers");
 const trackerTab = $("#trackers");
+
 const dashboard = $(".dashboard");
 const appRoot = $("#app");
 
@@ -101,12 +102,41 @@ listen(trackerTab, () => {
 async function renderAllTimers(timerList) {
   await ready;
   dashboard.innerHTML = dashboardHTML;
-  const timerListElement = $(".timer-list");
-  timerList.forEach((timer) => {
-    const namelist = $(".namelist");
-    const title = li();
-    title.textContent = timer.title;
-    namelist.appendChild(title);
-    timer.render(timerListElement);
-  });
+  hydrateTabPanel();
+  createMenuFromTimerNames();
+  function hydrateTabPanel() {
+    const timerTabs = $$(".task-insights .tab-bar .tab");
+    console.log(timerTabs);
+    timerTabs.forEach((tab) => {
+      console.log(tab);
+      console.log(timerTabs);
+      console.log("yoyo");
+      tab.addEventListener("click", () => {
+        const tName = tab.getAttribute("tab");
+        const activeModal = $(
+          '.task-insights .tab-panel .module[state="active"]'
+        );
+        console.log(tName);
+        const correspondingModal = $(
+          `.task-insights .module[module="${tName}"]`
+        );
+
+        if (activeModal == correspondingModal) return;
+
+        activeModal.setAttribute("state", "inactive");
+        correspondingModal.setAttribute("state", "active");
+      });
+    });
+  }
+
+  function createMenuFromTimerNames() {
+    const timerListElement = $(".timer-list");
+    timerList.forEach((timer) => {
+      const namelist = $(".namelist");
+      const title = li();
+      title.textContent = timer.title;
+      namelist.appendChild(title);
+      timer.render(timerListElement);
+    });
+  }
 }
