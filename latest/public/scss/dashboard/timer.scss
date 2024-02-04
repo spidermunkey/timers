@@ -187,7 +187,7 @@
     .create {
       cursor: pointer;
       padding: 16px 24px;
-      background-color: rgb(9, 149, 231);
+      background-color: $cold-blue;
       border-radius: 8px;
       color: white;
       font-size: 18px;
@@ -285,14 +285,173 @@
 
 .pg-2 {
   .module-create-timer {
-    height: 200px;
+    position: relative;
+    // height: 250px;
+    height: fit-content;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    form {
+      display: flex;
+      flex-direction: column;
+      padding-left: 48px;
+      background-color: white;
 
+      &:valid .form-submit {
+        opacity: 1;
+        cursor: pointer;
+
+        button[type="submit"] {
+          cursor: pointer;
+        }
+      }
+    }
+    .create-timer-form {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      position: absolute;
+      height: fit-content;
+      inset: 0;
+      // border: 1px solid black;
+    }
+    .form-submit {
+      background-color: $cold-blue;
+      opacity: 0.8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: not-allowed;
+      padding: 10px 0;
+      // height: 24px;
+      button[type="submit"] {
+        background: transparent;
+        border: 0;
+        outline: 0;
+        font-size: 32px;
+        color: white;
+        cursor: not-allowed;
+      }
+    }
+    .form-close {
+      position: absolute;
+      border-radius: 10px;
+      top: 12;
+      right: 12;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      width: 40px;
+      border-bottom: 1px solid #ccccccf1;
+      box-shadow: 0px 0px 3px -1px #ccc;
+      padding: 8px;
+      cursor: pointer;
+      svg {
+        height: 28px;
+        width: 28px;
+        stroke: #757575d4;
+        stroke-width: 2px;
+      }
+    }
+    .form-timer-title {
+      height: 64px;
+      margin-bottom: 20px;
+      margin-top: 16px;
+      input {
+        height: 100%;
+        font-size: 28px;
+        border: 0;
+        outline: none;
+        border-bottom: 1px solid #ddd;
+      }
+    }
+    .form-timer-days {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      .d-which {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        margin-left: 16px;
+        .which {
+          display: flex;
+          color: #555;
+          &:first-of-type {
+            margin-bottom: 4px;
+          }
+          .w-label {
+            letter-spacing: 0.015em;
+          }
+          .w-box {
+            height: 20px;
+            width: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 6px;
+          }
+        }
+      }
+      .d {
+        display: flex;
+        flex-direction: column;
+        width: 32px;
+        margin: 8px;
+        margin-top: 20px;
+        .d-box,
+        .d-label {
+          width: 100%;
+          text-align: center;
+          color: #656565;
+        }
+        .d-box {
+          height: 32px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        .d-label {
+          margin-top: 6px;
+        }
+      }
+    }
+    .form-timer-time-slot {
+      display: flex;
+      margin-bottom: 10px;
+      .slot {
+        display: flex;
+        align-items: flex-end;
+        margin-right: 16px;
+        input.t {
+          width: 64px;
+          height: 64px;
+          font-size: 52px;
+          text-align: center;
+          color: #656565;
+          // border-radius: 8px;
+          outline: none;
+          border: 0;
+          border-bottom: 1px solid #ccc;
+        }
+        .t-label {
+          margin-left: 8px;
+          margin-bottom: 8px;
+          color: #353535;
+        }
+      }
+    }
     .module-title {
-      margin-top: 10px;
+      // margin-top: 10px;
+      padding: 10px 20px;
+      border-radius: 16px;
+      box-shadow: 0px 0px 3px 0px #ccc;
+      background-color: $cold-blue;
+      letter-spacing: 0.025em;
+      color: white;
       font-size: 32px;
       text-align: center;
-      color: #555;
     }
   }
   .tabs {

@@ -108,9 +108,6 @@ async function renderAllTimers(timerList) {
     const timerTabs = $$(".task-insights .tab-bar .tab");
     console.log(timerTabs);
     timerTabs.forEach((tab) => {
-      console.log(tab);
-      console.log(timerTabs);
-      console.log("yoyo");
       tab.addEventListener("click", () => {
         const tName = tab.getAttribute("tab");
         const activeModal = $(
