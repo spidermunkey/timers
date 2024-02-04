@@ -51,7 +51,6 @@ export const dashboardHTML = `
         <span class="create">Create Note </span>
       </div>
         </div>
-        <div class="current-dashboard-label">icon + current page</div>
 
     </div>
 
@@ -89,10 +88,10 @@ export const dashboardHTML = `
 <div class="pg-2">
   <div class="row-1">
     <div class="page-header">
-      <div class="label">
-        <span>Task/Timer List</span>
+
+      <div class="search">
+        <input type="text" placeholder="search timers">
       </div>
-      <div class="search">search</div>
     </div>
   </div>
 
@@ -102,7 +101,7 @@ export const dashboardHTML = `
     </div>
     <div class="col-2">
       <div class="module-create-timer">
-        create-timer
+        <div class="module-title">Create Timer</div>
       </div>
       <div class="tab-wrapper">
         <div class="tabs">

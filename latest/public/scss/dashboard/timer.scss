@@ -18,7 +18,7 @@
   .col-1,
   .col-2 {
     // min-width: 50%;
-    height: 80vh;
+    height: 85vh;
     // border 1px dotted black;
   }
 
@@ -86,26 +86,10 @@
     display: flex;
     align-items: baseline;
   }
-  .search {
-    height: 64px;
-    width: 400px;
-    border: 1px solid #ddd;
-  }
+
   .pg-2 .col-2 {
     display: flex;
     flex-direction: column;
-    .module-create-timer {
-      height: 200px;
-      width: 100%;
-      border: 1px dotted blue;
-    }
-    .tabs {
-      display: flex;
-      justify-content: center;
-      .tab {
-        margin: 16px;
-      }
-    }
   }
 }
 
@@ -159,6 +143,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  justify-content: flex-start;
   .section-title {
     font-size: 32px;
     color: #353535;
@@ -191,6 +176,10 @@
     justify-self: flex-end;
   }
 
+  .timer-notes {
+    margin-top: 120px;
+    margin-left: 18px;
+  }
   .btn-add-note {
     margin: 24px auto;
     padding-left: 18px;
@@ -209,7 +198,7 @@
   .timer-note-title {
     font-size: 28px;
     color: #454545;
-    padding-left: 18px;
+    padding-left: 24px;
     padding-bottom: 18px;
   }
   .create-note {
@@ -280,7 +269,7 @@
     box-shadow: 0px 4px 12px -2px rgba(0, 0, 0, 0.324);
     border: 1px solid #ccccccab;
     border-radius: 12px;
-    flex: 1;
+    height: 700px;
 
     .module {
       display: none;
@@ -291,5 +280,90 @@
     .module-quick-notes {
       padding: 24px;
     }
+  }
+}
+
+.pg-2 {
+  .module-create-timer {
+    height: 200px;
+    width: 100%;
+
+    .module-title {
+      margin-top: 10px;
+      font-size: 32px;
+      text-align: center;
+      color: #555;
+    }
+  }
+  .tabs {
+    display: flex;
+    justify-content: center;
+    .tab {
+      margin: 16px;
+    }
+  }
+
+  .page-header {
+    width: 100%;
+    // border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 40px 0;
+
+    .search {
+      height: 64px;
+      width: 400px;
+      border: 1px solid #ddd;
+      box-shadow: 0px 0px 8px 0px #ddd, 0px 2px 4px 0px #ccc;
+      border-radius: 12px;
+      overflow: hidden;
+      input {
+        height: 100%;
+        width: 100%;
+        font-size: 32px;
+        color: #656565;
+        padding-left: 24px;
+        padding-right: 24px;
+        outline: none;
+        border: 0;
+      }
+    }
+  }
+
+  .col-1 {
+    width: 50%;
+    overflow: hidden;
+    .timer-list {
+      padding: 0 24px;
+      overflow: scroll;
+    }
+    .timer {
+      margin-top: 24px;
+      position: relative;
+      min-width: 400px;
+      .timer-title {
+        position: relative;
+        width: 150px;
+        text-wrap: nowrap;
+        overflow: hidden;
+        &:after {
+          content: "";
+          position: absolute;
+          height: 100%;
+          right: 0;
+          width: 10px;
+          background-color: black;
+          background: linear-gradient(
+            to left,
+            rgba(255, 255, 255, 0.752),
+            transparent
+          );
+        }
+      }
+    }
+  }
+  .col-2 {
+    flex: 1;
   }
 }
