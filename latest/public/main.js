@@ -137,10 +137,10 @@ async function renderAllTimers(timerList) {
   function createMenuFromTimerNames() {
     const timerListElement = $(".timer-list");
     timerList.forEach((timer) => {
-      const namelist = $(".namelist");
-      const title = li();
-      title.textContent = timer.title;
-      namelist.appendChild(title);
+      // const namelist = $(".namelist");
+      // const title = li();
+      // title.textContent = timer.title;
+      // namelist.appendChild(title);
       timer.render(timerListElement);
     });
   }

@@ -42,24 +42,16 @@ export const dashboardHTML = `
 
         </div>
 
-        <div class="timer-notes">
-        <div class="timer-note-title">Notes</div>
-        <div class="create-note"> 
-        <input class="subject" type="text" placeholder="Subject">
-        <textarea name="note" id="note" cols="30" rows="4" placeholder="Leave a Quick Note"></textarea> </div>
-        <div class="btn-add-note"> 
-        <span class="create">Create Note </span>
+        <div class="search">
+        <input type="text" placeholder="search timers">
       </div>
+        <div class="timer-list">
         </div>
 
+
     </div>
 
-    <div class="timer-list-names">
-      <div class="section-title">Other Timers </div>
-      <ul class="namelist">
 
-      </ul>
-    </div>
 
 
   </div>
@@ -89,9 +81,7 @@ export const dashboardHTML = `
   <div class="row-1">
     <div class="page-header">
 
-      <div class="search">
-        <input type="text" placeholder="search timers">
-      </div>
+
     </div>
   </div>
 
