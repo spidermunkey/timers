@@ -43,11 +43,12 @@ export const dashboardHTML = `
         </div>
 
         <div class="search">
-        <input type="text" placeholder="search timers">
-      </div>
+          <input type="text" placeholder="search timers">
+        </div>
         <div class="timer-list">
         </div>
 
+        <div class="create-timer">+</div>
 
     </div>
 
