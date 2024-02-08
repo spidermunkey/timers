@@ -2,7 +2,7 @@ export var api = {
   async getTimers(effect) {
     const res = await axios.get("http://localhost:1279/timers/meta");
     const { data } = res;
-
+    // console.log(data);
     if (responseOk(res)) {
       if (effect) effect(data);
       return data;

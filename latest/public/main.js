@@ -86,3 +86,15 @@ const ready = (async () => {
 
   return true;
 })();
+
+const readySetGo = async () => {
+  await ready;
+  const test = await api.getTimers();
+  console.dir({
+    description: "API META DATA",
+    trackers,
+    timers,
+  });
+};
+
+readySetGo();
