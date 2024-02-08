@@ -26,3 +26,5 @@ now, with that mapped out I can create all of these components on the backend an
 the benifit of this would be keeping all of the relevant logic within relevant chunks of code.
 
 my current workflow is ideal when you know how everything works already but seeing as features keep comming to mind on the fly it feels very awkard creating the html, styling it, adding javascript to make it work then hopping to another editor to make sure it works on the backend... sounds like the right thing in my head, easy to reason about after the fact. In the process of developing however, results in anything added or modified being added and modified it 5 different places which feels wrong in so many ways.
+
+maybe instead of scrapping it I'll come back to it once I know how all the peices work together. because spas feel nice...
