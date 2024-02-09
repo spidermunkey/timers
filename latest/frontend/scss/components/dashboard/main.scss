@@ -1,0 +1,15 @@
+@import "home.scss";
+@import "tracker.scss";
+@import "timer.scss";
+
+.dashboard {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 24px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: scroll;
+}

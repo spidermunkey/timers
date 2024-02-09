@@ -1,0 +1,358 @@
+.dashboard[location="home"] {
+  width: 100%;
+  flex-wrap: wrap;
+  padding-bottom: 24px;
+  //   background-color: blue;
+
+  .daily-metrics {
+    margin: 0px 14px;
+    // height: 300px;
+    width: 100%;
+    // background-color: blue;
+    border-radius: 8px;
+    box-shadow: 0px 8px 14px -6px rgba(31, 31, 31, 0.515);
+    overflow: hidden;
+    padding-bottom: 24px;
+    .task-metric {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      > .mod {
+        border-bottom: 0;
+      }
+      .module-task-complete {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        flex-shrink: 0;
+        padding: 24px;
+        border-right-style: solid;
+        border-width: 1px;
+        border-image: linear-gradient(to top, transparent, rgb(220, 220, 220)) 1;
+        .result {
+          margin-top: 16px;
+        }
+        .t-completed {
+          margin-top: 16px;
+        }
+        .t-completed .label {
+          font-size: 32px;
+          //   margin-left: 18px;
+          color: #132712;
+        }
+        .t-completed .res,
+        .t-completed .divider {
+          font-size: 24px;
+          color: #252525d6;
+        }
+
+        .indicator {
+          position: relative;
+          width: 100%;
+          height: 20px;
+          margin-top: 24px;
+          border-radius: 32px;
+
+          box-shadow: 0px 0px 4px -1px rgba(0, 0, 0, 0.314),
+            0px 3px 8px -2px rgba(38, 38, 38, 0.483);
+          overflow: hidden;
+        }
+        .progress {
+          position: absolute;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(#00c93d, #379931);
+
+          border-radius: 32px;
+          transform: translateX(var(--task-complete-progress--daily));
+          box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.603);
+        }
+        .perf-reccomendations {
+          ul {
+            margin-left: 0;
+            padding-left: 0;
+            position: relative;
+            list-style: none;
+            li {
+              margin-top: 24px;
+              //   display: flex;
+              //   justify-content: flex-start;
+              //   align-items: center;
+              div {
+                margin-top: 4px;
+                margin-left: 32px;
+                font-size: 18px;
+              }
+            }
+            svg {
+              margin-right: 4px;
+            }
+            .under-perf svg {
+              fill: $failure-red;
+            }
+            .over-perf svg {
+              stroke: $success-green;
+              fill: $success-green;
+            }
+          }
+        }
+        .create-todo {
+          position: absolute;
+          bottom: -8px;
+          right: 28px;
+          span {
+            cursor: pointer;
+            color: #575757;
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .module-weekly-completed {
+        padding: 24px;
+        padding-left: 40px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        .allocations {
+          display: flex;
+          flex-wrap: wrap;
+        }
+        .module-title {
+          margin: 16px 0;
+          font-size: 32px;
+          color: #132712;
+        }
+        .task-category {
+          margin-top: 32px;
+          margin-right: 24px;
+          display: flex;
+          align-items: center;
+          font-size: 24px;
+        }
+        .progress-wrapper {
+          position: relative;
+          margin-left: 12px;
+          //   scale: 0.8;
+          width: 64px;
+          height: 64px;
+          border-radius: 100%;
+          box-shadow: 0px 0px 4px -1px black;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 16px;
+          background-color: transparent;
+        }
+        .daily-indicator {
+          height: 100%;
+          width: 100%;
+          border: 4px solid transparent;
+          z-index: 2;
+        }
+        .daily-label {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: white;
+          border-radius: 100%;
+        }
+        .inner-indicator {
+          position: absolute;
+          inset: 0;
+          //   background-color: #00c93d;
+          z-index: 10;
+          border-radius: 100%;
+        }
+      }
+
+      .weekly {
+        align-self: flex-end;
+        margin-left: 24px;
+        margin-bottom: 4px;
+        .days {
+          display: flex;
+          font-size: 14px;
+          .day {
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  .panel-wrapper {
+    margin-top: 64px;
+    margin-bottom: 175px;
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .task-module {
+    // display: inline-flex;
+    height: 300px;
+    width: 325px;
+    margin: 48px 2vw;
+    flex: 1;
+    box-shadow: 0px 0px 2px -1px #4343433a, 0px 0px 3px 1px #1d1d1d14,
+      0px 1px 8px -2px #15151560, 0px 8px 14px -6px rgba(0, 0, 0, 0.262);
+
+    border-radius: 16px;
+
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+
+    &[module="timers"],
+    &[module="pomodoro"] {
+      transform: translateY(46px);
+    }
+
+    // &[module="tasks"] {
+    //   width: 400px;
+    //   flex: 1 1 140px;
+    // }
+    .now-playing {
+      justify-self: stretch;
+      align-self: flex-end;
+      height: 80px;
+      width: 100%;
+      border-top: 2px solid rgba(193, 193, 193, 0.269);
+
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      .btn-play-np {
+        // border: 1px solid black;
+        width: fit-content;
+        fill: #525252;
+        padding: 16px;
+        cursor: pointer;
+        &:hover {
+          fill: #222;
+        }
+      }
+      .np-ttl,
+      .np-time-slot {
+        padding-left: 24px;
+        font-size: 20px;
+
+        .session {
+          fill: #555;
+          margin-right: 2px;
+        }
+      }
+    }
+    .preview {
+      height: calc(100% - 100px);
+      width: 100%;
+      display: flex;
+    }
+    .preview {
+      height: calc(100% - 100px);
+      flex-grow: 1;
+      padding: 24px;
+      background: linear-gradient(#fcfcfc, white);
+
+      .preview-title {
+        margin-top: 8px;
+      }
+      .preview-icon {
+        margin-top: 10px;
+      }
+      & .ttl {
+        font-family: "Noto Sans", sans-serif;
+        font-size: 32px;
+        color: #444;
+      }
+      .task-list {
+        width: 100%;
+        margin-left: 48px;
+        border-left-style: solid;
+        border-width: 1px;
+        border-image: linear-gradient(to top, transparent, rgb(220, 220, 220)) 1;
+        overflow: scroll;
+        ul {
+          list-style: none;
+          li {
+            cursor: pointer;
+            margin-top: 12px;
+            font-size: 18px;
+            color: #636363;
+            &:hover {
+              color: #333;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .metrics-wrapper {
+    position: relative;
+    .btn-scrollTo {
+      position: absolute;
+      top: -148px;
+      right: 50px;
+      padding: 12px 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
+      color: #353535;
+    }
+    display: flex;
+    flex-direction: column;
+    // background-color: black;
+    width: 100%;
+    height: 100%;
+    .metrics-timeline {
+      width: 100%;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      .timeline {
+        align-self: center;
+        padding: 12px 24px;
+        margin: 0 16px;
+        font-size: 18px;
+        box-shadow: 0px 0px 8px -1px rgba(0, 0, 0, 0.169),
+          0px 1px 4px 1px rgba(0, 0, 0, 0.115),
+          0px 8px 14px -6px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+        min-width: 80px;
+        text-align: center;
+      }
+    }
+    .metrics-graph {
+      //   background-color: rgba(0, 0, 0, 0.04);
+      position: relative;
+      flex: 1;
+      //   padding: 24px;
+      border-radius: 32px;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.202),
+        0px 2px 14px -6px rgba(0, 0, 0, 0.615);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 24px;
+      .m-graph {
+        width: 100%;
+        height: calc(100% - 100px);
+        background-color: white;
+      }
+      .graph-type-banner {
+        height: 100px;
+        width: 100%;
+        border-top: 1px solid rgba(0, 0, 0, 0.115);
+
+        // background-color: black;
+      }
+    }
+  }
+}

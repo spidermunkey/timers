@@ -1,0 +1,63 @@
+@import "components/main.scss";
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  background-color: $main-border-trim-color;
+}
+
+#app {
+  display: flex;
+  box-sizing: border-box;
+  position: relative;
+  height: calc(100% - 16px);
+  width: calc(100% - 16px);
+  background: white;
+  border-radius: $border-radius__default;
+  overflow: hidden;
+}
+
+.app-col {
+  flex: 1;
+  // overflow: scroll;
+  height: 100%;
+  position: relative;
+}
+
+.app-header {
+  height: 100px;
+  //   width: 100%;
+  flex: 1;
+  border-bottom: 1px solid #8080802d;
+  margin: 0 24px;
+  display: flex;
+  justify-content: space-between;
+
+  .current-tab {
+    align-self: center;
+    margin: 16px;
+    font-size: 24px;
+    padding: 10px 8px;
+    letter-spacing: 0.025em;
+    color: #353535;
+  }
+}

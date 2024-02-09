@@ -5,10 +5,7 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "rm -rf ./development && rm -rf ./.parcel-cache && parcel ./frontend/index.html --dist-dir development -p 1994",
-    "start": "nodemon backend/server.js & npm run scss",
-    "start-server": "node backend/server.js",
-    "scss": "sass --watch frontend/app.scss frontend/static/css/app.css"
+    "dev": "rm -rf ./development && rm -rf ./.parcel-cache && parcel ./public/index.html --dist-dir development -p 1994"
   },
   "author": "",
   "license": "ISC",

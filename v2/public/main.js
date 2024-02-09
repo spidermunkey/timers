@@ -1,4 +1,4 @@
-import { api } from "./javascript/api/app.js";
+import { api } from "./javascript/api/app.js"
 import { Timer, TimeTracker } from "./javascript/components/Timer.js";
 
 /*
