@@ -5,7 +5,7 @@ export default class extends AbstractView {
     super();
     this.setTitle("Dashboard");
   }
-
+  
   async getHTML() {
     return `<div class="dashboard" location="home">
     <div class="daily-metrics">
