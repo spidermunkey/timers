@@ -1,5 +1,6 @@
 export class AbstractTimer {
   constructor(time) {
+    console.log(time);
     this.currentInterval = null;
     this.time = time;
     this.initial = structuredClone(time);
@@ -49,8 +50,9 @@ export class AbstractTimer {
   }
 
   doubleZero(number) {
-    if (typeof number !== "string" || typeof number !== "number")
-      throw new Error("double zero function requires string or number");
+    // console.log(number, typeof number !== "number");
+    // if (typeof number !== "number" || typeof number != "string")
+    //   throw new Error("double zero function requires string or number");
 
     return number.toString().padStart(2, "0");
   }
@@ -110,8 +112,8 @@ export class AbstractTimer {
 
 export class CountdownTimer extends AbstractTimer {
   constructor(props) {
-    super(props.time);
-
+    super(props.time ? props.time : { hours: 0, minutes: 0, seconds: 0 });
+    // console.log(this.time);
     this.once = false;
     this.currentInterval = null;
     this.days = props.days || [];
@@ -119,6 +121,7 @@ export class CountdownTimer extends AbstractTimer {
     this.initial = props.initial || structuredClone(props.time);
     this.id = props.id || uuid();
     this.element = undefined;
+    this.elementClones = [];
     this.isToday = this.days.some((day) => {
       let today = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"][
         new Date().getDay()
@@ -127,9 +130,17 @@ export class CountdownTimer extends AbstractTimer {
     });
   }
 
-  set time(timeObject) {
-    // update logic goes here
-    this.time = timeObject;
+  // set time(timeObject) {
+  //   this._time = timeObject
+  //   // update logic goes here
+  // }
+
+  formatTime() {
+    let { hours, minutes, seconds } = this.time,
+      h = this.doubleZero(hours),
+      m = this.doubleZero(minutes),
+      s = this.doubleZero(seconds);
+    return { h, m, s };
   }
 
   pause() {
@@ -141,13 +152,24 @@ export class CountdownTimer extends AbstractTimer {
   }
 
   render(destination) {
-    const element = document.createElement("div");
-    element.classList.add("timer-wrapper");
-    element.dataset.id = this.id;
-    element.innerHTML = this.getHTML();
-    this.hydrate(element);
+    let element;
+
+    if (!this.element) {
+      element = document.createElement("div");
+      element.classList.add("timer-wrapper");
+      element.dataset.id = this.id;
+      element.innerHTML = this.getHTML();
+    } else {
+      element = this.element.cloneNode(true);
+      this.elementClones.push(element);
+    }
+
     this.element = element;
+    this.hydrate(element);
+    destination.appendChild(element);
   }
+
+  destroy() {}
 
   getHTML() {
     let { h, m, s } = this.formatTime();

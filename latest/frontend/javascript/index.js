@@ -1,13 +1,14 @@
-import Timers from "../html/views/Timers.js";
-import Home from "../html/views/Home.js";
+import Timers from "./views/Timers.js";
+import Home from "./views/Home.js";
 
 const navigateTo = (url) => {
   history.pushState(null, null, url);
   router();
 };
 
-const swapView = (html) => {
-  $(".dashboard").innerHTML = html;
+const swapView = async (view) => {
+  $(".dashboard").innerHTML = await view.getHTML();
+  await view.hydrate();
 };
 
 const router = async () => {
@@ -52,7 +53,7 @@ const router = async () => {
   }
 
   const view = new match.route.view();
-  // swapView(await view.getHTML());
+  swapView(view);
 };
 
 window.addEventListener("popstate", router);

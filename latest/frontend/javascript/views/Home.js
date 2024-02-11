@@ -1,11 +1,11 @@
 import AbstractView from "./AbstractView.js";
 
-export default class extends AbstractView {
+export default class Home extends AbstractView {
   constructor() {
     super();
     this.setTitle("Dashboard");
   }
-  
+
   async getHTML() {
     return `<div class="dashboard" location="home">
     <div class="daily-metrics">
@@ -472,6 +472,6 @@ export default class extends AbstractView {
     
       </div>
     </div>
-    </div>`
+    </div>`;
   }
 }

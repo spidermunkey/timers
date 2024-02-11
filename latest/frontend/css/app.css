@@ -504,6 +504,70 @@
 .time-slot .current-context {
   margin-left: 3px;
 }
+.time-slot .idk {
+  color: blue;
+}
+
+.timer {
+  justify-self: stretch;
+  align-self: flex-end;
+  height: 80px;
+  width: 100%;
+  border-top: 2px solid rgba(193, 193, 193, 0.269);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 8px 10px 4px 10px;
+  border: 0;
+  border-radius: 24px;
+  margin: 10px;
+  box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.729);
+}
+.timer[data-type=tracker].complete {
+  background: lime;
+}
+.timer .timer-title,
+.timer .time-slot {
+  padding-left: 24px;
+  font-size: 20px;
+}
+.timer--clock-controls .ctrl {
+  display: none;
+}
+.timer--clock-controls .ctrl.current {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.timer .play,
+.timer .pause {
+  width: fit-content;
+  fill: #525252;
+  padding: 16px;
+  cursor: pointer;
+}
+.timer .play:hover,
+.timer .pause:hover {
+  fill: #222;
+}
+.timer .delete {
+  margin-left: 8px;
+}
+.timer .delete:hover svg {
+  fill: #ff878d;
+}
+.timer .edit:hover svg {
+  fill: #f5e050;
+}
+.timer .reset {
+  padding-top: 4px;
+  padding-right: 16px;
+  text-align: right;
+  cursor: pointer;
+}
+.timer .reset:hover {
+  color: #ff5349;
+}
 
 *,
 *::before,
