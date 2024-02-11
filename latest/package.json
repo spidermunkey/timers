@@ -8,7 +8,7 @@
     "dev": "rm -rf ./development && rm -rf ./.parcel-cache && parcel ./frontend/index.html --dist-dir development -p 1994",
     "start": "nodemon backend/server.js & npm run scss",
     "start-server": "node backend/server.js",
-    "scss": "sass ./frontend/scss/main.scss ./frontend/static/css/app.css"
+    "scss": "sass --watch frontend/scss/main.scss frontend/css/app.css"
   },
   "author": "",
   "license": "ISC",
