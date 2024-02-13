@@ -5,6 +5,7 @@ export class CountdownTimer extends AbstractTimer {
     super(props.time ? props.time : { hours: 0, minutes: 0, seconds: 0 });
     // console.log(this.time);
     this.once = false;
+    this.type = "timer";
     this.currentInterval = null;
     this.days = props.days || [];
     this.title = props.title || "";
