@@ -38,8 +38,21 @@ export class CountdownTimer extends AbstractTimer {
     return;
   }
 
-  hydrate(element) {
-    return element;
+  hydrate(element = this.element) {
+    listen($(".ctrl-wrapper", element), () => {
+      if (!this.currentInterval) {
+        this.renderClone();
+        this.showPlaying();
+        this.play();
+      } else if (this.currentInterval) {
+        this.showPaused();
+        this.pause();
+        app.current_timer.playing = false;
+      }
+    });
+    listen($(".reset", element), this.resetView.bind(this));
+    listen($(".delete", element), this.delete.bind(this));
+    listen($(".edit", element), this.showEditForm.bind(this));
   }
 
   render(destination) {

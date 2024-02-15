@@ -1,4 +1,4 @@
-export default class AbstractView {
+export class AbstractView {
   constructor() {}
 
   setTitle(title) {

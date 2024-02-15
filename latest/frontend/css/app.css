@@ -519,9 +519,9 @@
   overflow: hidden;
   padding: 8px 10px 4px 10px;
   border: 0;
-  border-radius: 24px;
-  margin: 10px;
-  box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.729);
+  border-radius: 14px;
+  margin: 4px 10px;
+  box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.29);
 }
 .timer[data-type=tracker].complete {
   background: lime;
@@ -530,6 +530,9 @@
 .timer .time-slot {
   padding-left: 24px;
   font-size: 20px;
+}
+.timer .timer-title {
+  width: 180px;
 }
 .timer--clock-controls .ctrl {
   display: none;
@@ -569,6 +572,9 @@
   color: #ff5349;
 }
 
+.countdown-timer-list {
+  padding: 24px 32px;
+}
 .countdown-timer-list .now-playing {
   height: 300px;
   width: 400px;
