@@ -16,14 +16,19 @@ export class TimerList {
     return countdownTimers;
   }
 
-  async hydrate() {}
+  async hydrate() {
+    const timerList = $(".dashboard .countdown-timer-list");
+    if (!timerList) console.warn("timer-list hasnt properly rendered");
+
+    timerList.addEventListener;
+  }
 
   async getHTML() {
     const timers = await this.getTimers();
 
     let html = (
       await Promise.all(timers.map(async (timer) => await timer.getHTML()))
-    ).join();
+    ).join(" ");
 
     return `
     <div class="countdown-timer-list">
@@ -35,6 +40,14 @@ export class TimerList {
         ${html}
       </div>
     </div>`;
+  }
+
+  getLoader() {
+    return `<div class="loader">Loading...</div>`;
+  }
+
+  async render(destination) {
+    //...
   }
 
   logData() {

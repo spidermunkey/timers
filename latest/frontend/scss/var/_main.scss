@@ -1,3 +1,9 @@
+@import "./colors.scss";
+@import "./components.scss";
+@import "./font.scss";
+@import "./shadows.scss";
+@import "./shapes.scss";
+
 :root {
   --sidebar_width: 64px;
   --sidebar_background: white;
@@ -13,7 +19,6 @@
   --sub-clr__light: #333;
   --font-clr__light: rgba(20, 20, 21, 0.9);
   --task-complete-progress--daily: 50%;
-
 }
 
 $success-green: #00c93d;

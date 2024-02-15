@@ -105,6 +105,8 @@ export class AbstractTimer {
     return;
   }
 
+  wait(waitTime, timeout, onComplete) {}
+
   reset() {
     this.time = structuredClone(this.initial);
   }

@@ -87,6 +87,7 @@ export class CountdownTimer extends AbstractTimer {
       <div class="timer-title">${this.title}</div>
       ${this.createTimeSlot()}
       </div>
+      <div class="edit-timer"></div>
     `;
   }
 

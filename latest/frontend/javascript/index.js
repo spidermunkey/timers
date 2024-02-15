@@ -10,6 +10,9 @@ const swapView = async (view) => {
   $(".dashboard").innerHTML = await view.getHTML();
   await view.hydrate();
 };
+const renderView = async (view) => {
+  await view.render($(".dashboard"));
+};
 
 const router = async () => {
   const routes = [
@@ -53,7 +56,8 @@ const router = async () => {
   }
 
   const view = new match.route.view();
-  swapView(view);
+  if (view.render) renderView(view);
+  else swapView(view);
 };
 
 window.addEventListener("popstate", router);

@@ -1,7 +1,18 @@
 .countdown-timer-list {
   padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  height: 860px;
+  width: fit-content;
+  overflow: hidden;
   .now-playing {
     height: 300px;
     width: 400px;
+  }
+  .timer-list-items {
+    padding: 0px 10px;
+    height: 100%;
+    flex: 1;
+    overflow: scroll;
   }
 }

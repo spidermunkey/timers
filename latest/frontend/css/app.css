@@ -509,10 +509,10 @@
 }
 
 .timer {
+  position: relative;
   justify-self: stretch;
   align-self: flex-end;
   height: 80px;
-  width: 100%;
   border-top: 2px solid rgba(193, 193, 193, 0.269);
   display: flex;
   align-items: center;
@@ -520,7 +520,7 @@
   padding: 8px 10px 4px 10px;
   border: 0;
   border-radius: 14px;
-  margin: 4px 10px;
+  margin: 10px;
   box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.29);
 }
 .timer[data-type=tracker].complete {
@@ -532,7 +532,20 @@
   font-size: 20px;
 }
 .timer .timer-title {
-  width: 180px;
+  width: 140px;
+  cursor: pointer;
+}
+.timer .time-slot {
+  margin-left: 8px;
+}
+.timer .options {
+  margin-left: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+}
+.timer .options > div {
+  margin: 0px 5px;
 }
 .timer--clock-controls .ctrl {
   display: none;
@@ -574,10 +587,21 @@
 
 .countdown-timer-list {
   padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  height: 860px;
+  width: fit-content;
+  overflow: hidden;
 }
 .countdown-timer-list .now-playing {
   height: 300px;
   width: 400px;
+}
+.countdown-timer-list .timer-list-items {
+  padding: 0px 10px;
+  height: 100%;
+  flex: 1;
+  overflow: scroll;
 }
 
 *,
