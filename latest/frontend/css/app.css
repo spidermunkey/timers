@@ -569,6 +569,11 @@
   color: #ff5349;
 }
 
+.countdown-timer-list .now-playing {
+  height: 300px;
+  width: 400px;
+}
+
 *,
 *::before,
 *::after {

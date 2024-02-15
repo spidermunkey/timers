@@ -11,7 +11,7 @@ export class CountdownTimer extends AbstractTimer {
     this.initial = props.initial || structuredClone(props.time);
     this.id = props.id || uuid();
     this.element = undefined;
-    this.elementClones = [];
+    this.logs = props.logs;
     this.isToday = this.days.some((day) => {
       let today = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"][
         new Date().getDay()
