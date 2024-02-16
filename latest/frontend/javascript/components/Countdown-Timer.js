@@ -10,8 +10,7 @@ export class CountdownTimer extends AbstractTimer {
     this.days = props.days || [];
     this.title = props.title || "";
     this.initial = props.initial || structuredClone(props.time);
-    this.id = props.id || uuid();
-    this.element = undefined;
+    this.id = props.id;
     this.elementClones = [];
     this.isToday = this.days.some((day) => {
       let today = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"][
@@ -26,6 +25,9 @@ export class CountdownTimer extends AbstractTimer {
   //   // update logic goes here
   // }
 
+  get element() {
+    return $(`.timer[data-id="${this.id}"]`);
+  }
   formatTime() {
     let { hours, minutes, seconds } = this.time,
       h = this.doubleZero(hours),
@@ -35,24 +37,36 @@ export class CountdownTimer extends AbstractTimer {
   }
 
   pause() {
+    this.clear();
     return;
   }
 
+  play(callback) {
+    console.log("yoooo");
+
+    this.countdown(
+      () =>
+        (this.element.querySelector(".t-slot-wrapper").innerHTML =
+          this.createTimeSlot())
+    );
+  }
+
   hydrate(element = this.element) {
-    listen($(".ctrl-wrapper", element), () => {
+    listen($(".ctrl-wrapper", this.element), () => {
       if (!this.currentInterval) {
-        this.renderClone();
-        this.showPlaying();
+        // this.renderClone();
+        // this.showPlaying();
+        // console.log(this.id);
         this.play();
       } else if (this.currentInterval) {
-        this.showPaused();
+        // this.showPaused();
         this.pause();
-        app.current_timer.playing = false;
+        // app.current_timer.playing = false;
       }
     });
-    listen($(".reset", element), this.resetView.bind(this));
-    listen($(".delete", element), this.delete.bind(this));
-    listen($(".edit", element), this.showEditForm.bind(this));
+    // listen($(".reset", element), this.resetView.bind(this));
+    // listen($(".delete", element), this.delete.bind(this));
+    // listen($(".edit", element), this.showEditForm.bind(this));
   }
 
   render(destination) {
@@ -79,6 +93,7 @@ export class CountdownTimer extends AbstractTimer {
     let { h, m, s } = this.formatTime();
     return `
     <div class="timer" data-id="${this.id}">
+      <div class="sub-overlay"></div>
       <div class="timer--clock-controls">
           <div class="ctrl-wrapper">
               <div class="play ctrl current">
@@ -99,7 +114,10 @@ export class CountdownTimer extends AbstractTimer {
       </div>
 
       <div class="timer-title">${this.title}</div>
+      <div class="t-slot-wrapper">
       ${this.createTimeSlot()}
+
+      </div>
 
         <div class="options">
         <div class="edit-time-option">

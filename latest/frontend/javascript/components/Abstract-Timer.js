@@ -70,33 +70,48 @@ export class AbstractTimer {
     };
   }
 
-  decrementTime(time = this.time) {
-    let decremented = AbstractTimer.timeToMilliseconds(time) - 1000;
+  decrementTime(callback) {
+    const callbackIf = () => {
+      if (callback) callback(this.time);
+    };
 
+    console.log(this.time, this);
+    let decremented = AbstractTimer.timeToMilliseconds(this.time) - 1000;
     if (decremented <= 0) {
-      time = AbstractTimer.millisecondsToTime(0);
-      return time;
+      this.time = AbstractTimer.millisecondsToTime(0);
+      callbackIf();
+      return this.time;
     }
 
-    time = AbstractTimer.millisecondsToTime(decremented);
-    return time;
+    this.time = AbstractTimer.millisecondsToTime(decremented);
+    callbackIf();
+    return this.time;
   }
 
-  incrementTime(time = this.time) {
-    time = AbstractTimer.millisecondsToTime(
-      AbstractTimer.timeToMilliseconds(time) + 1000
+  incrementTime() {
+    this.time = AbstractTimer.millisecondsToTime(
+      AbstractTimer.timeToMilliseconds(this.time) + 1000
     );
-    return time;
+
+    if (callback) callback(this.time);
+
+    return this.time;
   }
 
-  countdown() {
+  countdown(callback) {
     if (this.currentInterval) return;
-    this.currentInterval = this.setInterval(this.decrementTime, 1000);
+    this.currentInterval = setInterval(
+      this.decrementTime.bind(this, callback),
+      1000
+    );
   }
 
-  countup() {
+  countup(callback) {
     if (this.currentInterval) return;
-    this.currentInterval = this.setInterval(this.incrementTime, 1000);
+    this.currentInterval = this.setInterval(
+      this.incrementTime.bind(this),
+      1000
+    );
   }
 
   clear() {

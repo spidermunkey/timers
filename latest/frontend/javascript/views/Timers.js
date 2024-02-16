@@ -10,8 +10,6 @@ export default class Timers extends AbstractView {
   async hydrate() {}
 
   async getHTML() {
-    const timerList = new TimerList();
-    const html = await timerList.getHTML();
     return html;
   }
 
@@ -24,7 +22,9 @@ export default class Timers extends AbstractView {
     element.innerHTML = `
     <div class="loader">loading...</div>
     `;
-    const html = await this.getHTML();
+    const timerList = new TimerList();
+    const html = await timerList.getHTML();
     element.innerHTML = html;
+    timerList.hydrate();
   }
 }
