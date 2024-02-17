@@ -4,7 +4,7 @@ import { TimerList } from "../components/Timer-List.js";
 export default class Timers extends AbstractView {
   constructor() {
     super();
-    this.setTitle("Dashboard");
+    this.setTitle("Countdown Timers");
   }
 
   async hydrate() {}

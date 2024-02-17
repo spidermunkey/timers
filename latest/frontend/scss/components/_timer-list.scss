@@ -5,11 +5,9 @@
   height: 860px;
   width: fit-content;
   overflow: hidden;
-  .now-playing {
-    height: 300px;
-    width: 400px;
-  }
+
   .timer-list-items {
+    margin-top: 24px;
     padding: 0px 10px;
     height: 100%;
     flex: 1;

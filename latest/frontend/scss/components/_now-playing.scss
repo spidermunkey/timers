@@ -1,0 +1,22 @@
+.now-playing {
+  height: 300px;
+  width: 300px;
+  border-right: 2px solid rgba(0, 0, 0, 0.275);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.311);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 8px -1px rgba(0, 0, 0, 0.155);
+
+  .current-timer-title {
+    font-size: 24px;
+  }
+  .current-timer-time-slot {
+    margin-top: 24px;
+    .time-slot {
+      font-size: 21px;
+    }
+  }
+}

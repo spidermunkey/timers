@@ -42,25 +42,32 @@ export class CountdownTimer extends AbstractTimer {
   }
 
   play(callback) {
-    console.log("yoooo");
+    this.countdown(() => {
+      this.element.querySelector(".t-slot-wrapper").innerHTML =
+        this.createTimeSlot();
+      $(".now-playing .time-slot").innerHTML = this.createTimeSlot();
+    });
+  }
 
-    this.countdown(
-      () =>
-        (this.element.querySelector(".t-slot-wrapper").innerHTML =
-          this.createTimeSlot())
-    );
+  showPlaying() {
+    this.element.querySelector(".ctrl.play").classList.remove("current");
+    this.element.querySelector(".ctrl.pause").classList.add("current");
+  }
+  showPaused() {
+    this.element.querySelector(".ctrl.play").classList.add("current");
+    this.element.querySelector(".ctrl.pause").classList.remove("current");
   }
 
   hydrate(element = this.element) {
     listen($(".ctrl-wrapper", this.element), () => {
       if (!this.currentInterval) {
         // this.renderClone();
-        // this.showPlaying();
-        // console.log(this.id);
+        this.showPlaying();
         this.play();
       } else if (this.currentInterval) {
-        // this.showPaused();
         this.pause();
+        this.showPaused();
+
         // app.current_timer.playing = false;
       }
     });
