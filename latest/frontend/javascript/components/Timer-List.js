@@ -8,19 +8,15 @@ export class TimerList {
   }
 
   async getTimers() {
-    return (await api.getTimers()).map((timerData) => {
-      const timer = new CountdownTimer(timerData);
-      this.timers.push(timer);
-      console.log(timerData);
-      return timer;
-    });
+    this.timers = (await api.getTimers()).map(
+      (timerData) => new CountdownTimer(timerData)
+    );
+    return this.timers;
   }
 
   async hydrate() {
     const timerList = $(".dashboard .countdown-timer-list");
     if (!timerList) console.warn("timer-list hasnt properly rendered");
-    console.log("yo");
-    console.log(timerList);
     timerList.addEventListener("click", (e) => {
       const timer = e.target.closest(".timer");
       if (timer) {
@@ -28,7 +24,7 @@ export class TimerList {
         this.updateNowPlaying(clickedTimer);
       }
     });
-    this.timers.forEach((timer) => timer.hydrate());
+    // this.timers.forEach((timer) => timer.hydrate());
   }
 
   getTimerData(id) {
@@ -49,7 +45,6 @@ export class TimerList {
     let html = (
       await Promise.all(timers.map(async (timer) => await timer.getHTML()))
     ).join(" ");
-    console.log(html);
     return `
     <div class="countdown-timer-list">
       <div class="now-playing">

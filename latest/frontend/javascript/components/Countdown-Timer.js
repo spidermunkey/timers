@@ -38,6 +38,7 @@ export class CountdownTimer extends AbstractTimer {
 
   pause() {
     this.clear();
+    this.showPaused();
     return;
   }
 
@@ -47,6 +48,7 @@ export class CountdownTimer extends AbstractTimer {
         this.createTimeSlot();
       $(".now-playing .time-slot").innerHTML = this.createTimeSlot();
     });
+    this.showPlaying();
   }
 
   showPlaying() {

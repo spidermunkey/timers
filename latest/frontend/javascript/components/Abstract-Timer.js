@@ -1,6 +1,5 @@
 export class AbstractTimer {
   constructor(time) {
-    console.log(time);
     this.currentInterval = null;
     this.time = time;
     this.initial = structuredClone(time);
@@ -75,7 +74,6 @@ export class AbstractTimer {
       if (callback) callback(this.time);
     };
 
-    console.log(this.time, this);
     let decremented = AbstractTimer.timeToMilliseconds(this.time) - 1000;
     if (decremented <= 0) {
       this.time = AbstractTimer.millisecondsToTime(0);
@@ -100,6 +98,7 @@ export class AbstractTimer {
 
   countdown(callback) {
     if (this.currentInterval) return;
+
     this.currentInterval = setInterval(
       this.decrementTime.bind(this, callback),
       1000
@@ -108,6 +107,7 @@ export class AbstractTimer {
 
   countup(callback) {
     if (this.currentInterval) return;
+
     this.currentInterval = this.setInterval(
       this.incrementTime.bind(this),
       1000

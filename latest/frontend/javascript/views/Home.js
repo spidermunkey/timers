@@ -3,7 +3,13 @@ import { AbstractView } from "./AbstractView.js";
 export default class Home extends AbstractView {
   constructor() {
     super();
+    this.once = false;
+  }
+
+  async render(destination) {
     this.setTitle("Dashboard");
+    destination.innerHTML = await this.getHTML();
+    this.once = true;
   }
 
   async getHTML() {

@@ -11,6 +11,7 @@ const swapView = async (view) => {
   await view.hydrate();
 };
 const renderView = async (view) => {
+  $(".dashboard").innerHTML = "";
   await view.render($(".dashboard"));
 };
 
@@ -55,7 +56,12 @@ const router = async () => {
     };
   }
 
-  const view = new match.route.view();
+  let view;
+
+  if (!match.route.view.once) {
+    view = new match.route.view();
+  } else view = match.route.view;
+
   if (view.render) renderView(view);
   else swapView(view);
 };
