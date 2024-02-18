@@ -44,7 +44,7 @@ export class CountdownTimer extends AbstractTimer {
 
   // set time(timeObject) {
   //   this._time = timeObject
-  //   // update logic goes here
+  //   // update logic should probable go here
   // }
 
   get element() {
@@ -111,7 +111,10 @@ export class CountdownTimer extends AbstractTimer {
     destination.appendChild(element);
   }
 
-  destroy() {}
+  async destroy(animation) {
+    if (animation) await animation(this.element);
+    this.element.remove();
+  }
 
   getHTML() {
     let { h, m, s } = this.formatTime();

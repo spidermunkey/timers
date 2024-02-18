@@ -3,13 +3,12 @@ export class AbstractTimer {
     this.currentInterval = null;
     this.time = time;
     this.initial = structuredClone(time);
-
     this.onCompleteObservable = new Observable();
     this.onTickObservable = new Observable();
     this.onPlayObserverable = new Observable();
     this.onPauseObservable = new Observable();
     this.onResetObservable = new Observable();
-
+    this.onDeleteObservable = new Observable();
     this.onComplete(() => console.log("complete", this.time));
     this.onReset(() => (this.time = structuredClone(this.initial)));
   }

@@ -8,31 +8,32 @@ export default class Timers extends AbstractView {
 
   async hydrate() {
     this.element.addEventListener("click", (e) => {
-      const play = (timer) => {
-        if (this.currentTimer) this.currentTimer.pause();
+      if (!this.timerList) return;
 
-        this.currentTimer = timer;
+      const play = (timer) => {
         timer.play();
-        $(".now-playing .play").classList.remove("current");
-        $(".now-playing .pause").classList.add("current");
       };
       const pause = (timer) => {
         timer.pause();
-        $(".now-playing .play").classList.add("current");
-        $(".now-playing .pause").classList.remove("current");
       };
 
-      if (!this.timerList) return;
-      const timer = e.target.closest(".timer");
       let clickedTimer;
+      const timer = e.target.closest(".timer");
       const clickedControl = e.target.closest(".ctrl-wrapper");
+      const clickedNPControl = e.target.closest(".current-timer-controls");
+
       if (timer) {
         [clickedTimer] = this.timerList.getTimerData(timer.dataset.id);
+        this.currentTimer = clickedTimer;
         this.timerList.updateNowPlaying(clickedTimer);
       }
-      if (clickedControl && clickedTimer) {
+      if (clickedControl && clickedTimer)
         clickedTimer.currentInterval ? pause(clickedTimer) : play(clickedTimer);
-      }
+
+      if (clickedNPControl && this.currentTimer)
+        this.currentTimer.currentInterval
+          ? pause(this.currentTimer)
+          : play(this.currentTimer);
     });
   }
 

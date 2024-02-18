@@ -15,8 +15,22 @@ export class TimerList {
         $(".now-playing .pause").classList.remove("current");
         $(".now-playing .time-slot").innerHTML = timer.createTimeSlot();
       });
+      timer.onPlay(() => {
+        // if (this.currentTimer) this.currentTimer.pause();
+        this.currentTimer = timer;
+        $(".now-playing .play").classList.remove("current");
+        $(".now-playing .pause").classList.add("current");
+        $(".current-timer-title").textContent = timer.title;
+        $(".now-playing .current-timer-time-slot").innerHTML =
+          timer.createTimeSlot();
+      });
+      timer.onPause(() => {
+        $(".now-playing .play").classList.add("current");
+        $(".now-playing .pause").classList.remove("current");
+      });
       return timer;
     });
+
     return this.timers;
   }
 
@@ -25,6 +39,7 @@ export class TimerList {
     if (!timerList) console.warn("timer-list hasnt properly rendered");
     timerList.addEventListener("click", (e) => {
       const timer = e.target.closest(".timer");
+      const controls = e.target.closest(".now-playing .current-timer-controls");
       if (timer) {
         const [clickedTimer] = this.getTimerData(timer.dataset.id);
         this.updateNowPlaying(clickedTimer);
@@ -38,11 +53,10 @@ export class TimerList {
   }
 
   updateNowPlaying(timer) {
-    const element = $(".countdown-timer-list .now-playing");
-    const tTitle = $(".current-timer-title");
+    if (this.currentTimer) this.currentTimer.pause();
+    this.currentTimer = timer;
+    $(".current-timer-title").textContent = timer.title;
     $(".current-timer-time-slot").innerHTML = timer.createTimeSlot();
-    tTitle.textContent = timer.title;
-    $();
   }
 
   async getHTML() {
