@@ -4,11 +4,24 @@ import { TimerList } from "../components/Timer-List.js";
 export default class Timers extends AbstractView {
   constructor() {
     super();
-    // this.setTitle("Countdown Timers");
   }
 
   async hydrate() {
     this.element.addEventListener("click", (e) => {
+      const play = (timer) => {
+        if (this.currentTimer) this.currentTimer.pause();
+
+        this.currentTimer = timer;
+        timer.play();
+        $(".now-playing .play").classList.remove("current");
+        $(".now-playing .pause").classList.add("current");
+      };
+      const pause = (timer) => {
+        timer.pause();
+        $(".now-playing .play").classList.add("current");
+        $(".now-playing .pause").classList.remove("current");
+      };
+
       if (!this.timerList) return;
       const timer = e.target.closest(".timer");
       let clickedTimer;
@@ -18,9 +31,7 @@ export default class Timers extends AbstractView {
         this.timerList.updateNowPlaying(clickedTimer);
       }
       if (clickedControl && clickedTimer) {
-        clickedTimer.currentInterval
-          ? clickedTimer.pause()
-          : clickedTimer.play();
+        clickedTimer.currentInterval ? pause(clickedTimer) : play(clickedTimer);
       }
     });
   }
@@ -28,29 +39,20 @@ export default class Timers extends AbstractView {
   async getHTML() {
     this.timerList = new TimerList();
     const html = await this.timerList.getHTML();
-
     return html;
   }
 
   async render(destination) {
     this.setTitle("Countdown Timers");
 
-    const setBlank = (destination) => {
-      const element = document.createElement("div");
-      this.element = element;
-      destination.appendChild(element);
-      return element;
-    };
-
     this.element = setBlank(destination);
 
-    this.element.innerHTML = `
-    <div class="loader">loading...</div>
-    `;
+    this.element.innerHTML = this.getLoader();
 
     this.element.innerHTML = await this.getHTML();
 
     this.hydrate();
+
     this.once = true;
   }
 }

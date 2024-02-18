@@ -186,6 +186,12 @@ function appendElement(parent, child) {
   parent.append(child);
 }
 
+function setBlank(destination) {
+  const element = document.createElement("div");
+  destination.appendChild(element);
+  return element;
+}
+
 function wipeElement(element) {
   element.innerHTML = "";
   return element;

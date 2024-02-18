@@ -18,6 +18,17 @@ export class CountdownTimer extends AbstractTimer {
       ];
       day === today;
     });
+
+    this.onComplete(() => {
+      console.log("complete", this.time);
+      this.showPaused();
+      this.reset();
+    });
+
+    this.onTick(() => {
+      this.updateTimeSlot();
+      $(".now-playing .time-slot").innerHTML = this.createTimeSlot();
+    });
   }
 
   // set time(timeObject) {
@@ -28,12 +39,18 @@ export class CountdownTimer extends AbstractTimer {
   get element() {
     return $(`.timer[data-id="${this.id}"]`);
   }
+
   formatTime() {
     let { hours, minutes, seconds } = this.time,
       h = this.doubleZero(hours),
       m = this.doubleZero(minutes),
       s = this.doubleZero(seconds);
     return { h, m, s };
+  }
+
+  updateTimeSlot() {
+    this.element.querySelector(".t-slot-wrapper").innerHTML =
+      this.createTimeSlot();
   }
 
   pause() {
@@ -43,12 +60,13 @@ export class CountdownTimer extends AbstractTimer {
   }
 
   play(callback) {
-    this.countdown(() => {
-      this.element.querySelector(".t-slot-wrapper").innerHTML =
-        this.createTimeSlot();
-      $(".now-playing .time-slot").innerHTML = this.createTimeSlot();
-    });
+    this.countdown();
     this.showPlaying();
+  }
+
+  reset() {
+    this.time = structuredClone(this.initial);
+    this.updateTimeSlot();
   }
 
   showPlaying() {
@@ -73,9 +91,6 @@ export class CountdownTimer extends AbstractTimer {
         // app.current_timer.playing = false;
       }
     });
-    // listen($(".reset", element), this.resetView.bind(this));
-    // listen($(".delete", element), this.delete.bind(this));
-    // listen($(".edit", element), this.showEditForm.bind(this));
   }
 
   render(destination) {

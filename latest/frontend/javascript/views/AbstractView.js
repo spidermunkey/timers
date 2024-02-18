@@ -1,10 +1,17 @@
 export class AbstractView {
-  constructor() {}
+  constructor() {
+    this.once = false;
+  }
 
   setTitle(title) {
     document.title = title;
     $(".app-header .current-tab .label").textContent = title;
   }
+
+  getLoader() {
+    return `<div class="loader">loading...</div>`;
+  }
+
   async hydrate() {
     console.log("hydrating");
   }

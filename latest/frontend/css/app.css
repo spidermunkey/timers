@@ -610,6 +610,7 @@
 }
 
 .now-playing {
+  position: relative;
   height: 300px;
   width: 300px;
   border-right: 2px solid rgba(0, 0, 0, 0.275);
@@ -629,6 +630,29 @@
 }
 .now-playing .current-timer-time-slot .time-slot {
   font-size: 21px;
+}
+.now-playing .current-timer-controls {
+  position: absolute;
+  right: -32px;
+  bottom: 16px;
+}
+.now-playing .current-timer-controls .ctrl {
+  display: none;
+}
+.now-playing .current-timer-controls .ctrl.current {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.now-playing .current-timer-controls .play,
+.now-playing .current-timer-controls .pause {
+  width: fit-content;
+  fill: #525252;
+  cursor: pointer;
+}
+.now-playing .current-timer-controls .play:hover,
+.now-playing .current-timer-controls .pause:hover {
+  fill: #222;
 }
 
 *,

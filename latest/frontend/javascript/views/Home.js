@@ -3,12 +3,13 @@ import { AbstractView } from "./AbstractView.js";
 export default class Home extends AbstractView {
   constructor() {
     super();
-    this.once = false;
   }
 
   async render(destination) {
     this.setTitle("Dashboard");
-    destination.innerHTML = await this.getHTML();
+    this.element = setBlank(destination);
+    this.element.innerHTML = this.getLoader();
+    this.element.innerHTML = await this.getHTML();
     this.once = true;
   }
 
@@ -63,7 +64,7 @@ export default class Home extends AbstractView {
                       <div class="progress-wrapper">
     
                           <div class="inner-indicator">
-                              <svg width="64" height="64" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
+                              <svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
                                   <circle r="30" cx="32" cy="32" fill="transparent" stroke="#e0e0e0" stroke-width="4px" stroke-dasharray="201px" stroke-dashoffset="0"></circle>
                                   <circle r="30" cx="32" cy="32" stroke="#00c93d" stroke-width="4px" stroke-linecap="round" stroke-dashoffset="94.25" fill="transparent" stroke-dasharray="188.5"></circle>
                                 </svg>
@@ -110,7 +111,7 @@ export default class Home extends AbstractView {
                       <div class="progress-wrapper">
     
                           <div class="inner-indicator">
-                              <svg width="64" height="64" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
+                              <svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
                                   <circle r="30" cx="32" cy="32" fill="transparent" stroke="#e0e0e0" stroke-width="4px" stroke-dasharray="201px" stroke-dashoffset="0"></circle>
                                   <circle r="30" cx="32" cy="32" stroke="#00c93d" stroke-width="4px" stroke-linecap="round" stroke-dashoffset="94.25" fill="transparent" stroke-dasharray="188.5"></circle>
                                 </svg>
@@ -155,7 +156,7 @@ export default class Home extends AbstractView {
                       <div class="progress-wrapper">
     
                           <div class="inner-indicator">
-                              <svg width="64" height="64" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
+                              <svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
                                   <circle r="30" cx="32" cy="32" fill="transparent" stroke="#e0e0e0" stroke-width="4px" stroke-dasharray="201px" stroke-dashoffset="0"></circle>
                                   <circle r="30" cx="32" cy="32" stroke="#00c93d" stroke-width="4px" stroke-linecap="round" stroke-dashoffset="94.25" fill="transparent" stroke-dasharray="188.5"></circle>
                                 </svg>
@@ -200,7 +201,7 @@ export default class Home extends AbstractView {
                       <div class="progress-wrapper">
     
                           <div class="inner-indicator">
-                              <svg width="64" height="64" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
+                              <svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
                                   <circle r="30" cx="32" cy="32" fill="transparent" stroke="#e0e0e0" stroke-width="4px" stroke-dasharray="201px" stroke-dashoffset="0"></circle>
                                   <circle r="30" cx="32" cy="32" stroke="#00c93d" stroke-width="4px" stroke-linecap="round" stroke-dashoffset="94.25" fill="transparent" stroke-dasharray="188.5"></circle>
                                 </svg>
@@ -245,7 +246,7 @@ export default class Home extends AbstractView {
                       <div class="progress-wrapper">
     
                           <div class="inner-indicator">
-                              <svg width="64" height="64" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
+                              <svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
                                   <circle r="30" cx="32" cy="32" fill="transparent" stroke="#e0e0e0" stroke-width="4px" stroke-dasharray="201px" stroke-dashoffset="0"></circle>
                                   <circle r="30" cx="32" cy="32" stroke="#00c93d" stroke-width="4px" stroke-linecap="round" stroke-dashoffset="94.25" fill="transparent" stroke-dasharray="188.5"></circle>
                                 </svg>
@@ -290,7 +291,7 @@ export default class Home extends AbstractView {
                       <div class="progress-wrapper">
     
                           <div class="inner-indicator">
-                              <svg width="64" height="64" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
+                              <svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-90deg)">
                                   <circle r="30" cx="32" cy="32" fill="transparent" stroke="#e0e0e0" stroke-width="4px" stroke-dasharray="201px" stroke-dashoffset="0"></circle>
                                   <circle r="30" cx="32" cy="32" stroke="#00c93d" stroke-width="4px" stroke-linecap="round" stroke-dashoffset="94.25" fill="transparent" stroke-dasharray="188.5"></circle>
                                 </svg>
