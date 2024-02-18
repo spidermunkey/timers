@@ -143,6 +143,7 @@ export class AbstractTimer {
   }
 
   countdown(callback) {
+    console.log("playing", "root", this);
     if (this.currentInterval) return;
 
     this.currentInterval = setInterval(
@@ -162,7 +163,7 @@ export class AbstractTimer {
   }
 
   clear() {
-    console.log(this.currentInterval);
+    console.log("pausing", "root", this);
     clearInterval(this.currentInterval);
     this.currentInterval = null;
     return;

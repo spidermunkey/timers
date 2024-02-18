@@ -35,6 +35,7 @@ export class CountdownTimer extends AbstractTimer {
     });
 
     this.onPause(() => {
+      console.log(this);
       this.clear();
       this.showPaused();
     });
@@ -85,6 +86,7 @@ export class CountdownTimer extends AbstractTimer {
         this.showPlaying();
         this.play();
       } else if (this.currentInterval) {
+        console.log(this);
         this.pause();
         this.showPaused();
 

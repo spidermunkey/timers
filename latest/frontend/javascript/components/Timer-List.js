@@ -53,7 +53,6 @@ export class TimerList {
   }
 
   updateNowPlaying(timer) {
-    if (this.currentTimer) this.currentTimer.pause();
     this.currentTimer = timer;
     $(".current-timer-title").textContent = timer.title;
     $(".current-timer-time-slot").innerHTML = timer.createTimeSlot();
