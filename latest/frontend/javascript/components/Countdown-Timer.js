@@ -20,7 +20,6 @@ export class CountdownTimer extends AbstractTimer {
     });
 
     this.onComplete(() => {
-      console.log("complete", this.time);
       this.showPaused();
       this.reset();
     });
@@ -29,6 +28,18 @@ export class CountdownTimer extends AbstractTimer {
       this.updateTimeSlot();
       $(".now-playing .time-slot").innerHTML = this.createTimeSlot();
     });
+
+    this.onPlay(() => {
+      this.countdown();
+      this.showPlaying();
+    });
+
+    this.onPause(() => {
+      this.clear();
+      this.showPaused();
+    });
+
+    this.onReset(() => this.updateTimeSlot());
   }
 
   // set time(timeObject) {
@@ -51,17 +62,6 @@ export class CountdownTimer extends AbstractTimer {
   updateTimeSlot() {
     this.element.querySelector(".t-slot-wrapper").innerHTML =
       this.createTimeSlot();
-  }
-
-  pause() {
-    this.clear();
-    this.showPaused();
-    return;
-  }
-
-  play(callback) {
-    this.countdown();
-    this.showPlaying();
   }
 
   reset() {

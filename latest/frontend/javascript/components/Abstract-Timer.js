@@ -3,9 +3,15 @@ export class AbstractTimer {
     this.currentInterval = null;
     this.time = time;
     this.initial = structuredClone(time);
+
     this.onCompleteObservable = new Observable();
     this.onTickObservable = new Observable();
+    this.onPlayObserverable = new Observable();
+    this.onPauseObservable = new Observable();
+    this.onResetObservable = new Observable();
+
     this.onComplete(() => console.log("complete", this.time));
+    this.onReset(() => (this.time = structuredClone(this.initial)));
   }
 
   static millisecondsToTime(ms) {
@@ -87,6 +93,31 @@ export class AbstractTimer {
   callTick() {
     this.onTickObservable.notify();
   }
+
+  onPlay(callback) {
+    this.onPlayObserverable.subscribe(callback);
+  }
+
+  play() {
+    this.onPlayObserverable.notify();
+  }
+
+  onPause(callback) {
+    this.onPauseObservable.subscribe(callback);
+  }
+
+  pause() {
+    this.onPauseObservable.notify();
+  }
+
+  onReset(callback) {
+    this.onResetObservable.subscribe(callback);
+  }
+
+  reset() {
+    this.onResetObservable.notify();
+  }
+
   decrementTime(callback) {
     let decremented = AbstractTimer.timeToMilliseconds(this.time) - 1000;
     if (decremented <= 0) {
@@ -139,8 +170,4 @@ export class AbstractTimer {
   }
 
   wait(waitTime, timeout, onComplete) {}
-
-  reset() {
-    this.time = structuredClone(this.initial);
-  }
 }
