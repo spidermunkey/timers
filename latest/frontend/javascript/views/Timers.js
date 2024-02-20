@@ -18,19 +18,39 @@ export default class Timers extends AbstractView {
       const pause = (timer) => {
         timer.pause();
       };
+      const edit = (timer) => {
+        console.log(timer.dataset.id);
+        $(".sub-overlay", timer).innerHTML = `
+          <div class="edit-modal">
+            edit me
+            <div class="close">close</div>
+          </div>
+        `;
+        const close = () => {
+          $(".sub-overlay", timer).classList.remove("active");
+        };
+
+        listen($(".sub-overlay .close"), close);
+
+        $(".sub-overlay", timer).classList.add("active");
+      };
 
       let clickedTimer;
       const timer = e.target.closest(".timer");
       const clickedControl = e.target.closest(".ctrl-wrapper");
       const clickedNPControl = e.target.closest(".current-timer-controls");
+      const btnEdit = e.target.closest(".edit-time-option");
 
       if (timer) {
         [clickedTimer] = this.timerList.getTimerData(timer.dataset.id);
+
         if (clickedControl)
           clickedTimer.currentInterval
             ? pause(clickedTimer)
             : play(clickedTimer);
-        else if (!clickedControl && this.currentTimer) {
+        else if (btnEdit) {
+          edit(timer);
+        } else if (!clickedControl && this.currentTimer) {
           pause(this.currentTimer);
           this.timerList.updateNowPlaying(clickedTimer);
           this.currentTimer = clickedTimer;

@@ -93,6 +93,9 @@ export class CountdownTimer extends AbstractTimer {
         // app.current_timer.playing = false;
       }
     });
+    listen($(".options .edit-time-option", this.element), () => {
+      console.log("yo");
+    });
   }
 
   render(destination) {
