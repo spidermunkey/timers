@@ -523,14 +523,26 @@
   margin: 10px;
   box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.29);
 }
+.timer .sub-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .timer .edit-modal {
   position: relative;
+  width: 50%;
+  height: 70%;
+  box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.141);
+  border-radius: 10px;
 }
 .timer .edit-modal .close {
   position: absolute;
-  top: 0;
+  top: 40%;
   right: -64px;
-  color: blue;
+  color: #454545;
+  cursor: pointer;
+  font-size: 24px;
+  user-select: none;
 }
 .timer .sub-overlay {
   position: absolute;
@@ -543,11 +555,6 @@
 .timer .sub-overlay.active {
   opacity: 1;
   pointer-events: all;
-}
-.timer .sub-overlay .edit-modal {
-  width: 50%;
-  height: 100%;
-  background-color: black;
 }
 .timer[data-type=tracker].complete {
   background: lime;
