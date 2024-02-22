@@ -634,7 +634,7 @@
   overflow: scroll;
 }
 
-.now-playing {
+[location=Timers] .now-playing {
   position: relative;
   height: 300px;
   width: 300px;
@@ -647,36 +647,36 @@
   align-items: center;
   box-shadow: 1px 1px 8px -1px rgba(0, 0, 0, 0.155);
 }
-.now-playing .current-timer-title {
+[location=Timers] .now-playing .current-timer-title {
   font-size: 24px;
 }
-.now-playing .current-timer-time-slot {
+[location=Timers] .now-playing .current-timer-time-slot {
   margin-top: 24px;
 }
-.now-playing .current-timer-time-slot .time-slot {
+[location=Timers] .now-playing .current-timer-time-slot .time-slot {
   font-size: 21px;
 }
-.now-playing .current-timer-controls {
+[location=Timers] .now-playing .current-timer-controls {
   position: absolute;
   right: -32px;
   bottom: 16px;
 }
-.now-playing .current-timer-controls .ctrl {
+[location=Timers] .now-playing .current-timer-controls .ctrl {
   display: none;
 }
-.now-playing .current-timer-controls .ctrl.current {
+[location=Timers] .now-playing .current-timer-controls .ctrl.current {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.now-playing .current-timer-controls .play,
-.now-playing .current-timer-controls .pause {
+[location=Timers] .now-playing .current-timer-controls .play,
+[location=Timers] .now-playing .current-timer-controls .pause {
   width: fit-content;
   fill: #525252;
   cursor: pointer;
 }
-.now-playing .current-timer-controls .play:hover,
-.now-playing .current-timer-controls .pause:hover {
+[location=Timers] .now-playing .current-timer-controls .play:hover,
+[location=Timers] .now-playing .current-timer-controls .pause:hover {
   fill: #222;
 }
 

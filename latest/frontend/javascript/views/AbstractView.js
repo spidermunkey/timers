@@ -6,6 +6,7 @@ export class AbstractView {
   setTitle(title) {
     document.title = title;
     $(".app-header .current-tab .label").textContent = title;
+    $("#app").setAttribute("location", title);
   }
 
   getLoader() {

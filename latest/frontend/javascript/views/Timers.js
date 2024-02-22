@@ -71,7 +71,7 @@ export default class Timers extends AbstractView {
   }
 
   async render(destination) {
-    this.setTitle("Countdown Timers");
+    this.setTitle("Timers");
 
     this.element = setBlank(destination);
 

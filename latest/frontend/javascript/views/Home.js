@@ -6,7 +6,7 @@ export default class Home extends AbstractView {
   }
 
   async render(destination) {
-    this.setTitle("Dashboard");
+    this.setTitle("Home");
     this.element = setBlank(destination);
     this.element.innerHTML = this.getLoader();
     this.element.innerHTML = await this.getHTML();
