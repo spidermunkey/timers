@@ -59,7 +59,7 @@ export var api = {
 
   async delete(id) {
     console.log(id);
-    const res = await axios.delete(`http://localhost:1279/timers?id=${id}`);
+    const res = await axios.delete(`http://localhost:1279/timers/api?id=${id}`);
     console.log(res);
     if (responseOk(res)) return true;
     return false;

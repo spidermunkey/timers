@@ -1,6 +1,6 @@
 import { AbstractView } from "./AbstractView.js";
 import { TimerList } from "../components/Timer-List.js";
-
+import { api } from "../api/app.js";
 export default class Timers extends AbstractView {
   constructor() {
     super();
@@ -26,12 +26,34 @@ export default class Timers extends AbstractView {
             <div class="close">close</div>
           </div>
         `;
-        const close = () => {
-          $(".sub-overlay", timer).classList.remove("active");
-        };
+        const close = () => $(".sub-overlay", timer).classList.remove("active");
 
         listen($(".sub-overlay .close"), close);
 
+        $(".sub-overlay", timer).classList.add("active");
+      };
+
+      const dele = (timer) => {
+        const id = timer.dataset.id;
+        const modal = `<div class="rusure">
+        <div class="ttl">Are you sure?</div>
+        <div class="yes">delete</div>
+        <div class="no">cancel</div>
+        </div>`;
+
+        $(".sub-overlay", timer).innerHTML = modal;
+        const close = () => $(".sub-overlay", timer).classList.remove("active");
+        const destroy = async () => {
+          const success = await api.delete(id);
+          if (success) {
+            const [timer] = this.timerList.getTimerData(id);
+            console.log(timer);
+
+            timer.destroy();
+          }
+        };
+        listen($(".sub-overlay .no"), close);
+        listen($(".sub-overlay .yes"), destroy);
         $(".sub-overlay", timer).classList.add("active");
       };
 
@@ -40,6 +62,7 @@ export default class Timers extends AbstractView {
       const clickedControl = e.target.closest(".ctrl-wrapper");
       const clickedNPControl = e.target.closest(".current-timer-controls");
       const btnEdit = e.target.closest(".edit-time-option");
+      const btnDelete = e.target.closest(".delete-option");
 
       if (timer) {
         [clickedTimer] = this.timerList.getTimerData(timer.dataset.id);
@@ -50,6 +73,8 @@ export default class Timers extends AbstractView {
             : play(clickedTimer);
         else if (btnEdit) {
           edit(timer);
+        } else if (btnDelete) {
+          dele(timer);
         } else if (!clickedControl && this.currentTimer) {
           pause(this.currentTimer);
           this.timerList.updateNowPlaying(clickedTimer);
