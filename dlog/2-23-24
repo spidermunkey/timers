@@ -1,0 +1,8 @@
+Did I mention I got a new pc? Yea well a month back I bought a custom pc, tried to dual boot linux,
+and after serval backup hours, partitions, and installations it just went out. I think I screwed up the motherboard.
+ubuntu 22 didn't work with my graphics card or mobo (i think) so the buttons on the gui didn't work.
+this was after I wiped the main windows operating system from the hardrive. tried to install windows from linux on a separate machine
+(very sketchy process). But it wouldn't read it, no os found. tried to flash back the bios but go no post, no display, no nothing.
+After weeks of toil I bout new parts, mobo, and os and the only new part that worked (via part-swap) was the mobo.
+
+So I'm back from my new pc pretty much brand new from the case, and I'll just stick to wsl and powershell for now. 
