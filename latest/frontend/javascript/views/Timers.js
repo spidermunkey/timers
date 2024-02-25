@@ -4,22 +4,28 @@ import { api } from "../api/app.js";
 export default class Timers extends AbstractView {
   constructor() {
     super();
+
   }
 
   async hydrate() {
-    this.element.addEventListener("click", (e) => {
+    this.element.addEventListener("click", (e) => 
+    {
+
       if (!this.timerList) return;
+
+
 
       const play = (timer) => {
         this.currentTimer = timer;
         this.timerList.updateNowPlaying(timer);
         timer.play();
       };
+
       const pause = (timer) => {
         timer.pause();
       };
+
       const edit = (timer) => {
-        console.log(timer.dataset.id);
         $(".sub-overlay", timer).innerHTML = `
           <div class="edit-modal">
             edit me
@@ -66,16 +72,16 @@ export default class Timers extends AbstractView {
 
       if (timer) {
         [clickedTimer] = this.timerList.getTimerData(timer.dataset.id);
-
+        
         if (clickedControl)
           clickedTimer.currentInterval
             ? pause(clickedTimer)
             : play(clickedTimer);
-        else if (btnEdit) {
+        else if (btnEdit)
           edit(timer);
-        } else if (btnDelete) {
+        else if (btnDelete)
           dele(timer);
-        } else if (!clickedControl && this.currentTimer) {
+        else if (!clickedControl && this.currentTimer) {
           pause(this.currentTimer);
           this.timerList.updateNowPlaying(clickedTimer);
           this.currentTimer = clickedTimer;
