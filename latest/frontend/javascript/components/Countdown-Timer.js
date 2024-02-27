@@ -43,11 +43,6 @@ export class CountdownTimer extends AbstractTimer {
     this.onReset(() => this.updateTimeSlot());
   }
 
-  // set time(timeObject) {
-  //   this._time = timeObject
-  //   // update logic should probable go here
-  // }
-
   get element() {
     return $(`.timer[data-id="${this.id}"]`);
   }
@@ -74,6 +69,7 @@ export class CountdownTimer extends AbstractTimer {
     this.element.querySelector(".ctrl.play").classList.remove("current");
     this.element.querySelector(".ctrl.pause").classList.add("current");
   }
+  
   showPaused() {
     this.element.querySelector(".ctrl.play").classList.add("current");
     this.element.querySelector(".ctrl.pause").classList.remove("current");

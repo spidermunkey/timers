@@ -81,7 +81,7 @@ export class AbstractTimer {
     this.onCompleteObservable.subscribe(callback);
   }
 
-  setComplete() {
+  complete() {
     this.onCompleteObservable.notify();
   }
 
@@ -117,12 +117,12 @@ export class AbstractTimer {
     this.onResetObservable.notify();
   }
 
-  decrementTime(callback) {
+  decrementTime() {
     let decremented = AbstractTimer.timeToMilliseconds(this.time) - 1000;
     if (decremented <= 0) {
       this.time = AbstractTimer.millisecondsToTime(0);
       clearInterval(this.currentInterval);
-      this.setComplete();
+      this.complete();
 
       return this.time;
     }
@@ -137,37 +137,48 @@ export class AbstractTimer {
       AbstractTimer.timeToMilliseconds(this.time) + 1000
     );
 
-    if (callback) callback(this.time);
-
+    this.callTick()
     return this.time;
   }
 
   countdown(callback) {
     console.log("playing", "root", this);
-    if (this.currentInterval) return;
+
+    if (this.currentInterval) {
+      console.warn('countdown cancelled, current interval already set for', this);
+      return this.currentInterval;
+    };
 
     this.currentInterval = setInterval(
       this.decrementTime.bind(this, callback),
       1000
     );
-    console.log(this.currentInterval);
+
+    return this.currentInterval;
+
   }
 
-  countup(callback) {
-    if (this.currentInterval) return;
+  countup() {
+    if (this.currentInterval) {
+      console.warn('countup cancelled, current interval already set for', this);
+      return this.currentInterval;
+    }
 
     this.currentInterval = this.setInterval(
       this.incrementTime.bind(this),
       1000
     );
+
+    return this.currentInterval;
   }
 
   clear() {
-    console.log("pausing", "root", this);
+    console.log("clearing interval", "root", this);
     clearInterval(this.currentInterval);
     this.currentInterval = null;
-    return;
+    return this.currentInterval;
   }
 
-  wait(waitTime, timeout, onComplete) {}
+  wait(waitTime, timeout, onComplete) {};
+  
 }
