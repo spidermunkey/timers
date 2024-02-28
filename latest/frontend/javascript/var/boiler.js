@@ -78,8 +78,8 @@ function responseOk(response) {
   return response.status === 200 && response.statusText === "OK";
 }
 
-function nextTick(fn) {
-  setTimeout(fn, 0);
+function nextTick(callback) {
+  return setTimeout(callback, 0);
 }
 
 function toDecimal(num) {
@@ -262,7 +262,7 @@ function disable(submitInput) {
 }
 
 function enable(submitInput) {
-  submitInput.disabled = false;
+  submitInput.disabled = '';
 }
 
 function throttleInput(input, time) {

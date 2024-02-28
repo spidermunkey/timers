@@ -3,7 +3,6 @@ import { AbstractTimer } from "./Abstract-Timer.js";
 export class CountdownTimer extends AbstractTimer {
   constructor(props) {
     super(props.time ? props.time : { hours: 0, minutes: 0, seconds: 0 });
-    // console.log(this.time);
     this.once = false;
     this.type = "timer";
     this.currentInterval = null;

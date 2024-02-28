@@ -1,10 +1,11 @@
 .countdown-timer-list {
-  padding: 24px 32px;
+  // padding: 24px 32px;
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 860px;
   width: fit-content;
-  overflow: hidden;
+  overflow-y: hidden;
 
   .timer-list-items {
     margin-top: 24px;

@@ -618,13 +618,33 @@
   color: #ff5349;
 }
 
+.new-timer-form {
+  pointer-events: none;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 320px;
+  width: 99%;
+  background-color: white;
+  z-index: 100;
+  border: 1px solid black;
+}
+.new-timer-form .title {
+  width: 100%;
+}
+
+.new-timer-form.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
 .countdown-timer-list {
-  padding: 24px 32px;
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 860px;
   width: fit-content;
-  overflow: hidden;
+  overflow-y: hidden;
 }
 .countdown-timer-list .timer-list-items {
   margin-top: 24px;
@@ -655,6 +675,18 @@
 }
 [location=Timers] .now-playing .current-timer-time-slot .time-slot {
   font-size: 21px;
+}
+[location=Timers] .now-playing .new-timer-btn {
+  position: absolute;
+  bottom: -16px;
+  right: -8px;
+  font-size: 24px;
+  border: 1px solid transparent;
+  z-index: 99;
+  cursor: pointer;
+}
+[location=Timers] .now-playing .new-timer-btn:hover {
+  border: 1px solid black;
 }
 [location=Timers] .now-playing .current-timer-controls {
   position: absolute;

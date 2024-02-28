@@ -13,7 +13,14 @@ export default class Timers extends AbstractView {
 
       if (!this.timerList) return;
 
+      $('.new-timer-form .form-close').addEventListener('click',function close(){
+        $('.new-timer-form').classList.remove('active');
+      })
 
+      // $('.new-timer-btn').addEventListener('click',function open() {
+      //   $('.new-timer-form').classList.add('active');
+      //   console.log('here')
+      // })
 
       const play = (timer) => {
         this.currentTimer = timer;
@@ -63,13 +70,21 @@ export default class Timers extends AbstractView {
         $(".sub-overlay", timer).classList.add("active");
       };
 
+      const showForm = () => {
+        $('.new-timer-form').classList.add('active');
+      }
+
+      const closeForm = () => {
+        $('.new-time-form').classList.remove('active');
+      }
+
       let clickedTimer;
       const timer = e.target.closest(".timer");
       const clickedControl = e.target.closest(".ctrl-wrapper");
       const clickedNPControl = e.target.closest(".current-timer-controls");
       const btnEdit = e.target.closest(".edit-time-option");
       const btnDelete = e.target.closest(".delete-option");
-
+      const btnNew = e.target.closest(".new-timer-btn");
       if (timer) {
         [clickedTimer] = this.timerList.getTimerData(timer.dataset.id);
         
@@ -92,6 +107,9 @@ export default class Timers extends AbstractView {
         this.currentTimer.currentInterval
           ? pause(this.currentTimer)
           : play(this.currentTimer);
+
+          if (btnNew)
+            showForm();
     });
   }
 

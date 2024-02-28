@@ -1,7 +1,6 @@
 const curDate = new Date()
 const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 const months = ['January','February','March','April','May','June','July','August','September','October','November','December']
-console.log('hi')
 function setClock() {
 
     const {dow,month,date,hour,minute,context} = DateTime.clock;
@@ -16,7 +15,6 @@ function setClock() {
 }
 
 const msTilNextMinute = (60000 - (curDate.getSeconds() * 1000) + curDate.getMilliseconds())
-console.log(msTilNextMinute)
 
 setTimeout(() => {
     setClock();

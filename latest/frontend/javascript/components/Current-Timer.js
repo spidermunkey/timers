@@ -3,12 +3,15 @@ import { NewTimerForm } from "./New-Timer-Form.js";
 
 export class CurrentTimer {
     constructor(startingTimer) {
-
+        this.newTimerForm = new NewTimerForm();
     }
     
     getHTML() {
         return `
+        ${this.newTimerForm.getHTML()}
+
             <div class="now-playing">
+
                 <div class="current-timer-title">Now Playing</div>
                 <div class="current-timer-time-slot"></div>
                 <div class="current-timer-controls">
@@ -27,6 +30,7 @@ export class CurrentTimer {
                         </span>
                     </div>
                 </div>
+                <div class="new-timer-btn">+new</div>
             </div>`
     }
 
