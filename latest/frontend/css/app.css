@@ -619,7 +619,6 @@
 }
 
 .new-timer-form {
-  pointer-events: none;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -629,8 +628,41 @@
   z-index: 100;
   border: 1px solid black;
 }
-.new-timer-form .title {
+.new-timer-form .form-timer-title {
   width: 100%;
+  margin: 24px;
+}
+.new-timer-form .form-timer-title input {
+  font-size: 24px;
+  border: 1px solid transparent;
+  outline: none;
+}
+.new-timer-form .form-timer-time-slot,
+.new-timer-form .form-timer-days {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 16px;
+  margin-top: 24px;
+}
+.new-timer-form .which {
+  display: flex;
+  margin-left: 16px;
+  justify-content: start;
+  align-items: center;
+}
+.new-timer-form .slot {
+  display: flex;
+  align-items: end;
+  margin-right: 24px;
+}
+.new-timer-form .slot input.t {
+  width: 2ch;
+  font-size: 24px;
+}
+.new-timer-form .d {
+  width: 24px;
+  height: 24px;
 }
 
 .new-timer-form.active {

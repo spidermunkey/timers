@@ -6,9 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "rm -rf ./development && rm -rf ./.parcel-cache && parcel ./frontend/index.html --dist-dir development -p 1994",
-    "start": "nodemon backend/server.js & npm run scss",
+    "start": "(nodemon backend/server.js) && (npm run scss) && (livereload .)",
     "start-server": "node backend/server.js",
-    "scss": "sass --watch frontend/scss/main.scss frontend/css/app.css"
+    "scss": "sass --watch frontend/scss/main.scss frontend/css/app.css",
+    "live": "nodemon backend/server.js" 
   },
   "author": "",
   "license": "ISC",
