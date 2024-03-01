@@ -88,10 +88,14 @@ export default class Timers extends AbstractView {
       if (timer) {
         [clickedTimer] = this.timerList.getTimerData(timer.dataset.id);
         
-        if (clickedControl)
+        if (clickedControl) {
+          this.currentTimer ? pause(this.currentTimer) : null;
+
           clickedTimer.currentInterval
             ? pause(clickedTimer)
             : play(clickedTimer);
+        }
+
         else if (btnEdit)
           edit(timer);
         else if (btnDelete)
@@ -101,7 +105,12 @@ export default class Timers extends AbstractView {
           this.timerList.updateNowPlaying(clickedTimer);
           this.currentTimer = clickedTimer;
         }
+        else {
+          this.timerList.updateNowPlaying(clickedTimer);
+          this.currentTimer = clickedTimer
+        }
       }
+
 
       if (clickedNPControl && this.currentTimer)
         this.currentTimer.currentInterval

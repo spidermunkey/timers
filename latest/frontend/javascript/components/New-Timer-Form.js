@@ -21,69 +21,28 @@ export class NewTimerForm {
         </svg>
         </div>
         <div class="form">
-        <form action="#">
-            <div class="form-timer-title">
-            <input type="text" placeholder="Title" />
-            </div>
-            <div class="form-timer-time-slot">
-            <div class="time-hours slot">
-                <input type="text" class="z z-hour t" placeholder="0" />
-                <input type="text" class="n n-hour t" placeholder="0" />
-                <div class="t-label">h</div>
-            </div>
-            <div class="time-minutes slot">
-                <input type="text" class="z z-minute t" placeholder="0" />
-                <input type="text" class="n n-minute t" placeholder="0" />
-                <div class="t-label">m</div>
-            </div>
-            <div class="time-seconds slot">
-                <input type="text" class="z z-second t" placeholder="0" />
-                <input type="text" class="n n-second t" placeholder="0" />
-                <div class="t-label">s</div>
-            </div>
-            </div>
-            <div class="form-timer-days">
-            <div class="d">
-                <span class="d-box"></span>
-                <span class="d-label">M</span>
-            </div>
-            <div class="d">
-                <span class="d-box"></span>
-                <span class="d-label">T</span>
-            </div>
-            <div class="d">
-                <span class="d-box"></span>
-                <span class="d-label">W</span>
-            </div>
-            <div class="d">
-                <span class="d-box"></span>
-                <span class="d-label">T</span>
-            </div>
-            <div class="d">
-                <span class="d-box"></span>
-                <span class="d-label">F</span>
-            </div>
-            <div class="d">
-                <span class="d-box"></span>
-                <span class="d-label">S</span>
-            </div>
-            <div class="d">
-                <span class="d-box"></span>
-                <span class="d-label">S</span>
-            </div>
-    
-            <div class="d-which">
-                <div class="which every">
-                    <div class="w w-box e-box"></div>
-                    <div class="w w-label e-label">everday</div>
+            <form action="#">
+                <div class="form-timer-title">
+                    <input type="text" placeholder="Title" />
                 </div>
-                <div class="which never">
-                    <div class="w w-box nv-box"></div>
-                    <div class="w w-label nv-label">never</div>
+                <div class="form-timer-time-slot">
+                    <div class="time-hours slot">
+                        <input type="text" class="z z-hour t" placeholder="0" />
+                        <input type="text" class="n n-hour t" placeholder="0" />
+                        <div class="t-label">h</div>
+                    </div>
+                    <div class="time-minutes slot">
+                        <input type="text" class="z z-minute t" placeholder="0" />
+                        <input type="text" class="n n-minute t" placeholder="0" />
+                        <div class="t-label">m</div>
+                    </div>
+                    <div class="time-seconds slot">
+                        <input type="text" class="z z-second t" placeholder="0" />
+                        <input type="text" class="n n-second t" placeholder="0" />
+                        <div class="t-label">s</div>
+                    </div>
                 </div>
-            </div>
-            </div>
-        </form>
+            </form>
         </div>
   </div>
   
