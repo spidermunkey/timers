@@ -89,8 +89,8 @@ export default class Timers extends AbstractView {
         [clickedTimer] = this.timerList.getTimerData(timer.dataset.id);
         
         if (clickedControl) {
-          this.currentTimer ? pause(this.currentTimer) : null;
-
+          this.currentTimer && this.currentTimer !== clickedTimer ? pause(this.currentTimer) : null;
+          console.log(clickedTimer)
           clickedTimer.currentInterval
             ? pause(clickedTimer)
             : play(clickedTimer);

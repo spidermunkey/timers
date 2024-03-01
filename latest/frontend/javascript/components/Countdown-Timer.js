@@ -29,12 +29,13 @@ export class CountdownTimer extends AbstractTimer {
     });
 
     this.onPlay(() => {
+      console.log('playing timer',this)
       this.countdown();
       this.showPlaying();
     });
 
     this.onPause(() => {
-      console.log(this);
+      console.log('pausing timer',this);
       this.clear();
       this.showPaused();
     });
