@@ -5,6 +5,7 @@ const navigateTo = (url) => {
   history.pushState(null, null, url);
   router();
 };
+
  
 const swapView = async (view) => {
   $(".dashboard").innerHTML = await view.getHTML();

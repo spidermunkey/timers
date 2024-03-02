@@ -10,7 +10,6 @@ export default class Timers extends AbstractView {
   async hydrate() {
     this.element.addEventListener("click", (e) => 
     {
-
       if (!this.timerList) return;
 
       $('.new-timer-form .form-close').addEventListener('click',function close(){
@@ -19,7 +18,6 @@ export default class Timers extends AbstractView {
 
       // $('.new-timer-btn').addEventListener('click',function open() {
       //   $('.new-timer-form').classList.add('active');
-      //   console.log('here')
       // })
 
       const play = (timer) => {
@@ -29,6 +27,7 @@ export default class Timers extends AbstractView {
       };
 
       const pause = (timer) => {
+        // console.log('hi')
         timer.pause();
       };
 

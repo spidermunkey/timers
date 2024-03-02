@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "rm -rf ./development && rm -rf ./.parcel-cache && parcel ./frontend/index.html --dist-dir development -p 1994",
-    "start": "(nodemon backend/server.js) && (npm run scss) && (livereload .)",
+    "start": "start nodemon backend/server.js & start npm run scss & start node ../../refresh/watch.js",
     "start-server": "node backend/server.js",
     "scss": "sass --watch frontend/scss/main.scss frontend/css/app.css",
-    "live": "nodemon backend/server.js" 
+    "refresh": "node ../refresh/watch.js"
   },
   "author": "",
   "license": "ISC",
@@ -24,12 +24,15 @@
     "timers-browserify": "^2.0.12"
   },
   "dependencies": {
+    "connect-livereload": "^0.6.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "livereload": "^0.9.3",
     "mongodb": "^5.5.0",
     "mongoose": "^7.1.0",
     "morgan": "^1.10.0",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "ws": "^8.16.0"
   }
 }

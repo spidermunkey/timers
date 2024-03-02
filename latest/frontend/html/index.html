@@ -737,4 +737,18 @@
 </body>
 <script src="/static/javascript/src/app-time.js"></script>
 <script src="/static/javascript/index.js" type="module"></script>
+<script>
+
+  const socket = new WebSocket('ws://localhost:8080');
+
+  socket.addEventListener('open', function logEvent(event) {
+      console.log('Connected to Refresh Server');
+  })
+  socket.addEventListener('message', function refresh(event){
+    if (event.data === 'refresh') {
+        console.log('Refreshing page...');
+        location.reload(); // Reload the page
+    }
+  })
+</script>
 </html>
