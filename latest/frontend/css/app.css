@@ -464,6 +464,13 @@
   border-top: 1px solid rgba(0, 0, 0, 0.115);
 }
 
+#app[location=Timers] .dashboard[location=home] .dashboard--view {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 24px 64px;
+}
+
 .dashboard {
   position: relative;
   height: 100%;
@@ -701,17 +708,17 @@
   align-items: center;
   box-shadow: 1px 1px 8px -1px rgba(0, 0, 0, 0.155);
   margin: 24px;
-  padding: 80px;
+  padding: 180px;
 }
 [location=Timers] .now-playing .current-timer-title {
-  font-size: 24px;
+  font-size: 32px;
   text-align: center;
 }
 [location=Timers] .now-playing .current-timer-time-slot {
   margin-top: 24px;
 }
 [location=Timers] .now-playing .current-timer-time-slot .time-slot {
-  font-size: 21px;
+  font-size: 48px;
 }
 [location=Timers] .now-playing .new-timer-btn {
   position: absolute;

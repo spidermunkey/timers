@@ -82,6 +82,10 @@ export default class Timers extends AbstractView {
         $('.new-timer-form').classList.add('active');
       };
 
+      const toggleForm = () => {
+        $('.new-timer-form').classList.toggle('active');
+      }
+
       const closeForm = () => {
         $('.new-time-form').classList.remove('active');
       };
@@ -125,15 +129,19 @@ export default class Timers extends AbstractView {
           : play(this.currentTimer);
 
           if (btnNew)
-            showForm();
+            toggleForm();
       });
   }
 
   async getHTML() {
     return `
+    <div class="col-1">
       ${this.nowPlaying.getHTML()}
       ${this.newTimerForm.getHTML()}
+    </div>
+    <div class="col-2">
       ${await this.timerList.getHTML()}
+    </div>
     `;
   }
 
@@ -141,6 +149,7 @@ export default class Timers extends AbstractView {
     this.setTitle("Timers");
 
     this.element = setBlank(destination);
+    this.element.classList.add('dashboard--view')
 
     this.element.innerHTML = this.getLoader();
 

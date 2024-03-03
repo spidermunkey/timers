@@ -1,0 +1,9 @@
+#app[location="Timers"] .dashboard[location="home"] {
+    .dashboard--view {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 24px 64px;
+        // flex-direction: column;    
+    }
+}
