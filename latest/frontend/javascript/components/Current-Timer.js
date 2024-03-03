@@ -2,14 +2,11 @@ import { AbstractTimer } from "./Abstract-Timer.js";
 import { NewTimerForm } from "./New-Timer-Form.js";
 
 export class CurrentTimer {
-    constructor(startingTimer) {
-        this.newTimerForm = new NewTimerForm();
+    constructor() {
     }
     
     getHTML() {
         return `
-        ${this.newTimerForm.getHTML()}
-
             <div class="now-playing">
 
                 <div class="current-timer-title">Now Playing</div>
@@ -48,7 +45,7 @@ export class CurrentTimer {
         $(".now-playing .current-timer-time-slot").innerHTML = timer.createTimeSlot();
     }
 
-    syncPause(timer) {
+    syncPause() {
         $(".now-playing .play").classList.add("current");
         $(".now-playing .pause").classList.remove("current");
     }

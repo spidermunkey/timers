@@ -1,10 +1,14 @@
 import { AbstractView } from "./AbstractView.js";
 import { TimerList } from "../components/Timer-List.js";
+import { CurrentTimer } from "../components/Current-Timer.js";
+import { NewTimerForm } from "../components/New-Timer-Form.js";
 import { api } from "../api/app.js";
 export default class Timers extends AbstractView {
   constructor() {
     super();
-
+    this.timerList = new TimerList();
+    this.nowPlaying = new CurrentTimer();
+    this.newTimerForm = new NewTimerForm();
   }
 
   async hydrate() {
@@ -12,9 +16,15 @@ export default class Timers extends AbstractView {
     {
       if (!this.timerList) return;
 
+      this.timerList.timers.forEach(timer => {
+        timer.onComplete(() => this.nowPlaying.syncComplete(timer));
+        timer.onPlay(() => this.nowPlaying.syncPlay(timer));
+        timer.onPause(() => this.nowPlaying.syncPause(timer));
+      });
+
       $('.new-timer-form .form-close').addEventListener('click',function close(){
         $('.new-timer-form').classList.remove('active');
-      })
+      });
 
       // $('.new-timer-btn').addEventListener('click',function open() {
       //   $('.new-timer-form').classList.add('active');
@@ -22,12 +32,11 @@ export default class Timers extends AbstractView {
 
       const play = (timer) => {
         this.currentTimer = timer;
-        this.timerList.updateNowPlaying(timer);
+        this.nowPlaying.update(timer)
         timer.play();
       };
 
       const pause = (timer) => {
-        // console.log('hi')
         timer.pause();
       };
 
@@ -71,11 +80,11 @@ export default class Timers extends AbstractView {
 
       const showForm = () => {
         $('.new-timer-form').classList.add('active');
-      }
+      };
 
       const closeForm = () => {
         $('.new-time-form').classList.remove('active');
-      }
+      };
 
       let clickedTimer;
       const timer = e.target.closest(".timer");
@@ -89,7 +98,6 @@ export default class Timers extends AbstractView {
         
         if (clickedControl) {
           this.currentTimer && this.currentTimer !== clickedTimer ? pause(this.currentTimer) : null;
-          console.log(clickedTimer)
           clickedTimer.currentInterval
             ? pause(clickedTimer)
             : play(clickedTimer);
@@ -101,14 +109,14 @@ export default class Timers extends AbstractView {
           dele(timer);
         else if (!clickedControl && this.currentTimer) {
           pause(this.currentTimer);
-          this.timerList.updateNowPlaying(clickedTimer);
+          this.nowPlaying.update(clickedTimer);
           this.currentTimer = clickedTimer;
         }
         else {
-          this.timerList.updateNowPlaying(clickedTimer);
+          this.nowPlaying.update(clickedTimer);
           this.currentTimer = clickedTimer
         }
-      }
+      };
 
 
       if (clickedNPControl && this.currentTimer)
@@ -118,13 +126,15 @@ export default class Timers extends AbstractView {
 
           if (btnNew)
             showForm();
-    });
+      });
   }
 
   async getHTML() {
-    this.timerList = new TimerList();
-    const html = await this.timerList.getHTML();
-    return html;
+    return `
+      ${this.nowPlaying.getHTML()}
+      ${this.newTimerForm.getHTML()}
+      ${await this.timerList.getHTML()}
+    `;
   }
 
   async render(destination) {

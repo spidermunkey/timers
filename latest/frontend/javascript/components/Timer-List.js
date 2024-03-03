@@ -10,14 +10,7 @@ export class TimerList {
   }
 
   async getTimers() {
-    this.timers = (await api.getTimers()).map((timerData) => {
-      const timer = new CountdownTimer(timerData);
-      timer.onComplete(() => this.currentTimer.syncComplete(timer));
-      timer.onPlay(() => this.currentTimer.syncPlay(timer));
-      timer.onPause(() => this.currentTimer.syncPause(timer))
-      return timer;
-    });
-
+    this.timers = (await api.getTimers()).map((timerData) => new CountdownTimer(timerData));
     return this.timers;
   }
 
@@ -34,16 +27,13 @@ export class TimerList {
     const timers = await this.getTimers();
     
     let timerListItems = (
-      await Promise.all(timers.map(async (timer) => await timer.getHTML()))
-    ).join(" ");
-    let nowPlayingTimer = this.currentTimer.getHTML();
+    await Promise.all(timers.map(async (timer) => await timer.getHTML()))).join(" ");
     return `
-    <div class="countdown-timer-list">
-      ${nowPlayingTimer}
-      <div class="timer-list-items">
-        ${timerListItems}
-      </div>
-    </div>`;
+      <div class="countdown-timer-list">
+        <div class="timer-list-items">
+          ${timerListItems}
+        </div>
+      </div>`;
   }
 
   getLoader() {
