@@ -631,8 +631,9 @@
   position: absolute;
   display: flex;
   flex-direction: column;
+  top: 64px;
   height: 320px;
-  width: 99%;
+  width: 50%;
   background-color: white;
   z-index: 100;
   border: 1px solid black;
@@ -709,10 +710,17 @@
   box-shadow: 1px 1px 8px -1px rgba(0, 0, 0, 0.155);
   margin: 24px;
   padding: 180px;
+  opacity: 0;
+  pointer-events: none;
+}
+[location=Timers] .now-playing.active {
+  opacity: 1;
+  pointer-events: all;
 }
 [location=Timers] .now-playing .current-timer-title {
   font-size: 32px;
   text-align: center;
+  word-wrap: nowrap;
 }
 [location=Timers] .now-playing .current-timer-time-slot {
   margin-top: 24px;

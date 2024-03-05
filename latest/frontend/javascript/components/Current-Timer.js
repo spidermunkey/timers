@@ -7,7 +7,7 @@ export class CurrentTimer {
     
     getHTML() {
         return `
-            <div class="now-playing">
+            <div class="now-playing active">
 
                 <div class="current-timer-title">Now Playing</div>
                 <div class="current-timer-time-slot"></div>

@@ -15,21 +15,7 @@ export default class Timers extends AbstractView {
     this.element.addEventListener("click", (e) => 
     {
       if (!this.timerList) return;
-
-      this.timerList.timers.forEach(timer => {
-        timer.onComplete(() => this.nowPlaying.syncComplete(timer));
-        timer.onPlay(() => this.nowPlaying.syncPlay(timer));
-        timer.onPause(() => this.nowPlaying.syncPause(timer));
-      });
-
-      $('.new-timer-form .form-close').addEventListener('click',function close(){
-        $('.new-timer-form').classList.remove('active');
-      });
-
-      // $('.new-timer-btn').addEventListener('click',function open() {
-      //   $('.new-timer-form').classList.add('active');
-      // })
-
+      
       const play = (timer) => {
         this.currentTimer = timer;
         this.nowPlaying.update(timer)
@@ -84,11 +70,22 @@ export default class Timers extends AbstractView {
 
       const toggleForm = () => {
         $('.new-timer-form').classList.toggle('active');
+        $('.now-playing').classList.remove('active');
       }
 
       const closeForm = () => {
-        $('.new-time-form').classList.remove('active');
+        $('.new-timer-form').classList.remove('active');
+        $('.now-playing').classList.add('active');
       };
+
+
+      this.timerList.timers.forEach(timer => {
+        timer.onComplete(() => this.nowPlaying.syncComplete(timer));
+        timer.onPlay(() => this.nowPlaying.syncPlay(timer));
+        timer.onPause(() => this.nowPlaying.syncPause(timer));
+      });
+
+      $('.new-timer-form .form-close').addEventListener('click',closeForm);
 
       let clickedTimer;
       const timer = e.target.closest(".timer");
@@ -97,6 +94,7 @@ export default class Timers extends AbstractView {
       const btnEdit = e.target.closest(".edit-time-option");
       const btnDelete = e.target.closest(".delete-option");
       const btnNew = e.target.closest(".new-timer-btn");
+
       if (timer) {
         [clickedTimer] = this.timerList.getTimerData(timer.dataset.id);
         

@@ -12,11 +12,17 @@
   box-shadow: 1px 1px 8px -1px rgba(0, 0, 0, 0.155);
   margin: 24px;
   padding: 180px;
+  opacity: 0;
+  pointer-events: none;
 
-
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
   .current-timer-title {
     font-size: 32px;
     text-align: center;
+    word-wrap: nowrap;
   }
   .current-timer-time-slot {
     margin-top: 24px;
