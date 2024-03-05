@@ -5,6 +5,7 @@ export class NewTimerForm {
 
     getHTML() {
         return `
+        <div class="new-timer">
         <div class="new-timer-form">
         <div class="form-close">
         <svg
@@ -45,6 +46,8 @@ export class NewTimerForm {
             </form>
         </div>
   </div>
+        </div>
+        
   
         `
     }

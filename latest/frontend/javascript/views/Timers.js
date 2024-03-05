@@ -65,16 +65,16 @@ export default class Timers extends AbstractView {
       };
 
       const showForm = () => {
-        $('.new-timer-form').classList.add('active');
+        $('.new-timer').classList.add('active');
       };
 
       const toggleForm = () => {
-        $('.new-timer-form').classList.toggle('active');
+        $('.new-timer').classList.toggle('active');
         $('.now-playing').classList.remove('active');
       }
 
       const closeForm = () => {
-        $('.new-timer-form').classList.remove('active');
+        $('.new-timer').classList.remove('active');
         $('.now-playing').classList.add('active');
       };
 

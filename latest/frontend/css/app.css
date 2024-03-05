@@ -625,15 +625,32 @@
   color: #ff5349;
 }
 
+.new-timer {
+  pointer-events: none;
+  width: 40%;
+  position: absolute;
+  top: 32px;
+  height: 420px;
+  background: transparent;
+  z-index: 100;
+  transition: 1500ms ease;
+}
+.new-timer.active {
+  background: white;
+  pointer-events: all;
+}
+.new-timer.active .new-timer-form {
+  opacity: 1;
+  pointer-events: all;
+  transition: 1500ms ease;
+}
+
 .new-timer-form {
   opacity: 0;
   pointer-events: none;
-  position: absolute;
   display: flex;
   flex-direction: column;
-  top: 64px;
-  height: 320px;
-  width: 50%;
+  width: max-content;
   background-color: white;
   z-index: 100;
   border: 1px solid black;
@@ -673,11 +690,6 @@
 .new-timer-form .d {
   width: 24px;
   height: 24px;
-}
-
-.new-timer-form.active {
-  opacity: 1;
-  pointer-events: all;
 }
 
 .countdown-timer-list {
