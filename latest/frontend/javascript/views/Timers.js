@@ -27,17 +27,17 @@ export default class Timers extends AbstractView {
       };
 
       const edit = (timer) => {
-        $(".sub-overlay", timer).innerHTML = `
+        log(timer)
+        const editOverlay = $(".sub-overlay", timer)
+        editOverlay.innerHTML = `
           <div class="edit-modal">
             edit me
             <div class="close">close</div>
           </div>
         `;
-        const close = () => $(".sub-overlay", timer).classList.remove("active");
+        listen($(".sub-overlay .close",timer), () => editOverlay.classList.remove("active"));
 
-        listen($(".sub-overlay .close"), close);
-
-        $(".sub-overlay", timer).classList.add("active");
+        editOverlay.classList.add("active");
       };
 
       const dele = (timer) => {
