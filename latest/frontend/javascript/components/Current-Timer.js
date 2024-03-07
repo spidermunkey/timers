@@ -3,6 +3,17 @@ import { NewTimerForm } from "./New-Timer-Form.js";
 
 export class CurrentTimer {
     constructor() {
+
+        // TODO
+
+        /* 
+            FIX TEXT ALIGNMENT FOR TITLE
+            ADJUST TIME SECTION FONT COLOR
+            ADD BLINKER EFFECT TO STARTED TIMER
+            ADD GRADIENT / B&W MOVING SHADOW
+            ADD PROGRESS INDICATOR
+            ADD BEEP FOR EVER HOUR 
+        */
     }
     
     getHTML() {

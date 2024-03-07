@@ -2,6 +2,13 @@ import { AbstractTimer } from "./Abstract-Timer.js";
 
 export class CountdownTimer extends AbstractTimer {
   constructor(props) {
+
+    // TODO
+    /* 
+      FINISH EDIT FUNCTIONALITY (ADD INPUT OVERLAYS)
+      FINISH DELETE FUNCTIONALITY (ADD APPROPRIATE BUTTONS AND DESIGN)
+      ADD SETTINGS TAB (SOUNDS EFFECTS <ANIMATIONS> </ANIMATIONS>)
+    */
     super(props.time ? props.time : { hours: 0, minutes: 0, seconds: 0 });
     this.once = false;
     this.type = "timer";

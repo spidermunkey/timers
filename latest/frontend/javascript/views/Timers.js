@@ -5,6 +5,8 @@ import { NewTimerForm } from "../components/New-Timer-Form.js";
 import { api } from "../api/app.js";
 export default class Timers extends AbstractView {
   constructor() {
+
+    // ADD ACCESSIBLITY SHORTCUTS (CTRL + C = COUNTDOWN TAB ++ CTRL + T ++ CTRL + P ++ CTRL + A)
     super();
     this.timerList = new TimerList();
     this.nowPlaying = new CurrentTimer();

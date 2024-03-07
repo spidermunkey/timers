@@ -4,6 +4,11 @@ import { api } from "../api/app.js";
 
 export class TimerList {
   constructor() {
+    // TODO 
+
+    /*
+      ADD ACCESSIBILITY (TAB SHORTCUTS DEFAULT HERE ++ SPACE DEFAULTS TO PLAY PAUSE)
+    */
     this.logData = [];
     this.timers = [];
     this.currentTimer = new CurrentTimer();

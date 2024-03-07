@@ -1,6 +1,12 @@
 export class NewTimerForm {
     constructor(){
-
+        // TODO 
+        /* 
+            ADD TOP HEADER/LABEL TO FORM CLOSE AREA "NEW TIMER"
+            SCROLL WHEEL AND CURSOR FOR SELECTING TIME INPUTS
+            SUBMIT TO API FUNCTIONALITY
+            ADD SUMBIT BUTTON
+        */
     }
 
     getHTML() {
