@@ -653,11 +653,25 @@
   width: max-content;
   background-color: white;
   z-index: 100;
-  border: 1px solid black;
+  margin-left: 64px;
+  margin-top: 64px;
+}
+.new-timer-form .form-close {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.new-timer-form .form-close .label {
+  color: #252525;
+  margin-bottom: 2px;
+  font-size: 18px;
 }
 .new-timer-form .form-timer-title {
   width: 100%;
-  margin: 24px;
+  margin-top: 24px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
 }
 .new-timer-form .form-timer-title input {
   font-size: 24px;
@@ -683,9 +697,30 @@
   align-items: end;
   margin-right: 24px;
 }
+.new-timer-form .slot .t-label {
+  margin-left: 4px;
+  color: #454545;
+}
 .new-timer-form .slot input.t {
+  border-radius: 2px;
+  border: 1px solid rgba(204, 204, 204, 0.8196078431);
   width: 2ch;
   font-size: 24px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.new-timer-form .slot input.t.n {
+  margin-left: 2px;
+}
+.new-timer-form .slot input.t:focus, .new-timer-form .slot input.t:hover {
+  border: 1px solid #ccc;
+}
+.new-timer-form .slot input.t:focus {
+  outline: 1px solid #222;
 }
 .new-timer-form .d {
   width: 24px;

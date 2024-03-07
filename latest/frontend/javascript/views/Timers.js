@@ -12,6 +12,8 @@ export default class Timers extends AbstractView {
   }
 
   async hydrate() {
+    $('.new-timer').classList.toggle('active');
+    $('.now-playing').classList.remove('active');
     this.element.addEventListener("click", (e) => 
     {
       if (!this.timerList) return;
@@ -128,7 +130,10 @@ export default class Timers extends AbstractView {
 
           if (btnNew)
             toggleForm();
+
+
       });
+
   }
 
   async getHTML() {
