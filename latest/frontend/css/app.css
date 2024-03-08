@@ -693,28 +693,82 @@
   align-items: center;
 }
 .new-timer-form .slot {
+  position: relative;
   display: flex;
   align-items: end;
   margin-right: 24px;
+  border: 1px solid transparent;
+  padding: 10px;
+  border-radius: 8px;
+  will-change: perspective;
 }
 .new-timer-form .slot .t-label {
   margin-left: 4px;
   color: #454545;
 }
-.new-timer-form .slot input.t {
+.new-timer-form .slot:hover {
+  border: 1px solid rgba(204, 204, 204, 0.5843137255);
+}
+.new-timer-form .slot .input-slot {
+  position: relative;
+  overflow: scroll;
   border-radius: 2px;
   border: 1px solid rgba(204, 204, 204, 0.8196078431);
-  width: 2ch;
+  background-color: transparent;
+}
+.new-timer-form .slot .input-slot.n-slot {
+  margin-left: 4px;
+}
+.new-timer-form .slot .input-slot:hover .ph-scroll-trap {
+  background-color: rgba(0, 0, 0, 0.159);
+}
+.new-timer-form .slot .ph-scroll-trap {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  height: 350px;
+  border-top: 1px solid transparent;
+  border-bottom: 2px solid transparent;
+}
+.new-timer-form .slot .ph-scroll {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+  text-align: center;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: 100;
   font-size: 24px;
-  padding-left: 6px;
-  padding-right: 6px;
-  padding-top: 2px;
-  padding-bottom: 2px;
+  border: 1px solid transparent;
+}
+.new-timer-form .slot .ph-scroll span {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid transparent;
+}
+.new-timer-form .slot .ph-scroll.n-scroll {
+  margin-left: 44px;
+}
+.new-timer-form .slot input.t {
+  border: 1px solid transparent;
+  width: 2ch;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  z-index: 10;
   border-radius: 4px;
   overflow: hidden;
-}
-.new-timer-form .slot input.t.n {
-  margin-left: 2px;
 }
 .new-timer-form .slot input.t:focus, .new-timer-form .slot input.t:hover {
   border: 1px solid #ccc;

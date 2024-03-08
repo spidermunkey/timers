@@ -11,11 +11,74 @@ export default class Timers extends AbstractView {
     this.timerList = new TimerList();
     this.nowPlaying = new CurrentTimer();
     this.newTimerForm = new NewTimerForm();
+    
   }
 
   async hydrate() {
+
     $('.new-timer').classList.toggle('active');
     $('.now-playing').classList.remove('active');
+
+    $$('.input-slot').forEach(slot => slot.addEventListener('scroll',(function hardCodedScrollCounter() {
+
+      let int = 0;
+      let tick = 30;
+      let maxINT = 6;
+      let maxScroll = 350;
+      let ticking = false;
+
+      let lastKnownScrollPosition = 0;
+      let intermediateScrollPosition = 0;
+      let currentScrollPosition = 0;
+      let scrollContainer = $(`.ph-scroll-container[slot="${slot.getAttribute('slot')}"]`)
+      let scrollSlot = slot;
+      
+      if(slot.getAttribute('t') == 'h' || slot.getAttribute('t') == 'n')
+        maxINT = 9
+      function diff(last,current) {
+        let dir = last < current ? 'incer' : 'decer';
+        let diffy = Math.abs(last - current);
+        return [diffy,dir]
+      }
+
+      return function(e) {
+
+        intermediateScrollPosition = e.target.scrollTop;
+        const scrollData = diff(lastKnownScrollPosition,intermediateScrollPosition);
+        const difference = scrollData[0];
+        const direction = scrollData[1];
+        if (difference >= tick) {
+          direction == 'incer'
+            ? int = int + 1
+            : int = int - 1
+          if (int > maxINT){
+            int = 0;
+            e.target.scrollTop = 0;
+          }
+
+          lastKnownScrollPosition = int * tick
+          console.log('tick',lastKnownScrollPosition,'int',int);
+
+          scrollContainer.style.transform = `translateY(-${lastKnownScrollPosition}px)`
+
+        }
+
+        //   int = Math.round(intermediateScrollPosition/tick)
+        //   console.log(int)
+        //   $('.ph-scroll').transform = `translateY(${int * tick}px)`
+        // }
+        // if (!ticking) {
+        //   window.requestAnimationFrame((() => {
+        //     doSomething(currentScrollPosition)
+        //     ticking = false
+        //   }))
+
+        //   ticking = true;
+        // }
+      }
+
+    })()))
+
     this.element.addEventListener("click", (e) => 
     {
       if (!this.timerList) return;
