@@ -52,6 +52,7 @@ export class NewTimerForm {
                     <div class="time-hours slot">
                         <div class="ph-scroll z-scroll">
                             <div class="ph-scroll-container" slot="z1">
+                            <span></span>
                                 <span>0</span>
                                 <span>1</span>
                                 <span>2</span>
@@ -66,6 +67,7 @@ export class NewTimerForm {
                         </div>
                         <div class="ph-scroll n-scroll">
                             <div class="ph-scroll-container" slot="n1">
+                            <span></span>
                                 <span>0</span>
                                 <span>1</span>
                                 <span>2</span>
@@ -80,11 +82,11 @@ export class NewTimerForm {
                         </div>
 
 
-                        <span class="input-slot" slot="z1" t="h">
+                        <span class="input-slot" slot="z1" t="h" sv="0">
                             <input type="text" class="z z-hour t" placeholder="" />
                             <div class="ph-scroll-trap"></div>
                         </span>
-                        <span class="input-slot n-slot" slot="n1" t="h">
+                        <span class="input-slot n-slot" slot="n1" t="n" sv="0">
                             <input type="text" class="n n-hour t" placeholder="" />
                             <div class="ph-scroll-trap"></div>
                         </span>
@@ -95,6 +97,7 @@ export class NewTimerForm {
                     <div class="time-minutes slot">
                         <div class="ph-scroll z-scroll">
                             <div class="ph-scroll-container" slot="z2">
+                            <span></span>
                                 <span>0</span>
                                 <span>1</span>
                                 <span>2</span>
@@ -109,6 +112,7 @@ export class NewTimerForm {
                         </div>
                         <div class="ph-scroll n-scroll">
                             <div class="ph-scroll-container" slot="n2">
+                            <span></span>
                                 <span>0</span>
                                 <span>1</span>
                                 <span>2</span>
@@ -121,11 +125,11 @@ export class NewTimerForm {
                                 <span>9</span>
                             </div>
                         </div>
-                        <span class="input-slot" slot="z2">
+                        <span class="input-slot" slot="z2" t="z" sv="0">
                             <input type="text" class="z z-minute t" placeholder="" />
                             <div class="ph-scroll-trap"></div>
                         </span>
-                        <span class="input-slot n-slot" slot="n2" t="n">
+                        <span class="input-slot n-slot" slot="n2" t="n" sv="0">
                             <input type="text" class="n n-minute t" placeholder="" />
                             <div class="ph-scroll-trap"></div>
                         </span>
@@ -137,6 +141,7 @@ export class NewTimerForm {
                     <div class="time-seconds slot">
                         <div class="ph-scroll z-scroll">
                             <div class="ph-scroll-container" slot="z3">
+                            <span></span>
                                 <span>0</span>
                                 <span>1</span>
                                 <span>2</span>
@@ -151,6 +156,7 @@ export class NewTimerForm {
                         </div>
                         <div class="ph-scroll n-scroll">
                             <div class="ph-scroll-container" slot="n3">
+                            <span></span>
                                 <span>0</span>
                                 <span>1</span>
                                 <span>2</span>
@@ -163,11 +169,11 @@ export class NewTimerForm {
                                 <span>9</span>
                             </div>
                         </div>
-                    <span class="input-slot" slot="z3">
+                    <span class="input-slot" slot="z3" t="z" sv="0">
                         <input type="text" class="z z-second t" placeholder="" />
                         <div class="ph-scroll-trap"></div>
                     </span>
-                    <span class="input-slot n-slot" slot="n3" t="n">
+                    <span class="input-slot n-slot" slot="n3" t="n" sv="0">
                         <input type="text" class="n n-second t" placeholder="" />
                         <div class="ph-scroll-trap"></div>
                     </span>
