@@ -3,6 +3,271 @@ import { TimerList } from "../components/Timer-List.js";
 import { CurrentTimer } from "../components/Current-Timer.js";
 import { NewTimerForm } from "../components/New-Timer-Form.js";
 import { api } from "../api/app.js";
+
+function hardCodedScrollCounter(slot) {
+  let ticking = false;
+  let slotType = slot.getAttribute('t');
+  let zerosPlaceElement = slotType == 'n' ? slot.previousElementSibling : null;
+  let container = $(`.ph-scroll-container[slot="${slot.getAttribute('slot')}"]`);
+  container.style.transform = `translateY(-${30}px)`;
+  let slotData = {
+    // put all of that in here so you don't have to reference the element again
+    // turn it into an actual class or functional component
+    type: slotType,
+    tVal: slot.getAttribute('tv'),
+    value: '',
+    slotElement: slot,
+    scrollContainer: $(`.ph-scroll-container[slot="${slot.getAttribute('slot')}"]`),
+    zerosPlaceElement: slotType == 'n' ? slot.previousElementSibling : null,
+    zerosPlaceElementType: slotType == 'n' ? slot.previousElementSibling.getAttribute('t') : null,
+    get zerosPlaceValue() {
+      if (this.zerosPlaceElement !== null)
+        return Number(this.zerosPlaceElement.getAttribute('sv'))
+      return null
+    },
+    get maxZINT() {
+      let type = this.zerosPlaceElementType;
+      switch (type) {
+        case 'h': {
+          return 9
+        }
+        case 'z': {
+          return 6
+        }
+        default : {
+          return null
+        }
+
+      }
+    },
+    int: 0,
+    tick: 30,
+    startPos: 30,
+    lksp: 0,
+    imsp: 0,
+    direction: undefined,
+    maxINT: slotType == 'h' || slotType == 'n' ? 9 : 6,
+    maxZINT: null,
+
+    set scrollPos(position) {
+      // scroll logic
+      let {type,value} = position
+      switch (type) {
+        case 'tick' : {
+
+        }
+        case 'pos' : {
+
+        }
+      }
+    },
+    get scrollPos() {
+      return this.slotElement.scrollTop
+    },
+    
+    updateValue(int) {
+      this.slotElement.setAttribute('sv',int);
+      return int;
+    },
+    updatePos(position) {
+        let px = (position * this.tick) + this.startPos;
+        console.log(px)
+        requestAnimationFrame(() => this.scrollContainer.style.transform = `translateY(-${px}px)`)
+        this.updateValue(position)
+        this.int = position;
+    },
+    updateZeroethElement(position) {
+
+    },
+
+    reset() {
+      this.updatePos(0)
+    },
+
+    diff() {
+      let last = this.lksp;
+      let current = this.scrollPos;
+      let dir = last < current ? 'incer' : 'decer';
+      let diffy = Math.abs(last - current);
+      this.direction = dir;
+      return [diffy,dir]
+    },
+
+    handleScroll(event) {
+      console.log('triggered')
+      this.imsp = event.target.scrollTop;
+      let [difference,direction] = this.diff(),
+       tickReady = difference >= this.tick;
+      if (!tickReady)
+        return;
+      let
+        nextTick = direction == 'incer' ? this.int + 1 : this.int - 1,
+        isNthElement = this.slotType == 'n',
+        upperLimitReached = direction == 'incer' && (nextTick > this.maxINT),
+        lowerLimitReached = direction == 'decer' && (this.int == 0);
+      if (upperLimitReached || lowerLimitReached)
+        return
+      let
+        zeroethUpperReached = isNthElement && (this.zerosPlaceValue == this.maxZINT),
+        zeroethLowerReached = isNthElement && (this.zerosPlaceValue < 0);
+
+          this.updatePos(nextTick)
+          this.lksp = this.imsp
+       return;
+
+    }
+  }
+
+
+  return slotData.handleScroll.bind(slotData)
+  
+  
+  let scrollContainer = $(`.ph-scroll-container[slot="${slot.getAttribute('slot')}"]`);
+  let scrollStart = 30;
+  // each scroll container has a place holder span 30px from the top
+  // so that you can scroll beyond the beginning in order to lower/raise the zeroeth place
+  // scrollContainer.style.transform = `translateY(-${scrollStart}px)`;
+
+  // int represents the index of the corresponding number where 1 represents the first digit of 0
+  let int = 1;
+
+  let tick = 30;
+  let lastKnownScrollPosition = 0;
+  let intermediateScrollPosition = 0;
+
+  // slot type is the zeroth place or the nthn place
+  // in the case of minutes and seconds the nth place goes to 9
+  // and the zeroth place goes to 6
+  // hours can be up to 99 until days are added to the module
+
+  let maxINT = 7;
+  if(slotType == 'h' || slotType == 'n')
+    maxINT = 10
+  if (slotType == 'n')
+    zerosPlaceElement = slot.previousElementSibling;
+
+  function diff(last,current) {
+    let dir = last < current ? 'incer' : 'decer';
+    let diffy = Math.abs(last - current
+      );
+    return [diffy,dir];
+  }
+  function handleScroll(e) {
+
+    let d = slotData;
+    intermediateScrollPosition = e.target.scrollTop;
+    d.imsp = intermediateScrollPosition;
+    const scrollData = diff(lastKnownScrollPosition,intermediateScrollPosition);
+    const difference = scrollData[0];
+    const direction = scrollData[1];
+
+    let maxINT = 10,
+        maxZINT,
+        zerosPlaceSlotValue,
+        zerosPlaceElementSlotType,
+        slotValue
+
+    if (difference >= tick) {
+
+      if (direction == 'incer')
+        int = int + 1
+      else if (direction == 'decer')
+        int = int - 1
+
+    
+    // check if current scroller is n's place
+    if (slotType == 'n') {
+
+      // maxINT = 7;
+      maxZINT = 10;
+
+      zerosPlaceSlotValue = Number(zerosPlaceElement.getAttribute('sv'));
+      zerosPlaceElementSlotType = zerosPlaceElement.getAttribute('t');
+
+      if(zerosPlaceElementSlotType != 'h')
+        maxZINT = 7
+      if(zerosPlaceSlotValue == maxZINT && direction == 'incer') {
+        return
+      }
+      
+        // so that you dont move n's place beyond zero if z's place is already maxed
+    } else if (slotType != 'h') {
+      maxINT = 7;
+      slotValue = Number(slot.getAttribute('sv'));
+      if (slotValue == maxINT && direction == 'incer') {
+        return;
+      }
+    }
+
+
+
+      if (int > maxINT){
+
+        int = 1;
+
+        // this will trigger another scroll event!!!
+        e.target.scrollTop = int * tick;
+        
+        // if the nth slot reaches maxINT
+        // increase/decrease the zeroeth place upto min/max values
+
+        // scrolling ns place
+        if (slotType == 'n') {
+          
+
+          
+          // again hours may go up to 9.. the 9th number element is at 10 because 0 == 1st
+          if(zerosPlaceElementSlotType != 'h')
+            maxINT = 7;
+
+            // if slot value is not already at its maximum increment
+           if (zerosPlaceSlotValue < maxINT) {
+            // remember to substract one from zerosPlaceSlotValue when using the actual form
+            zerosPlaceElement.setAttribute('sv', zerosPlaceSlotValue + 1)
+            zerosPlaceElement.scrollTop = (zerosPlaceSlotValue + 1) * tick
+          }
+
+          // scrolling zeros place
+        }
+      }
+      else if (int == 0) {
+        int = maxINT;
+        e.target.scrollTop = int * tick
+        if(slot.getAttribute('t') == 'n') {
+
+          let zerosPlaceElement = slot.previousElementSibling;
+          let minINT = 0;
+          let int = Number(zerosPlaceElement.getAttribute('sv'));
+          let slotType = zerosPlaceElement.getAttribute('t');
+          let slotIndex = zerosPlaceElement.getAttribute('slot');
+          zerosPlaceElement.setAttribute('sv', Math.max((int - 1),1))
+          zerosPlaceElement.scrollTop = Math.max(1,(int - 1)) * tick
+        }
+      }
+
+      lastKnownScrollPosition = int * tick
+      console.log('tick',lastKnownScrollPosition,'int',int);
+
+      scrollContainer.style.transform = `translateY(-${lastKnownScrollPosition}px)`
+      slot.setAttribute('sv',int);
+      $('input',slot).value=int
+    }
+
+    //   int = Math.round(intermediateScrollPosition/tick)
+    //   console.log(int)
+    //   $('.ph-scroll').transform = `translateY(${int * tick}px)`
+    // }
+    // if (!ticking) {
+    //   window.requestAnimationFrame((() => {
+    //     doSomething(currentScrollPosition)
+    //     ticking = false
+    //   }))
+
+    //   ticking = true;
+    // }
+  }
+
+}
 export default class Timers extends AbstractView {
   constructor() {
 
@@ -21,141 +286,7 @@ export default class Timers extends AbstractView {
     $('.now-playing').classList.remove('active');
 
     // HYDRATE REVOLVING NEW TIMER INPUT SLOTS
-    $$('.input-slot').forEach(slot => slot.addEventListener('scroll',(function hardCodedScrollCounter() {
-
-      let scrollContainer = $(`.ph-scroll-container[slot="${slot.getAttribute('slot')}"]`)
-      let overflowContainer = slot;
-      let zerosPlaceElement;
-      let scrollStart = 30;
-      // each scroll container has a place holder span 30px from the top
-      // so that you can scroll beyond the beginning in order to lower/raise the zeroeth place
-      scrollContainer.style.transform = `translateY(-${scrollStart}px)`;
-
-      // int represents the index of the corresponding number where 1 represents the first digit of 0
-      let int = 1;
-  
-      let tick = 30;
-      let lastKnownScrollPosition = 0;
-      let intermediateScrollPosition = 0;
-
-      // slot type is the zeroth place or the nthn place
-      // in the case of minutes and seconds the nth place goes to 9
-      // and the zeroth place goes to 6
-      // hours can be up to 99 until days are added to the module
-      let slotType = slot.getAttribute('t')
-      let maxINT = 7;
-      if(slotType == 'h' || slotType == 'n')
-        maxINT = 10
-      if (slotType == 'n')
-        zerosPlaceElement = slot.previousElementSibling;
-
-      function diff(last,current) {
-        let dir = last < current ? 'incer' : 'decer';
-        let diffy = Math.abs(last - current);
-        return [diffy,dir]
-      }
-
-      return function handleScroll(e) {
-
-        intermediateScrollPosition = e.target.scrollTop;
-
-        const scrollData = diff(lastKnownScrollPosition,intermediateScrollPosition);
-        const difference = scrollData[0];
-        const direction = scrollData[1];
-        let maxINT,
-            zerosPlaceSlotValue,
-            zerosPlaceElementSlotType
-
-        if (difference >= tick) {
-
-          if (direction == 'incer')
-            int = int + 1
-          else if (direction == 'decer')
-            int = int - 1
-
-        
-        // check if current scroller is n's place
-        if (slotType == 'n') {
-
-          maxINT = 7;
-          zerosPlaceSlotValue = Number(zerosPlaceElement.getAttribute('sv'));
-          zerosPlaceElementSlotType = zerosPlaceElement.getAttribute('t');
-
-          if(zerosPlaceElementSlotType == 'h')
-            maxINT = 10;
-          if(zerosPlaceSlotValue == maxINT && direction == 'incer') {
-            return
-          }
-          
-            // so that you dont move n's place beyond zero if z's place is already maxed
-        }
-
-
-
-          if (int > maxINT){
-
-            int = 1;
-
-            // this will trigger another scroll event!!!
-            e.target.scrollTop = int * tick;
-            
-            // if the nth slot reaches maxINT
-            // increase/decrease the zeroeth place upto min/max values
-            if (slotType == 'n') {
-              
-
-              
-              // again hours may go up to 9.. the 9th number element is at 10 because 0 == 1st
-              if(zerosPlaceElementSlotType == 'h')
-                maxINT = 10;
-
-                // if slot value is not already at its maximum increment
-               if (zerosPlaceSlotValue < maxINT) {
-                // remember to substract one from zerosPlaceSlotValue when using the actual form
-                zerosPlaceElement.setAttribute('sv', zerosPlaceSlotValue + 1)
-                zerosPlaceElement.scrollTop = (zerosPlaceSlotValue + 1) * tick
-              }
-
-            } 
-          }
-          else if (int == 0) {
-            int = maxINT;
-            e.target.scrollTop = int * tick
-            if(slot.getAttribute('t') == 'n') {
-
-              let zerosPlaceElement = slot.previousElementSibling;
-              let minINT = 0;
-              let int = Number(zerosPlaceElement.getAttribute('sv'));
-              let slotType = zerosPlaceElement.getAttribute('t');
-              let slotIndex = zerosPlaceElement.getAttribute('slot');
-              zerosPlaceElement.setAttribute('sv', Math.max((int - 1),1))
-              zerosPlaceElement.scrollTop = Math.max(1,(int - 1)) * tick
-            }
-          }
-
-          lastKnownScrollPosition = int * tick
-          console.log('tick',lastKnownScrollPosition,'int',int);
-
-          scrollContainer.style.transform = `translateY(-${lastKnownScrollPosition}px)`
-          slot.setAttribute('sv',int);
-          $('input',slot).value=int
-        }
-
-        //   int = Math.round(intermediateScrollPosition/tick)
-        //   console.log(int)
-        //   $('.ph-scroll').transform = `translateY(${int * tick}px)`
-        // }
-        // if (!ticking) {
-        //   window.requestAnimationFrame((() => {
-        //     doSomething(currentScrollPosition)
-        //     ticking = false
-        //   }))
-
-        //   ticking = true;
-        // }
-      }
-
-    })()))
+    $$('.input-slot').forEach(slot => slot.addEventListener('scroll',hardCodedScrollCounter(slot)))
 
     this.element.addEventListener("click", (e) => 
     {
