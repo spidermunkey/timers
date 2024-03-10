@@ -3,7 +3,6 @@
 // -----------------------------------------
 
 class Cursor {
-  cd;
   // Allows extends a basic array allowing easy access to the next and previous elements in a list
   // according to a pointer in memory
 
@@ -2141,4 +2140,53 @@ class TimeTracker extends Timer {
     if (this.currentInterval) return;
     this.currentInterval = setInterval(this.countup.bind(this), 1000);
   }
+}
+
+
+class scrollTrap {
+  constructor( scrollable , tick = 30) {
+      
+      this.isScrolling = false;
+      this.tickReady = false;
+      this.direction = 'idle';
+      
+      this.intermediateScrollPosition = 0;
+      this.lastKnownScrollPostion = 0;
+      this.tick = tick;
+
+      this.element = scrollable;
+      this.lksp = this.lastKnownScrollPostion;
+      this.imsp = this.intermediateScrollPosition;
+      
+      this.element.addEventListener('scroll',this.handleScroll);
+
+  }
+
+  
+  diff(eventTarget) {
+
+    let last = this.lksp;
+    let current = eventTarget.scrollTop;
+
+    let dir = last < current ? 'incer' : 'decer';
+    let diffy = Math.abs(last - current);
+    this.direction = dir;
+    return [diffy,dir]
+  }
+
+  handleScroll(event) {
+
+  }
+
+  onScrollUp() {
+
+  }
+  onScrollDown() {
+
+  }
+
+  alignTrap() {
+
+  }
+
 }

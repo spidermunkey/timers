@@ -5,11 +5,23 @@ import { NewTimerForm } from "../components/New-Timer-Form.js";
 import { api } from "../api/app.js";
 
 function hardCodedScrollCounter(slot) {
+
+  function throttle(fn, wait = 60) {
+    var time = Date.now();
+    return function() {
+      if ((time + wait - Date.now()) < 0) {
+        fn.call(this,...arguments);
+        time = Date.now();
+      } else return;
+    }
+  }
+  
   let ticking = false;
   let slotType = slot.getAttribute('t');
   let zerosPlaceElement = slotType == 'n' ? slot.previousElementSibling : null;
   let container = $(`.ph-scroll-container[slot="${slot.getAttribute('slot')}"]`);
   container.style.transform = `translateY(-${30}px)`;
+  slot.scrollTop = slot.scrollHeight/2;
   let slotData = {
     // put all of that in here so you don't have to reference the element again
     // turn it into an actual class or functional component
@@ -20,6 +32,11 @@ function hardCodedScrollCounter(slot) {
     scrollContainer: $(`.ph-scroll-container[slot="${slot.getAttribute('slot')}"]`),
     zerosPlaceElement: slotType == 'n' ? slot.previousElementSibling : null,
     zerosPlaceElementType: slotType == 'n' ? slot.previousElementSibling.getAttribute('t') : null,
+
+    throttle: {
+
+    },
+
     get zerosPlaceValue() {
       if (this.zerosPlaceElement !== null)
         return Number(this.zerosPlaceElement.getAttribute('sv'))
@@ -84,21 +101,32 @@ function hardCodedScrollCounter(slot) {
       this.updatePos(0)
     },
 
-    diff() {
+    diff(eventTarget) {
       let last = this.lksp;
-      let current = this.scrollPos;
+      let current = eventTarget.scrollTop;
       let dir = last < current ? 'incer' : 'decer';
       let diffy = Math.abs(last - current);
       this.direction = dir;
       return [diffy,dir]
     },
 
+    alignScrollTrap(){
+      slot.style.overflow='hidden';
+      slot.onscroll = null;
+      slot.scrollTop = slot.scrollHeight/2;
+      this.lksp = slot.scrollTop;
+      slot.onscroll = this.handleScroll.bind(this)
+      slot.style.overflow='scroll';
+    },  
+
     handleScroll(event) {
       console.log('triggered')
+      console.log(slot.scrollTop)
+      // return;
       this.imsp = event.target.scrollTop;
-      let [difference,direction] = this.diff(),
+      let [difference,direction] = this.diff(event.target),
        tickReady = difference >= this.tick;
-      if (!tickReady)
+      if (!tickReady) 
         return;
       let
         nextTick = direction == 'incer' ? this.int + 1 : this.int - 1,
@@ -106,7 +134,13 @@ function hardCodedScrollCounter(slot) {
         upperLimitReached = direction == 'incer' && (nextTick > this.maxINT),
         lowerLimitReached = direction == 'decer' && (this.int == 0);
       if (upperLimitReached || lowerLimitReached)
-        return
+      {
+        console.log('canceled at', slot.scrollTop);
+        event.preventDefault()
+        slot.scrollTop = this.lksp
+        // slot.style.overflow='hidden';
+        return;
+      }
       let
         zeroethUpperReached = isNthElement && (this.zerosPlaceValue == this.maxZINT),
         zeroethLowerReached = isNthElement && (this.zerosPlaceValue < 0);
@@ -118,8 +152,10 @@ function hardCodedScrollCounter(slot) {
     }
   }
 
-
-  return slotData.handleScroll.bind(slotData)
+  slot.addEventListener('scrollend',() => slotData.alignScrollTrap)
+  slot.addEventListener('mouseleave',() => slotData.alignScrollTrap)
+  slot.addEventListener('mouseenter',() => slotData.alignScrollTrap)
+  return throttle(slotData.handleScroll.bind(slotData))
   
   
   let scrollContainer = $(`.ph-scroll-container[slot="${slot.getAttribute('slot')}"]`);
@@ -286,7 +322,7 @@ export default class Timers extends AbstractView {
     $('.now-playing').classList.remove('active');
 
     // HYDRATE REVOLVING NEW TIMER INPUT SLOTS
-    $$('.input-slot').forEach(slot => slot.addEventListener('scroll',hardCodedScrollCounter(slot)))
+    $$('.input-slot').forEach(slot => slot.onscroll = hardCodedScrollCounter(slot))
 
     this.element.addEventListener("click", (e) => 
     {
