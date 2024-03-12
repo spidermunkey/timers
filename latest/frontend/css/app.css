@@ -712,10 +712,11 @@
 .new-timer-form .slot .input-slot {
   position: relative;
   overflow-y: scroll;
-  overscroll-behavior: contain;
   border-radius: 2px;
   border: 1px solid rgba(204, 204, 204, 0.8196078431);
   background-color: transparent;
+  height: 30px;
+  width: 30px;
 }
 .new-timer-form .slot .input-slot.n-slot {
   margin-left: 4px;
@@ -768,6 +769,8 @@
   align-items: center;
   font-size: 24px;
   z-index: 10;
+  position: absolute;
+  z-index: -1;
   border-radius: 4px;
   overflow: hidden;
   color: transparent;
