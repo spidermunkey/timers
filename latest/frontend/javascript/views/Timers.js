@@ -17,15 +17,13 @@ export default class Timers extends AbstractView {
     this.nowPlaying = new CurrentTimer();
     this.newTimerForm = new NewTimerForm();
 
-    this.
-    this.nowPlayingElement = $('.now-playing')
   }
 
   async hydrate() {
     const newTimerElement = $('.new-timer')
     const nowPlayingElement = $('.now-playing')
-    this.newTimerElement.classList.toggle('active');
-    this.nowPlayingElement.classList.remove('active');
+    newTimerElement.classList.toggle('active');
+    nowPlayingElement.classList.remove('active');
     // HYDRATE REVOLVING NEW TIMER INPUT SLOTS
     $$('.input-slot').forEach(slot => slot.addEventListener('scroll', hardCodedScrollCounter(slot)))
 

@@ -656,10 +656,33 @@
   margin-left: 64px;
   margin-top: 64px;
 }
+.new-timer-form .slot {
+  position: relative;
+}
+.new-timer-form .slot:hover .resetter {
+  transform: translateY(8px);
+  opacity: 1;
+  border: 1px solid rgba(255, 127, 80, 0.185);
+}
+.new-timer-form .resetter {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 17%;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 2px 8px;
+  transition: 200ms ease;
+  transform: translateY(8px);
+  opacity: 0;
+}
 .new-timer-form .form-close {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+.new-timer-form .form-close .header-title {
+  color: #252525;
+  font-size: 18px;
 }
 .new-timer-form .form-close .label {
   color: #252525;

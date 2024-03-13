@@ -3,22 +3,8 @@ export class NewTimerForm {
         // TODO 
         /* 
             ADD TOP HEADER/LABEL TO FORM CLOSE AREA "NEW TIMER"
-            SCROLL WHEEL AND CURSOR FOR SELECTING TIME INPUTS
             SUBMIT TO API FUNCTIONALITY
             ADD SUMBIT BUTTON
-
-                                        <div class="ph-scroll">
-                                <span>0</span>
-                                <span>1</span>
-                                <span>2</span>
-                                <span>3</span>
-                                <span>4</span>
-                                <span>5</span>
-                                <span>6</span>
-                                <span>7</span>
-                                <span>8</span>
-                                <span>9</span>
-                            </div>
         */
     }
 
@@ -27,6 +13,7 @@ export class NewTimerForm {
         <div class="new-timer">
         <div class="new-timer-form">
         <div class="form-close">
+        <div class="header-title">New Timer</div>
         <svg
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -91,6 +78,7 @@ export class NewTimerForm {
                             <div class="ph-scroll-trap"></div>
                         </span>
                         <div class="t-label">h</div>
+                        <div class="resetter">reset</div>
                     </div>
 
 
@@ -134,6 +122,8 @@ export class NewTimerForm {
                             <div class="ph-scroll-trap"></div>
                         </span>
                         <div class="t-label">m</div>
+                        <div class="resetter">reset</div>
+
                     </div>
 
 
@@ -178,6 +168,8 @@ export class NewTimerForm {
                         <div class="ph-scroll-trap"></div>
                     </span>
                         <div class="t-label">s</div>
+                        <div class="resetter">reset</div>
+
                     </div>
                 </div>
             </form>
