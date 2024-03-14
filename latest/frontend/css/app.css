@@ -464,6 +464,9 @@
   border-top: 1px solid rgba(0, 0, 0, 0.115);
 }
 
+#app[location=Timers] .dashboard[location=home] {
+  overflow: hidden;
+}
 #app[location=Timers] .dashboard[location=home] .dashboard--view {
   display: flex;
   justify-content: space-between;
@@ -636,6 +639,19 @@
   font-size: 20px;
   border-radius: 16px;
   box-shadow: 0px 0px 8px 0px #dbdcdc;
+  margin: 12px 0;
+}
+.np-timer[state=playing] .control.pause {
+  display: inline;
+}
+.np-timer[state=playing] .control.play {
+  display: none;
+}
+.np-timer[state=paused] .control.pause, .np-timer[state=""] .control.pause {
+  display: none;
+}
+.np-timer[state=paused] .control.play, .np-timer[state=""] .control.play {
+  display: inline;
 }
 .np-timer .ctrl {
   border-radius: 50%;
@@ -645,6 +661,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .np-timer .ctrl svg {
   height: 16px;
@@ -652,6 +669,21 @@
 }
 .np-timer .ctrl.playpause {
   margin-right: 10px;
+}
+.np-timer .control.play {
+  padding-top: 2px;
+  padding-left: 2px;
+}
+.np-timer .control.pause {
+  padding-top: 4px;
+}
+.np-timer .control.pause svg {
+  height: 18px;
+  width: 18px;
+}
+.np-timer .ctrl.close svg {
+  height: 14px;
+  width: 14px;
 }
 .np-timer .timer--clock-controls {
   margin-right: 40px;

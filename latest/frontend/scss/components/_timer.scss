@@ -138,25 +138,56 @@
   font-size: 20px;
   border-radius: 16px;
   box-shadow: 0px 0px 8px 0px $silver;
+  margin: 12px 0;
 
+  &[state="playing"]{
+    .control.pause {
+      display: inline;
+    }
+    .control.play {
+      display: none;
+    }
+  }
+  &[state="paused"],
+  &[state=""]{
+    .control.pause {
+      display: none;
+    }
+    .control.play {
+      display: inline;
+    }
+  }
   .ctrl {
     border-radius: 50%;
     background-color: $silver;
-
-    // padding: 24px;
     height: 46px;
     width: 46px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
   .ctrl svg {
-
     height: 16px;
     width: 16px;
   }
   .ctrl.playpause {
     margin-right: 10px;
+  }
+  .control.play {
+    padding-top: 2px;
+    padding-left: 2px;
+  }
+  .control.pause {
+    padding-top: 4px;
+  }
+  .control.pause svg {
+    height: 18px;
+    width: 18px;
+  }
+  .ctrl.close svg {
+    height: 14px;
+    width: 14px;
   }
   .timer--clock-controls {
     margin-right: 40px;

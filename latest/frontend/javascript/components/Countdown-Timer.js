@@ -26,6 +26,7 @@ export class CountdownTimer extends AbstractTimer {
     });
 
     this.onComplete(() => {
+      this.clear();
       this.showPaused();
       this.reset();
     });
@@ -125,7 +126,6 @@ export class CountdownTimer extends AbstractTimer {
   }
 
   getHTML() {
-    let { h, m, s } = this.formatTime();
     return `
     <div class="timer" data-id="${this.id}">
       <div class="sub-overlay"></div>

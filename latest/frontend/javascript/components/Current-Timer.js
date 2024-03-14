@@ -6,8 +6,6 @@ export class CurrentTimer {
         // TODO
 
         /* 
-            FIX TEXT ALIGNMENT FOR TITLE
-            ADJUST TIME SECTION FONT COLOR
             ADD BLINKER EFFECT TO STARTED TIMER
             ADD GRADIENT / B&W MOVING SHADOW
             ADD PROGRESS INDICATOR
@@ -27,7 +25,6 @@ export class CurrentTimer {
 
     update(timer) {
         this.timer = timer;
-        $(".current-timer-title").textContent = timer.title;
     }
 
     syncPlay(timer) {
@@ -35,18 +32,23 @@ export class CurrentTimer {
         const {id} = timer;
         if (!this.list.some(i => i.id == id)) {
             let nptimer = new npTimer(timer)
-            this.list.push({id,timer:nptimer})
+            let x = {id,timer:nptimer}
+            this.list.push(x)
 
             let thisList = $('.now-playing .current-timer-list');
             if (!thisList) return;
 
-            nptimer.render(thisList)
+            nptimer.render(thisList);
             nptimer.play();
+            nptimer.remove = () => {
+                nptimer.timer.complete();
+                nptimer.element.remove();
+                console.log(this.list.indexOf(x))
+                let i = this.list.indexOf(x);
+                this.list.splice(i,1)
+            }
         }
-        // $(".now-playing .play").classList.remove("current");
-        // $(".now-playing .pause").classList.add("current");
-        $(".current-timer-title").textContent = timer.title;
-        // $(".now-playing .current-timer-time-slot").innerHTML = timer.createTimeSlot();
+
     }
 
     syncPause(timer) {
@@ -54,8 +56,6 @@ export class CurrentTimer {
             let nptimer = this.list.find(i => i.id == timer.id).timer;
             nptimer.pause();
         }
-        // $(".now-playing .play").classList.add("current");
-        // $(".now-playing .pause").classList.remove("current");
     }
     syncComplete(timer) {
         // $(".now-playing .play").classList.add("current");
