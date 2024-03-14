@@ -14,4 +14,31 @@
     flex: 1;
     overflow: scroll;
   }
+
+  .timer-list-options {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 16px;
+  }
+
+  .create-new {
+    display: inline-flex;
+    padding: 8px;
+    align-items: center;
+    font-size: 18px;
+    border: 1px solid $silver;
+    border-radius: 8px;
+    cursor: pointer;
+    .icon {
+      margin-left: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // border: 1px dotted red;
+    }
+    svg {
+      height: 24px;
+      width: 24px;
+    }
+  }
 }

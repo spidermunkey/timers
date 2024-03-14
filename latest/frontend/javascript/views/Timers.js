@@ -85,12 +85,12 @@ export default class Timers extends AbstractView {
 
       const toggleForm = () => {
         newTimerElement.classList.toggle('active');
-        nowPlayingElement.classList.remove('active');
+        // nowPlayingElement.classList.toggle('active');
       }
 
       const closeForm = () => {
         newTimerElement.classList.remove('active');
-        nowPlayingElement.classList.add('active');
+        // nowPlayingElement.classList.add('active');
       };
 
 
@@ -108,7 +108,7 @@ export default class Timers extends AbstractView {
       const clickedNPControl = e.target.closest(".current-timer-controls");
       const btnEdit = e.target.closest(".edit-time-option");
       const btnDelete = e.target.closest(".delete-option");
-      const btnNew = e.target.closest(".new-timer-btn");
+      const btnNew = e.target.closest(".create-new");
 
       if (timer) {
         [clickedTimer] = this.timerList.getTimerData(timer.dataset.id);
@@ -141,8 +141,8 @@ export default class Timers extends AbstractView {
           ? pause(this.currentTimer)
           : play(this.currentTimer);
 
-          if (btnNew)
-            toggleForm();
+        if (btnNew)
+          toggleForm();
 
 
       });
@@ -153,11 +153,17 @@ export default class Timers extends AbstractView {
     return `
     <div class="col-1">
       ${this.nowPlaying.getHTML()}
-      ${this.newTimerForm.getHTML()}
     </div>
+    <div class="group">
     <div class="col-2">
+    ${this.newTimerForm.getHTML()}
+    
+    </div>
+    <div class="col-3">
       ${await this.timerList.getHTML()}
     </div>
+    </div>
+
     `;
   }
 

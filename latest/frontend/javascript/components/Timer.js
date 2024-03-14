@@ -12,18 +12,8 @@ export class CountdownTimer extends AbstractTimer {
     this.id = props.id || uuid();
     this.element = undefined;
     this.logs = props.logs;
-    this.isToday = this.days.some((day) => {
-      let today = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"][
-        new Date().getDay()
-      ];
-      day === today;
-    });
+    this.isToday = this.days.some(day => day === ["sun", "mon", "tue", "wed", "thu", "fri", "sat"][new Date().getDay()]);
   }
-
-  // set time(timeObject) {
-  //   this._time = timeObject
-  //   // update logic goes here
-  // }
 
   formatTime() {
     let { hours, minutes, seconds } = this.time,

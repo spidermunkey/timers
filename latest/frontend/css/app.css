@@ -470,6 +470,9 @@
   width: 100%;
   padding: 24px 64px;
 }
+#app[location=Timers] .dashboard[location=home] .group {
+  display: flex;
+}
 
 .dashboard {
   position: relative;
@@ -627,13 +630,11 @@
 
 .new-timer {
   pointer-events: none;
-  width: 40%;
-  position: absolute;
-  top: 32px;
-  height: 420px;
+  top: 24px;
+  padding: 24px;
   background: transparent;
   z-index: 100;
-  transition: 1500ms ease;
+  transition: 500ms ease;
 }
 .new-timer.active {
   background: white;
@@ -642,7 +643,7 @@
 .new-timer.active .new-timer-form {
   opacity: 1;
   pointer-events: all;
-  transition: 1500ms ease;
+  transition: 500ms ease;
 }
 
 .new-timer-form {
@@ -653,8 +654,6 @@
   width: max-content;
   background-color: white;
   z-index: 100;
-  margin-left: 64px;
-  margin-top: 64px;
 }
 .new-timer-form .slot {
   position: relative;
@@ -688,6 +687,9 @@
   color: #252525;
   margin-bottom: 2px;
   font-size: 18px;
+}
+.new-timer-form .form-close .close {
+  cursor: pointer;
 }
 .new-timer-form .form-timer-title {
   width: 100%;
@@ -824,73 +826,39 @@
   flex: 1;
   overflow: scroll;
 }
+.countdown-timer-list .timer-list-options {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 16px;
+}
+.countdown-timer-list .create-new {
+  display: inline-flex;
+  padding: 8px;
+  align-items: center;
+  font-size: 18px;
+  border: 1px solid #dbdcdc;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.countdown-timer-list .create-new .icon {
+  margin-left: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.countdown-timer-list .create-new svg {
+  height: 24px;
+  width: 24px;
+}
 
 [location=Timers] .now-playing {
-  position: relative;
-  height: 100px;
-  width: 100px;
-  border-right: 2px solid rgba(0, 0, 0, 0.275);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.311);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 1px 1px 8px -1px rgba(0, 0, 0, 0.155);
-  margin: 24px;
-  padding: 180px;
-  opacity: 0;
-  pointer-events: none;
-}
-[location=Timers] .now-playing.active {
-  opacity: 1;
-  pointer-events: all;
+  padding: 24px;
 }
 [location=Timers] .now-playing .current-timer-title {
-  font-size: 32px;
-  text-align: center;
+  font-size: 18px;
   word-wrap: nowrap;
-}
-[location=Timers] .now-playing .current-timer-time-slot {
-  margin-top: 24px;
-}
-[location=Timers] .now-playing .current-timer-time-slot .time-slot {
-  font-size: 48px;
-}
-[location=Timers] .now-playing .new-timer-btn {
-  position: absolute;
-  bottom: -16px;
-  right: -32px;
-  font-size: 24px;
-  border: 1px solid transparent;
-  z-index: 99;
-  cursor: pointer;
-}
-[location=Timers] .now-playing .new-timer-btn:hover {
-  border: 1px solid black;
-}
-[location=Timers] .now-playing .current-timer-controls {
-  position: absolute;
-  right: -64px;
-  bottom: 24px;
-}
-[location=Timers] .now-playing .current-timer-controls .ctrl {
-  display: none;
-}
-[location=Timers] .now-playing .current-timer-controls .ctrl.current {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-[location=Timers] .now-playing .current-timer-controls .play,
-[location=Timers] .now-playing .current-timer-controls .pause {
-  width: fit-content;
-  fill: #525252;
-  cursor: pointer;
-}
-[location=Timers] .now-playing .current-timer-controls .play:hover,
-[location=Timers] .now-playing .current-timer-controls .pause:hover {
-  fill: #222;
+  width: 420px;
+  color: #252525;
 }
 
 *,

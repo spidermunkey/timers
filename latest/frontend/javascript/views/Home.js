@@ -55,7 +55,7 @@ export default class Home extends AbstractView {
               </div>
           </div>
           <div class="mod module-weekly-completed">
-              <span class="module-title">Time Allocated</span>
+              <span class="module-title">Time Tracked</span>
               <div class="allocations">
                   <div class="task-category">
     

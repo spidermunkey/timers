@@ -32,7 +32,7 @@ export class CountdownTimer extends AbstractTimer {
 
     this.onTick(() => {
       this.updateTimeSlot();
-      $(".now-playing .time-slot").innerHTML = this.createTimeSlot();
+      // $(".now-playing .time-slot").innerHTML = this.createTimeSlot();
     });
 
     this.onPlay(() => {

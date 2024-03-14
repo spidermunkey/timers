@@ -1,73 +1,10 @@
 [location="Timers"] .now-playing {
-  position: relative;
-  height: 100px;
-  width: 100px;
-  border-right: 2px solid rgba(0, 0, 0, 0.275);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.311);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 1px 1px 8px -1px rgba(0, 0, 0, 0.155);
-  margin: 24px;
-  padding: 180px;
-  opacity: 0;
-  pointer-events: none;
-
-  &.active {
-    opacity: 1;
-    pointer-events: all;
-  }
+  padding: 24px;
   .current-timer-title {
-    font-size: 32px;
-    text-align: center;
+    font-size: 18px;
     word-wrap: nowrap;
-  }
-  .current-timer-time-slot {
-    margin-top: 24px;
-    .time-slot {
-      font-size: 48px;
-    }
-  }
-  .new-timer-btn {
-    // border: 1px solid black;
-    // background-color: black;
-    position: absolute;
-    bottom: -16px;
-    right: -32px;
-    font-size: 24px;
-    border: 1px solid transparent;
-    z-index: 99;
-    cursor: pointer;
-    &:hover {
-      border: 1px solid black
-    }
+    width: 420px;
+    color: #252525;
   }
 
-  .current-timer-controls {
-    position: absolute;
-    right: -64px;
-    bottom: 24px;
-
-    .ctrl {
-      display: none;
-    }
-
-    .ctrl.current {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .play,
-    .pause {
-      width: fit-content;
-      fill: #525252;
-      cursor: pointer;
-      &:hover {
-        fill: #222;
-      }
-    }
-  }
 }
