@@ -19,6 +19,7 @@
     align-items: center;
   }
   .settings-modal {
+
   }
   .edit-modal {
     position: relative;
@@ -129,7 +130,7 @@
 }
 
 
-.np-timer {
+.np-timer{ 
   // border: 1px solid red;
   padding: 20px;
   display: inline-flex;
@@ -205,4 +206,81 @@
     display: inline-flex;
     align-items: flex-end;
   }
+}
+
+.recent-timer {
+    // border: 1px solid red;
+    padding: 20px;
+    display: inline-flex;
+    width: fit-content;
+    // justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    border-radius: 16px;
+    box-shadow: 0px 0px 8px 0px $silver;
+    margin: 12px 0;
+    cursor: pointer;
+    &[state="playing"]{
+      .control.pause {
+        display: inline;
+      }
+      .control.play {
+        display: none;
+      }
+    }
+    &[state="paused"],
+    &[state=""]{
+      .control.pause {
+        display: none;
+      }
+      .control.play {
+        display: inline;
+      }
+    }
+    .ctrl {
+      border-radius: 50%;
+      background-color: $silver;
+      height: 40px;
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .ctrl svg {
+      height: 12px;
+      width: 12px;
+    }
+    .ctrl.playpause {
+      margin-right: 6px;
+    }
+    .control.play {
+      padding-left: 2px;
+    }
+    .control.pause {
+      padding-top: 4px;
+    }
+    .control.pause svg {
+      height: 18px;
+      width: 18px;
+    }
+    .ctrl.close svg {
+      height: 14px;
+      width: 14px;
+    }
+    .timer--clock-controls {
+      margin-right: 20px;
+  
+    }
+    .timer--clock-controls .ctrl-wrapper {
+      display: inline-flex;
+    }
+    .time-slot {
+      font-size: 24px;
+      color: #ed5216;
+    }
+    .timer-title {
+      align-self: flex-end;
+      display: inline-flex;
+      align-items: flex-end;
+    }
 }

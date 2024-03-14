@@ -701,6 +701,75 @@
   align-items: flex-end;
 }
 
+.recent-timer {
+  padding: 20px;
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  font-size: 16px;
+  border-radius: 16px;
+  box-shadow: 0px 0px 8px 0px #dbdcdc;
+  margin: 12px 0;
+  cursor: pointer;
+}
+.recent-timer[state=playing] .control.pause {
+  display: inline;
+}
+.recent-timer[state=playing] .control.play {
+  display: none;
+}
+.recent-timer[state=paused] .control.pause, .recent-timer[state=""] .control.pause {
+  display: none;
+}
+.recent-timer[state=paused] .control.play, .recent-timer[state=""] .control.play {
+  display: inline;
+}
+.recent-timer .ctrl {
+  border-radius: 50%;
+  background-color: #dbdcdc;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.recent-timer .ctrl svg {
+  height: 12px;
+  width: 12px;
+}
+.recent-timer .ctrl.playpause {
+  margin-right: 6px;
+}
+.recent-timer .control.play {
+  padding-left: 2px;
+}
+.recent-timer .control.pause {
+  padding-top: 4px;
+}
+.recent-timer .control.pause svg {
+  height: 18px;
+  width: 18px;
+}
+.recent-timer .ctrl.close svg {
+  height: 14px;
+  width: 14px;
+}
+.recent-timer .timer--clock-controls {
+  margin-right: 20px;
+}
+.recent-timer .timer--clock-controls .ctrl-wrapper {
+  display: inline-flex;
+}
+.recent-timer .time-slot {
+  font-size: 24px;
+  color: #ed5216;
+}
+.recent-timer .timer-title {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: flex-end;
+}
+
 .new-timer {
   pointer-events: none;
   top: 24px;
@@ -927,12 +996,26 @@
 [location=Timers] .now-playing {
   padding: 24px;
 }
-[location=Timers] .now-playing .current-timer-title {
+[location=Timers] .now-playing .current-timer-title,
+[location=Timers] .now-playing .recent-timer-title {
   font-size: 18px;
   word-wrap: nowrap;
   width: 420px;
   color: #252525;
   margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(204, 204, 204, 0.2901960784);
+}
+[location=Timers] .now-playing .placeholder {
+  margin-left: 8px;
+  font-size: 14px;
+}
+[location=Timers] .now-playing .recent-timer-title {
+  margin-top: 24px;
+}
+[location=Timers] .now-playing .recent-timer-list {
+  display: flex;
+  flex-direction: column;
 }
 
 *,

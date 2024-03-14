@@ -1,12 +1,28 @@
 [location="Timers"] .now-playing {
 
   padding: 24px;
-  .current-timer-title {
+  .current-timer-title,
+  .recent-timer-title {
     font-size: 18px;
     word-wrap: nowrap;
     width: 420px;
     color: #252525;
     margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #cccccc4a;
+  }
+
+  .placeholder {
+    margin-left: 8px;
+    font-size: 14px;
+  }
+
+  .recent-timer-title {
+    margin-top: 24px;
+  }
+  .recent-timer-list {
+    display: flex;
+    flex-direction: column;
   }
 
 }

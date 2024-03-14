@@ -1,57 +1,23 @@
-export class npTimer {
+export class RecentTimer {
     constructor(timer) {
-        this.timer = timer;
-
+        this.timer = timer
         this.element = document.createElement('div');
-        this.element.classList.add('np-timer');
-        this.element.setAttribute('uuid',timer.id);
+        this.element.classList.add('recent-timer');
         this.element.setAttribute('state','');
         this.element.innerHTML = this.getHTML();
-        this.timer.onTick(() => $('.t-slot-wrapper',this.element).innerHTML = this.timer.createTimeSlot());
-        this.timer.onPlay(() => this.showPlaying());
-        this.timer.onPause(() => this.showPaused())
     }
 
 
-
     render(destination) {
-        destination.append(this.element);
+        destination.appendChild(this.element);
         this.hydrate();
     }
 
     hydrate() {
-        $('.ctrl',this.element).addEventListener('click',() => {
-            this.timer.currentInterval 
-                ? this.timer.pause()
-                : this.timer.play()
-        })
-
-        $('.ctrl.close',this.element).addEventListener('click',() => {
-            this.remove();
-        })
+        this.element.addEventListener('click',this.timer.play.bind(this.timer));
+        // this.timer.play();
     }
-
-    remove() {
-        this.element.remove();
-    }
-
-    play() {
-        this.showPlaying();
-    }
-
-    showPlaying() {
-        this.element.setAttribute("state","playing");
-    }
-
-    pause() {
-        this.showPaused();
-    }
-
-
-    showPaused() {
-        this.element.setAttribute("state","paused");
-    }
-
+        
     getHTML() {
         return`
             <div class="timer--clock-controls">
@@ -81,7 +47,4 @@ export class npTimer {
 
         `
     }
-
-
-
 }
