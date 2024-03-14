@@ -469,7 +469,7 @@
 }
 #app[location=Timers] .dashboard[location=home] .dashboard--view {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
   padding: 24px 64px;
 }
@@ -702,13 +702,13 @@
 }
 
 .recent-timer {
-  padding: 20px;
+  padding: 10px 20px;
   display: inline-flex;
   width: fit-content;
   align-items: center;
   font-size: 16px;
   border-radius: 16px;
-  box-shadow: 0px 0px 8px 0px #dbdcdc;
+  border: 1px solid #dbdcdc;
   margin: 12px 0;
   cursor: pointer;
 }
@@ -954,6 +954,7 @@
 }
 
 .countdown-timer-list {
+  padding: 2px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -970,10 +971,17 @@
 }
 .countdown-timer-list .timer-list-options {
   display: flex;
-  justify-content: flex-end;
-  padding: 0 16px;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 18px;
+  word-wrap: nowrap;
+  color: #252525;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(204, 204, 204, 0.2901960784);
 }
-.countdown-timer-list .create-new {
+.countdown-timer-list .opt {
   display: inline-flex;
   padding: 8px;
   align-items: center;
@@ -982,13 +990,14 @@
   border-radius: 8px;
   cursor: pointer;
 }
-.countdown-timer-list .create-new .icon {
-  margin-left: 4px;
+.countdown-timer-list .opt .icon {
   display: flex;
+  display: none;
+  margin-left: 4px;
   justify-content: center;
   align-items: center;
 }
-.countdown-timer-list .create-new svg {
+.countdown-timer-list .opt svg {
   height: 24px;
   width: 24px;
 }

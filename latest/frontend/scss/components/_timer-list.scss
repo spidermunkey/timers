@@ -1,5 +1,6 @@
 .countdown-timer-list {
   // padding: 24px 32px;
+  padding: 2px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -17,11 +18,19 @@
 
   .timer-list-options {
     display: flex;
-    justify-content: flex-end;
-    padding: 0 16px;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-left:16px;
+    padding-right: 16px;
+
+    font-size: 18px;
+    word-wrap: nowrap;
+    color: #252525;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #cccccc4a;
   }
 
-  .create-new {
+  .opt {
     display: inline-flex;
     padding: 8px;
     align-items: center;
@@ -30,8 +39,9 @@
     border-radius: 8px;
     cursor: pointer;
     .icon {
-      margin-left: 4px;
       display: flex;
+      display: none;
+      margin-left: 4px;
       justify-content: center;
       align-items: center;
       // border: 1px dotted red;

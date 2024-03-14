@@ -156,11 +156,12 @@ export default class Timers extends AbstractView {
     </div>
     <div class="group">
     <div class="col-2">
-    ${this.newTimerForm.getHTML()}
+    ${await this.timerList.getHTML()}
     
     </div>
     <div class="col-3">
-      ${await this.timerList.getHTML()}
+    ${this.newTimerForm.getHTML()}
+
     </div>
     </div>
 

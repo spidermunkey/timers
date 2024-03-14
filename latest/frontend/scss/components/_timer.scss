@@ -210,14 +210,14 @@
 
 .recent-timer {
     // border: 1px solid red;
-    padding: 20px;
+    padding: 10px 20px;
     display: inline-flex;
     width: fit-content;
     // justify-content: space-between;
     align-items: center;
     font-size: 16px;
     border-radius: 16px;
-    box-shadow: 0px 0px 8px 0px $silver;
+    border: 1px solid $silver;
     margin: 12px 0;
     cursor: pointer;
     &[state="playing"]{
