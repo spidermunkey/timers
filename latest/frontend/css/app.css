@@ -590,10 +590,10 @@
 .timer .options > div {
   margin: 0px 5px;
 }
-.timer--clock-controls .ctrl {
+.timer .timer--clock-controls .ctrl {
   display: none;
 }
-.timer--clock-controls .ctrl.current {
+.timer .timer--clock-controls .ctrl.current {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -626,6 +626,47 @@
 }
 .timer .reset:hover {
   color: #ff5349;
+}
+
+.np-timer {
+  padding: 20px;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  border-radius: 16px;
+  box-shadow: 0px 0px 8px 0px #dbdcdc;
+}
+.np-timer .ctrl {
+  border-radius: 50%;
+  background-color: #dbdcdc;
+  height: 46px;
+  width: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.np-timer .ctrl svg {
+  height: 16px;
+  width: 16px;
+}
+.np-timer .ctrl.playpause {
+  margin-right: 10px;
+}
+.np-timer .timer--clock-controls {
+  margin-right: 40px;
+}
+.np-timer .timer--clock-controls .ctrl-wrapper {
+  display: inline-flex;
+}
+.np-timer .time-slot {
+  font-size: 40px;
+  color: #ed5216;
+}
+.np-timer .timer-title {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: flex-end;
 }
 
 .new-timer {
@@ -859,6 +900,7 @@
   word-wrap: nowrap;
   width: 420px;
   color: #252525;
+  margin-bottom: 24px;
 }
 
 *,

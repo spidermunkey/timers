@@ -1,5 +1,4 @@
-import { AbstractTimer } from "./Abstract-Timer.js";
-import { NewTimerForm } from "./New-Timer-Form.js";
+import { npTimer } from "./npTimer.js";
 
 export class CurrentTimer {
     constructor() {
@@ -14,6 +13,7 @@ export class CurrentTimer {
             ADD PROGRESS INDICATOR
             ADD BEEP FOR EVER HOUR 
         */
+       this.list = [];
     }
     
     getHTML() {
@@ -28,11 +28,21 @@ export class CurrentTimer {
     update(timer) {
         this.timer = timer;
         $(".current-timer-title").textContent = timer.title;
-        // $(".current-timer-time-slot").innerHTML = timer.createTimeSlot();
     }
 
     syncPlay(timer) {
         this.timer = timer;
+        const {id} = timer;
+        if (!this.list.some(i => i.id == id)) {
+            let nptimer = new npTimer(timer)
+            this.list.push({id,timer:nptimer})
+
+            let thisList = $('.now-playing .current-timer-list');
+            if (!thisList) return;
+
+            nptimer.render(thisList)
+            nptimer.play();
+        }
         // $(".now-playing .play").classList.remove("current");
         // $(".now-playing .pause").classList.add("current");
         $(".current-timer-title").textContent = timer.title;
@@ -40,6 +50,10 @@ export class CurrentTimer {
     }
 
     syncPause(timer) {
+        if (this.list.some(i => i.id == timer.id)){
+            let nptimer = this.list.find(i => i.id == timer.id).timer;
+            nptimer.pause();
+        }
         // $(".now-playing .play").classList.add("current");
         // $(".now-playing .pause").classList.remove("current");
     }
