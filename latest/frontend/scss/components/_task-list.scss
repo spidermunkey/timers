@@ -1,0 +1,17 @@
+.task-list {
+    padding: 24px;
+    
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding-left:16px;
+        padding-right: 16px;
+    
+        font-size: 18px;
+        word-wrap: nowrap;
+        color: #252525;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #cccccc4a;
+    }
+}

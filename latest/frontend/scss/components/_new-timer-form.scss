@@ -61,6 +61,19 @@
         transform: translateY(8px);
         opacity: 0;
     }
+    .btn-create {
+        margin: 20px 64px;
+        padding: 16px 10px;
+        background-color: #0284C7;
+        outline: none;
+        border: none;
+        border-radius: 12px;
+        border: 1px solid #cdcdcd;
+        font-size: 18px;
+        letter-spacing: 0.05em;
+        color: white;
+        cursor: pointer;
+    }
     .form-close {
         display: flex;
         align-items: center;

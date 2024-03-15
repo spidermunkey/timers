@@ -3,6 +3,7 @@ import { TimerList } from "../components/Timer-List.js";
 import { CurrentTimer } from "../components/Current-Timer.js";
 import { NewTimerForm } from "../components/New-Timer-Form.js";
 import { hardCodedScrollCounter } from "../components/HardCodedScrollCounter.js";
+import { TaskList } from "../components/Task-List.js";
 import { api } from "../api/app.js";
 
 
@@ -16,16 +17,16 @@ export default class Timers extends AbstractView {
     this.timerList = new TimerList();
     this.nowPlaying = new CurrentTimer();
     this.newTimerForm = new NewTimerForm();
-
+    this.TaskList = new TaskList();
   }
 
   async hydrate() {
-    const newTimerElement = $('.new-timer')
-    const nowPlayingElement = $('.now-playing')
+    const newTimerElement = $('.new-timer');
+    const nowPlayingElement = $('.now-playing');
     newTimerElement.classList.toggle('active');
     nowPlayingElement.classList.remove('active');
     // HYDRATE REVOLVING NEW TIMER INPUT SLOTS
-    $$('.input-slot').forEach(slot => slot.addEventListener('scroll', hardCodedScrollCounter(slot)))
+    $$('.input-slot').forEach(slot => slot.addEventListener('scroll', hardCodedScrollCounter(slot)));
 
     this.element.addEventListener("click", (e) => 
     {
@@ -131,7 +132,7 @@ export default class Timers extends AbstractView {
         }
         else {
           this.nowPlaying.update(clickedTimer);
-          this.currentTimer = clickedTimer
+          this.currentTimer = clickedTimer;
         }
       };
 
@@ -149,34 +150,38 @@ export default class Timers extends AbstractView {
 
   }
 
-  async getHTML() {
+  getHTML() {
     return `
     <div class="col-1">
-      ${this.nowPlaying.getHTML()}
     </div>
     <div class="group">
-    <div class="col-2">
-    ${await this.timerList.getHTML()}
-    
+      <div class="col-2">
+      </div>
+      <div class="col-3">
+      </div>
     </div>
-    <div class="col-3">
-    ${this.newTimerForm.getHTML()}
-
+    <div class="col-4">
     </div>
-    </div>
-
     `;
   }
 
   async render(destination) {
+
     this.setTitle("Timers");
 
     this.element = setBlank(destination);
     this.element.classList.add('dashboard--view')
+    this.element.innerHTML = this.getHTML();
+    
+    const column1 = $('.col-1',this.element);
+    const column2 = $('.col-2',this.element);
+    const column3 = $('.col-3',this.element);
+    const column4 = $('.col-4',this.element);
 
-    this.element.innerHTML = this.getLoader();
-
-    this.element.innerHTML = await this.getHTML();
+    this.nowPlaying.render(column1);
+    await this.timerList.render(column2);
+    this.newTimerForm.render(column3);
+    this.TaskList.render(column4);
 
     this.hydrate();
 

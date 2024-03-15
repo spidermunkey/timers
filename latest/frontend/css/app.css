@@ -816,6 +816,19 @@
   transform: translateY(8px);
   opacity: 0;
 }
+.new-timer-form .btn-create {
+  margin: 20px 64px;
+  padding: 16px 10px;
+  background-color: #0284C7;
+  outline: none;
+  border: none;
+  border-radius: 12px;
+  border: 1px solid #cdcdcd;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+  color: white;
+  cursor: pointer;
+}
 .new-timer-form .form-close {
   display: flex;
   align-items: center;
@@ -1025,6 +1038,22 @@
 [location=Timers] .now-playing .recent-timer-list {
   display: flex;
   flex-direction: column;
+}
+
+.task-list {
+  padding: 24px;
+}
+.task-list .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 18px;
+  word-wrap: nowrap;
+  color: #252525;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(204, 204, 204, 0.2901960784);
 }
 
 *,

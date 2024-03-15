@@ -14,21 +14,24 @@ export class CurrentTimer {
         */
        this.list = [];
        this.recent = [];
+       this.element = document.createElement('div');
+       this.element.classList.add('now-playing');
+       this.element.innerHTML = this.getHTML();
+    }
+
+    render(destination) {
+        destination.appendChild(this.element)
     }
     
     getHTML() {
         return `
-            <div class="now-playing active">
-
-
-                <div class="current-timer-title">Now Playing</div>
-                <div class="current-timer-list">
-                    <div class="placeholder current">No Timers Running</div>
-                </div>
-                <div class="recent-timer-title">Recent Timers</div>
-                <div class="recent-timer-list">
-                    <div class="placeholder recent">No Recent Timers</div>
-                </div>
+            <div class="current-timer-title">Now Playing</div>
+            <div class="current-timer-list">
+                <div class="placeholder current">No Timers Running</div>
+            </div>
+            <div class="recent-timer-title">Recent Timers</div>
+            <div class="recent-timer-list">
+                <div class="placeholder recent">No Recent Timers</div>
             </div>`
     }
 
@@ -53,7 +56,7 @@ export class CurrentTimer {
             let placeholder = $('.placeholder',thisList)
             
             if (placeholder) placeholder.remove();
-            
+
             nptimer.render(thisList);
             nptimer.play();
             nptimer.remove = () => {

@@ -12,6 +12,8 @@ export class TimerList {
     this.logData = [];
     this.timers = [];
     this.currentTimer = new CurrentTimer();
+    this.element = document.createElement('div');
+    this.element.classList.add('countdown-timer-list');
   }
 
   async getTimers() {
@@ -28,13 +30,15 @@ export class TimerList {
     this.currentTimer.update(timer);
   }
 
+  async render(destination) {
+    this.element.innerHTML = await this.getHTML();
+    destination.appendChild(this.element);
+    return this.element;
+  }
   async getHTML() {
     const timers = await this.getTimers();
-    
-    let timerListItems = (
-    await Promise.all(timers.map(async (timer) => await timer.getHTML()))).join(" ");
+    let timerListItems = (await Promise.all(timers.map(async (timer) => await timer.getHTML()))).join(" ");
     return `
-      <div class="countdown-timer-list">
         <div class="timer-list-options">
           <div class="timer-list-title">
             Saved Timers
@@ -57,16 +61,11 @@ export class TimerList {
         </div>
         <div class="timer-list-items">
           ${timerListItems}
-        </div>
       </div>`;
   }
 
   getLoader() {
     return `<div class="loader">Loading...</div>`;
-  }
-
-  async render(destination) {
-    //...
   }
 
   logData() {

@@ -1,16 +1,21 @@
 export class NewTimerForm {
     constructor(){
+        this.element = document.createElement('div');
+        this.element.classList.add('new-timer');
+        this.element.innerHTML = this.getHTML();
         // TODO 
         /* 
-            ADD TOP HEADER/LABEL TO FORM CLOSE AREA "NEW TIMER"
             SUBMIT TO API FUNCTIONALITY
             ADD SUMBIT BUTTON
         */
     }
 
+    render(destination) {
+        destination.appendChild(this.element);
+        return this.element;
+    }
     getHTML() {
         return `
-        <div class="new-timer">
         <div class="new-timer-form">
         <div class="form-close">
         <div class="header-title">New Timer</div>
@@ -167,18 +172,17 @@ export class NewTimerForm {
                         <div class="ph-scroll-trap"></div>
                     </span>
                     <span class="input-slot n-slot" slot="n3" t="n" tv="s" sv="0">
-                        <input type="text" class="n n-second t" placeholder="" />
+                        <input type="text" class="n n-second t" placeholder=""/>
                         <div class="ph-scroll-trap"></div>
                     </span>
                         <div class="t-label">s</div>
                         <div class="resetter">reset</div>
-
                     </div>
                 </div>
             </form>
         </div>
+        <button class="btn-create">Create Timer</button>
   </div>
-        </div>
         
   
         `
