@@ -1,5 +1,5 @@
-import { ScrollCounter, ScrollCounterTotalData, ScrollCountingGroupData, hardCodedScrollCounter } from "./HardCodedScrollCounter.js";
-
+import { ScrollCounter, ScrollCounterTotalData, ScrollCountingGroupData } from "./HardCodedScrollCounter.js";
+import { api } from "../api/app.js";
 export class NewTimerForm {
     constructor(){
         this.element = document.createElement('div');
@@ -86,7 +86,6 @@ export class NewTimerForm {
 
         $('.form-timer-title input').addEventListener('input',(e) => {
             this.title = e.target.value;
-            console.log(this.title)
         })
 
         $('form',this.element).addEventListener('submit',(e) => {
@@ -96,7 +95,7 @@ export class NewTimerForm {
 
     }
 
-    submit() {
+    async submit() {
         if (!this.title){
             console.error('title field cannot be empty')
             return;
@@ -106,6 +105,19 @@ export class NewTimerForm {
             return;
         }
 
+        let body = {
+            title:this.title,
+            id:uuid(),
+            time:{
+                ...this.counterTotals.formatTotal(),
+                total: this.counterTotals.formatMs()
+            },
+            days: null,
+            initial: null,
+        }
+
+        const res = api.addTimer(body)
+        console.log(res,body)
         console.log({
             title: this.title,
             total: this.counterTotals.formatTotal(),
