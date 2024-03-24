@@ -11,6 +11,12 @@ export var api = {
     return false;
   },
 
+  async getTimer(id) {
+    const res = await axios.get(`http://localhost:1279/timers/?id=${id}`)
+    const { data } = res;
+    return data;
+  },
+
   async getTrackers(effect) {
     const res = await axios.get("http://localhost:1279/trackers/meta");
     const { data } = res;
@@ -30,6 +36,7 @@ export var api = {
     console.log("response data came back from post", data);
 
     if (responseOk(res)) {
+      console.log('timer added')
       if (effect) {
         console.log("effect triggered");
         effect(data);

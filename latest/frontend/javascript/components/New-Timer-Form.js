@@ -70,10 +70,10 @@ export class NewTimerForm {
             let nthCounter = new ScrollCounter($('.input-slot[type="n"]',slot));
             this[slotType] = new ScrollCountingGroupData(zeroCounter,nthCounter);
             let x = [zeroCounter,nthCounter].forEach(counter => counter.onUpdate(() => {
-                console.log(this[slotType].total)
-                console.log(this.counterTotals.total)
-                this.counterTotals.formatTotal()
-                this.counterTotals.formatMs();
+                // console.log(this[slotType].total)
+                // console.log(this.counterTotals.total)
+                // this.counterTotals.formatTotal();
+                // this.counterTotals.formatMs();
             }))
             // slot.addEventListener('scroll', hardCodedScrollCounter(slot))
         });
@@ -88,10 +88,6 @@ export class NewTimerForm {
             this.title = e.target.value;
         })
 
-        $('form',this.element).addEventListener('submit',(e) => {
-            e.preventDefault();
-            this.submit()
-        })
 
     }
 
@@ -115,13 +111,17 @@ export class NewTimerForm {
             days: null,
             initial: null,
         }
+            const res = await api.addTimer(body);
+            console.log({
+                title: this.title,
+                total: this.counterTotals.formatTotal(),
+            })
+            const [verified] = await api.getTimer(body.id);
+            console.log(verified,'HERE')
+            return verified;
 
-        const res = api.addTimer(body)
-        console.log(res,body)
-        console.log({
-            title: this.title,
-            total: this.counterTotals.formatTotal(),
-        })
+
+
     }
 
     render(destination) {

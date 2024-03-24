@@ -36,12 +36,12 @@ export class ScrollCounterTotalData {
   }
 
   formatMs() {
-    console.log(this.total,'here')
-    console.log(Timer.timeInMs(this.total))
+    // console.log(this.total,'here')
+    // console.log(Timer.timeInMs(this.total))
     return Timer.timeInMs(this.total)
   }
   formatTotal() {
-    console.log(Timer.formatMs(this.formatMs()))
+    // console.log(Timer.formatMs(this.formatMs()))
     return Timer.formatMs(this.formatMs())
   }
 

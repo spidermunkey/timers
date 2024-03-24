@@ -24,6 +24,15 @@ export default class Timers extends AbstractView {
     const nowPlayingElement = $('.now-playing');
     newTimerElement.classList.toggle('active');
     nowPlayingElement.classList.remove('active');
+
+    $('form',this.newTimerForm.element).addEventListener('submit',async (e) => {
+      e.preventDefault();
+      const data = await this.newTimerForm.submit();
+      console.log('DATA',data)
+      const timer = this.timerList.addtimer(data);
+      console.log(timer)      
+  })
+
     // HYDRATE REVOLVING NEW TIMER INPUT SLOTS
     this.element.addEventListener("click", (e) => 
     {
@@ -65,11 +74,12 @@ export default class Timers extends AbstractView {
         const close = () => $(".sub-overlay", timer).classList.remove("active");
         const destroy = async () => {
           const success = await api.delete(id);
+          console.log('success status',success);
           if (success) {
             const [timer] = this.timerList.getTimerData(id);
-            console.log(timer);
+            console.log('found timer to destroy',timer);
 
-            timer.destroy();
+            await timer.destroy();
           }
         };
         listen($(".sub-overlay .no"), close);

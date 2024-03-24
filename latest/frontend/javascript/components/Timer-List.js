@@ -21,6 +21,16 @@ export class TimerList {
     return this.timers;
   }
 
+  addtimer(data){
+    console.log(data)
+    const timer = new CountdownTimer(data)
+    this.timers.push(timer);
+    $('.timer-list-items',this.element).appendChild(timer.element);
+    console.log('thiselement',this.element,'timerelement',timer.element)
+    console.log('here',timer)
+    return timer;
+  }
+
   getTimerData(id) {
     return this.timers.filter((timer) => timer.id == id);
   }
