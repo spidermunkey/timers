@@ -1,8 +1,61 @@
+import { ScrollCounter, ScrollCounterTotalData, ScrollCountingGroupData, hardCodedScrollCounter } from "./HardCodedScrollCounter.js";
+
 export class NewTimerForm {
     constructor(){
         this.element = document.createElement('div');
         this.element.classList.add('new-timer');
         this.element.innerHTML = this.getHTML();
+        this.title = '';
+        this.hours = {
+            n: undefined,
+            nv: 0,
+            z: undefined,
+            zv: 0,
+            get nv() {
+                if (this.n) {
+                    return this.n.int;
+                }
+            },
+            get zv() {
+                if (this.z) {
+                    return this.z.int;
+                }
+            },
+            get total(){
+                return [this.zv,this.nv].join('');
+                // [this.n, this.z].join();
+            },
+        }
+        this.minutes = {
+            n: undefined,
+            z: undefined,
+            total: undefined,
+            get nv() {
+                if (this.n) {
+                    return this.n.int;
+                }
+            },
+            get nv() {
+                if (this.z) {
+                    return this.z.int;
+                }
+            },
+        }
+        this.seconds = {
+            n: undefined,
+            z: undefined,
+            total: undefined,
+            get nv() {
+                if (this.n) {
+                    return this.n.int;
+                }
+            },
+            get nv() {
+                if (this.z) {
+                    return this.z.int;
+                }
+            },
+        }
         // TODO 
         /* 
             SUBMIT TO API FUNCTIONALITY
@@ -10,8 +63,58 @@ export class NewTimerForm {
         */
     }
 
+    hydrate() {
+        $$('.slot',this.element).forEach(slot => {
+            let slotType = slot.getAttribute('type');
+            let zeroCounter = new ScrollCounter($('.input-slot[type="z"]',slot));
+            let nthCounter = new ScrollCounter($('.input-slot[type="n"]',slot));
+            this[slotType] = new ScrollCountingGroupData(zeroCounter,nthCounter);
+            let x = [zeroCounter,nthCounter].forEach(counter => counter.onUpdate(() => {
+                console.log(this[slotType].total)
+                console.log(this.counterTotals.total)
+                this.counterTotals.formatTotal()
+                this.counterTotals.formatMs();
+            }))
+            // slot.addEventListener('scroll', hardCodedScrollCounter(slot))
+        });
+
+        this.counterTotals = new ScrollCounterTotalData(
+            this.hours,
+            this.minutes,
+            this.seconds,
+        )
+
+        $('.form-timer-title input').addEventListener('input',(e) => {
+            this.title = e.target.value;
+            console.log(this.title)
+        })
+
+        $('form',this.element).addEventListener('submit',(e) => {
+            e.preventDefault();
+            this.submit()
+        })
+
+    }
+
+    submit() {
+        if (!this.title){
+            console.error('title field cannot be empty')
+            return;
+        }
+        if (this.counterTotals.formatMs() <= 0){
+            console.error('must submit valid countdown time')
+            return;
+        }
+
+        console.log({
+            title: this.title,
+            total: this.counterTotals.formatTotal(),
+        })
+    }
+
     render(destination) {
         destination.appendChild(this.element);
+        this.hydrate();
         return this.element;
     }
     getHTML() {
@@ -38,13 +141,13 @@ export class NewTimerForm {
 
         </div>
         <div class="form">
-            <form action="#">
+            <form action="#" id="new-timer">
                 <div class="form-timer-title">
                     <input type="text" placeholder="Title" />
                 </div>
                 <div class="form-timer-time-slot">
 
-                    <div class="time-hours slot">
+                    <div class="time-hours slot" type="hours" >
                         <div class="ph-scroll z-scroll">
                             <div class="ph-scroll-container" slot="z1">
                                 <span></span>
@@ -77,11 +180,11 @@ export class NewTimerForm {
                         </div>
 
 
-                        <span class="input-slot" slot="z1" t="h" tv="h" sv="0" >
+                        <span class="input-slot" slot="z1" t="h" tv="h" sv="0" type="z" >
                             <input type="text" class="z z-hour t" placeholder="" />
                             <div class="ph-scroll-trap"></div>
                         </span>
-                        <span class="input-slot n-slot" slot="n1" t="n" tv="h" sv="0">
+                        <span class="input-slot n-slot" slot="n1" t="n" tv="h" sv="0" type="n">
                             <input type="text" class="n n-hour t" placeholder="" />
                             <div class="ph-scroll-trap"></div>
                         </span>
@@ -90,7 +193,9 @@ export class NewTimerForm {
                     </div>
 
 
-                    <div class="time-minutes slot">
+
+
+                    <div class="time-minutes slot" type="minutes">
                         <div class="ph-scroll z-scroll">
                             <div class="ph-scroll-container" slot="z2">
                                 <span></span>
@@ -121,11 +226,11 @@ export class NewTimerForm {
                                 <span>9</span>
                             </div>
                         </div>
-                        <span class="input-slot" slot="z2" t="z" tv="m" sv="0">
+                        <span class="input-slot" slot="z2" t="z" tv="m" sv="0" type="z">
                             <input type="text" class="z z-minute t" placeholder="" />
                             <div class="ph-scroll-trap"></div>
                         </span>
-                        <span class="input-slot n-slot" slot="n2" t="n" tv="m" sv="0">
+                        <span class="input-slot n-slot" slot="n2" t="n" tv="m" sv="0" type="n">
                             <input type="text" class="n n-minute t" placeholder="" />
                             <div class="ph-scroll-trap"></div>
                         </span>
@@ -136,7 +241,7 @@ export class NewTimerForm {
 
 
 
-                    <div class="time-seconds slot">
+                    <div class="time-seconds slot" type="seconds">
                         <div class="ph-scroll z-scroll">
                             <div class="ph-scroll-container" slot="z3">
                                 <span></span>
@@ -167,11 +272,11 @@ export class NewTimerForm {
                                 <span>9</span>
                             </div>
                         </div>
-                    <span class="input-slot" slot="z3" t="z" tv="s" sv="0">
+                    <span class="input-slot" slot="z3" t="z" tv="s" sv="0" type="z">
                         <input type="text" class="z z-second t" placeholder="" />
                         <div class="ph-scroll-trap"></div>
                     </span>
-                    <span class="input-slot n-slot" slot="n3" t="n" tv="s" sv="0">
+                    <span class="input-slot n-slot" slot="n3" t="n" tv="s" sv="0" type="n">
                         <input type="text" class="n n-second t" placeholder=""/>
                         <div class="ph-scroll-trap"></div>
                     </span>
@@ -181,7 +286,7 @@ export class NewTimerForm {
                 </div>
             </form>
         </div>
-        <button class="btn-create">Create Timer</button>
+        <button class="btn-create" type="submit" form="new-timer">Create Timer</button>
   </div>
         
   

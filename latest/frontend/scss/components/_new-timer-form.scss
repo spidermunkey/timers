@@ -43,26 +43,29 @@
         position: relative;
 
         &:hover {
-            .resetter {
-                transform: translateY(8px);
-                opacity: 1;
-                border: 1px solid rgba(255, 127, 80, 0.185);
-            }   
+            // .resetter {
+            //     transform: translateY(8px);
+            //     opacity: 1;
+            //     border: 1px solid rgba(255, 127, 80, 0.185);
+            // }   
         }
     }
     .resetter {
         position: absolute;
         top: calc(100% + 8px);
         left: 17%;
-        border: 1px solid transparent;
+        // border: 1px solid transparent;
+        border: 1px solid rgba(80, 121, 255, 0.185);
         border-radius: 4px;
         padding: 2px 8px;
         transition: 200ms ease;
         transform: translateY(8px);
-        opacity: 0;
+        // opacity: 0;
+        cursor: pointer;
     }
     .btn-create {
-        margin: 20px 64px;
+        margin: 56px 64px;
+        margin-top: 80px;
         padding: 16px 10px;
         background-color: #0284C7;
         outline: none;
@@ -150,6 +153,7 @@
             height:30px;
             width:30px;
             // padding-right: 4px;
+            scrollbar-width: none;
             &.n-slot {
                 margin-left: 4px;
             }
@@ -209,6 +213,7 @@
         z-index: 10;
         position: absolute;
         z-index: -1;
+        scrollbar-width: none;
         // padding-left: 6px;
         // padding-right: 6px;
         // padding-top: 2px;

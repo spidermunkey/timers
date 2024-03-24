@@ -2,7 +2,6 @@ import { AbstractView } from "./AbstractView.js";
 import { TimerList } from "../components/Timer-List.js";
 import { CurrentTimer } from "../components/Current-Timer.js";
 import { NewTimerForm } from "../components/New-Timer-Form.js";
-import { hardCodedScrollCounter } from "../components/HardCodedScrollCounter.js";
 import { TaskList } from "../components/Task-List.js";
 import { api } from "../api/app.js";
 
@@ -26,8 +25,6 @@ export default class Timers extends AbstractView {
     newTimerElement.classList.toggle('active');
     nowPlayingElement.classList.remove('active');
     // HYDRATE REVOLVING NEW TIMER INPUT SLOTS
-    $$('.input-slot').forEach(slot => slot.addEventListener('scroll', hardCodedScrollCounter(slot)));
-
     this.element.addEventListener("click", (e) => 
     {
       if (!this.timerList) return;

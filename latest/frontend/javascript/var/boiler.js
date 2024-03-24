@@ -57,17 +57,25 @@ function listenAll(elements, callback, listener = "click") {
   return elements;
 }
 
-function listen(
+function listen( //element passed always last argument instead of being used as this context
   element = document,
   callback,
   listener = "click",
-  capture = false
+  capture = false,
 ) {
-  if (!element) return;
+  if (!element) {
+    console.warn('no element passed to listen function')
+    return;
+  }
+
+  // let context = this;
+
   element.addEventListener(
     listener,
     function (event) {
-      callback.apply(callback, [event, ...arguments, element]);
+      // callback.element = element;
+      // callback.event = event;
+      callback.apply(callback,[event, ...arguments, element]);
     },
     capture
   );

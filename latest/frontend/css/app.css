@@ -800,24 +800,20 @@
 .new-timer-form .slot {
   position: relative;
 }
-.new-timer-form .slot:hover .resetter {
-  transform: translateY(8px);
-  opacity: 1;
-  border: 1px solid rgba(255, 127, 80, 0.185);
-}
 .new-timer-form .resetter {
   position: absolute;
   top: calc(100% + 8px);
   left: 17%;
-  border: 1px solid transparent;
+  border: 1px solid rgba(80, 121, 255, 0.185);
   border-radius: 4px;
   padding: 2px 8px;
   transition: 200ms ease;
   transform: translateY(8px);
-  opacity: 0;
+  cursor: pointer;
 }
 .new-timer-form .btn-create {
-  margin: 20px 64px;
+  margin: 56px 64px;
+  margin-top: 80px;
   padding: 16px 10px;
   background-color: #0284C7;
   outline: none;
@@ -897,6 +893,7 @@
   background-color: transparent;
   height: 30px;
   width: 30px;
+  scrollbar-width: none;
 }
 .new-timer-form .slot .input-slot.n-slot {
   margin-left: 4px;
@@ -951,6 +948,7 @@
   z-index: 10;
   position: absolute;
   z-index: -1;
+  scrollbar-width: none;
   border-radius: 4px;
   overflow: hidden;
   color: transparent;
